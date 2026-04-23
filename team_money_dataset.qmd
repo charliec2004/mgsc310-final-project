@@ -1,0 +1,145 @@
+---
+title: "Team Money Dataset"
+subtitle: "Pacific Federal Loan Campaign"
+author: "Charlie, Arya, Steven, Ryan (Team Money)"
+format:
+  html:
+    df-print: paged
+    number-sections: true
+    toc: true
+    toc-depth: 2
+    code-tools: true
+    code-overflow: wrap
+    embed-resources: true
+execute:
+  echo: true
+  warning: false
+  message: false
+  cache: false
+  error: false
+---
+
+```{r}
+# Load libs
+library(tidyverse)
+
+# set seed
+set.seed(310)
+
+# Printing / numeric display
+options(width = 70)
+options(scipen = 99)
+
+# Chunk defaults (optional, but keeps figures consistent)
+knitr::opts_chunk$set(
+  fig.width  = 5,
+  fig.height = 4,
+  fig.align  = "center"
+  )
+```
+
+# Load the Data
+
+```{r}
+loans <- read_csv("data/pacific_federal_loan_campaign.csv")
+```
+
+# Overview
+
+```{r}
+# Dimensions: rows x columns
+dim(loans)
+```
+
+```{r}
+glimpse(loans)
+```
+
+```{r}
+head(loans)
+```
+
+# Summary Statistics
+
+```{r}
+summary(loans)
+```
+
+# Data Cleaning
+
+```{r}
+loans_clean <- 
+  loans %>% 
+  mutate(
+    Education = factor(Education),
+    Personal_Loan = factor(Personal_Loan),
+    Securities_Account = factor(Securities_Account),
+    CD_Account = factor(CD_Account),
+    Online = factor(Online),
+    CreditCard = factor(CreditCard)
+  )
+```
+
+# Model
+
+```{r}
+library(caret)
+library(rsample)
+set.seed(310)
+loans_split <- initial_split(loans_clean, prop=0.8)
+loans_train <- training(loans_split)
+loans_test  <- testing(loans_split)
+logit1 <- glm(Personal_Loan ~ Age + Experience + Income + Education + Mortgage, 
+              data=loans_train, 
+              family = binomial)
+
+summary(logit1)
+
+scores_train <- predict(logit1, newdata=loans_train, type="response")
+results_train <- 
+  loans_train %>% 
+    mutate(scores = scores_train)
+
+
+```
+
+# Visualizations
+
+```{r}
+library(ggplot2)
+
+# Visualization 1: This visualization examines the relationship between annual income and the propensity to accept a personal loan, segmented by education level.
+
+ggplot(loans_train, aes(x = Income, fill = as.factor(Personal_Loan))) +
+  geom_density(alpha = 0.5) +
+  facet_wrap(~Education) +
+  labs(title = "Income Distribution by Loan Acceptance",
+       subtitle = "Faceted by Education Level",
+       x = "Annual Income (Thousands $)",
+       fill = "Personal Loan") +
+  theme_minimal()
+
+
+# Visualization 2: This plot visualizes the predicted probabilities against income, which we believe could be a very significant predictor. 
+ggplot(results_train, aes(x = Income, y = scores, color = Personal_Loan)) +
+  geom_point(alpha = 0.6) +
+  geom_hline(yintercept = 0.5, color="red", linetype="dashed") + 
+  labs(title = "Predicted Loan Probability vs. Income",
+       x = "Income",
+       y = "Predicted Probability of Accepting Loan") +
+  theme_minimal()
+```
+
+# Plan
+
+1.  More in depth data cleaning (looking at data for outliers and removing them along with missing values)
+2.  Adjusting model to find predictors that have the largest prediction impact (rather than just using variables we think may be useful)
+3.  Experiment with numerous types of models to find which one best pertains to our question and dataset
+4.  Predicting the probabilities of a certain person accepting the loan offer or not
+5.  Deciding what metrics are most useful to measure how impactful our model is
+6.  Creating visualizations that paint a picture to stakeholders of the type of clients they should be targeting with the new campaign
+7.  Refining our model(s)
+
+# Roadblocks/Questions
+
+Deciding the type of model we want to use has been a roadblock. We will continue using what we learned in class (such as random forests) to experiment. Our preliminary model is a logistic regression.
