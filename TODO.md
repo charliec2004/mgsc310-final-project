@@ -1,64 +1,28 @@
 # Mini AI Project; Outstanding TODOs
 
-Everything still needing to be done before submission. Tasks are grouped: human-fill-in, rebuild-and-verify, submit, optional.
+Sections 1-4 (team roles, reflection answers, rebuild + re-verify, pre-flight checks) are all complete and removed. Only one task left.
 
-## 1. Team needs to fill in (human-only)
+## 1. Submit
 
-- [x] Assign Arya's role. File: `app/README.md` line 10. File: `app/TeamMoney_Mini_AI_Report.qmd` line 22. Choices: Data Lead / Modeling Lead / App Developer / Documentation Lead.
-- [x] Assign Steven's role + last name. File: `app/README.md` line 11. File: `app/TeamMoney_Mini_AI_Report.qmd` line 23.
-- [x] Assign Ryan's role + last name. File: `app/README.md` line 12. File: `app/TeamMoney_Mini_AI_Report.qmd` line 24.
-- [x] Sync Charlie's role across both files. `app/TeamMoney_Mini_AI_Report.qmd` line 21 and `app/README.md` line 9 both say "App Developer".
-
-## 2. Reflection answers (human writes, AI gave recommendations)
-
-All five live in `app/TeamMoney_Mini_AI_Report.qmd` under `# 3. Reflection`. Each currently shows a recommendation paragraph plus a `[FILL IN; your answer here]` line. Keep answers specific to this build.
-
-- [x] Q1; "What did AI help your group do especially well?" Replace `[FILL IN]` under `## 1. What did AI help your group do especially well?`.
-- [x] Q2; "What did AI get wrong, miss, or oversimplify?" Replace `[FILL IN]` under `## 2. What did AI get wrong, miss, or oversimplify?`.
-- [x] Q3; "How did your group catch and fix that issue?" Replace `[FILL IN]` under `## 3. How did your group catch and fix that issue?`.
-- [x] Q4; "What still required human judgment?" Replace `[FILL IN]` under `## 4. What still required human judgment?`.
-- [x] Q5; "If this tool were used in a real setting, what is one limitation or risk?" Replace `[FILL IN]` under `## 5. If this tool were used in a real setting, what is one limitation or risk?`.
-
-After replacing each `[FILL IN]`, also delete the italicized recommendation blockquote above it (the `> *Recommendation: ...*` block) so the final report shows only the team's answers.
-
-## 3. Rebuild and re-verify (after the human edits above)
-
-- [x] Re-render the report. Render command (re-run any time the qmd is edited):
-
-  ```bash
-  cd /Users/charles/Documents/CLASSES/MGSC_310/mgsc310-final-project
-  rm -rf app/TeamMoney_Mini_AI_Report_files app/TeamMoney_Mini_AI_Report.html
-  quarto render app/TeamMoney_Mini_AI_Report.qmd --to html --embed-resources
-  ```
-
-  The `--embed-resources` flag is required because the template's malformed YAML doesn't pass the embed directive through automatically. Without it, the rendered HTML pulls in an external `TeamMoney_Mini_AI_Report_files/libs/` directory and the single-file submission breaks.
-
-- [x] No `TeamMoney_Mini_AI_Report_files/` directory exists after render (HTML is self-contained, 1.24 MB).
-- [x] Rendered HTML opens cleanly: all four team roles in the table, all five Reflection answers written, README/AI Build Log/Reflection sections render.
-
-## 4. Pre-flight before Canvas upload
-
-Both submission files live in `app/`. There is no copy step. **All checks below pass as of last render.**
-
-- [x] Both files exist: `ls -1 app/TeamMoney_app.R app/TeamMoney_Mini_AI_Report.html` returns both.
-- [x] Report contains the dataset filename: 3 matches for `pacific_federal_loan_campaign.csv`.
-- [x] Report names the app file: 16 matches for `TeamMoney_app.R`.
-- [x] Report names the outcome variable: 5 matches for `Personal_Loan`.
-- [x] No `[FILL IN` strings remain in the rendered HTML.
-- [x] No zip file in the repo.
-
-> If the qmd is edited again after this point, re-run the §3 render command, then re-verify all six pre-flight items above.
-
-## 5. Submit
-
-- [x] Merge `feat/shiny-app` into `main` (merge commits `e926e1a` and `26f50e8` on `origin/main`).
-- [x] `feat/shiny-app` branch deleted locally and on origin (work lives on `main` only now).
 - [ ] Upload `app/TeamMoney_app.R` and `app/TeamMoney_Mini_AI_Report.html` to Canvas. Two files. Not a zip.
 
 ## Files of record (read-only; no edits expected)
 
 - `app/AI-plan.md`; design spec, the source of truth for what we built and why.
 - `app/TeamMoney_app.R`; working Shiny app. Implementation complete.
+- `app/TeamMoney_Mini_AI_Report.qmd` + `.html`; rendered report (the `.html` is what gets submitted).
 - `app/data/`; dev-only symlink to `../data` (gitignored).
 - `.gitignore`; already excludes `.env`, `app/data`, `.DS_Store`.
 - `~/.claude/projects/-Users-charles-Documents-CLASSES-MGSC-310-mgsc310-final-project/plans/2026-04-28-mini-ai-shiny-app.md`; the implementation plan AI followed (kept outside the repo per team direction).
+
+## If the qmd gets edited after this point
+
+Re-render before re-uploading:
+
+```bash
+cd /Users/charles/Documents/CLASSES/MGSC_310/mgsc310-final-project
+rm -rf app/TeamMoney_Mini_AI_Report_files app/TeamMoney_Mini_AI_Report.html
+quarto render app/TeamMoney_Mini_AI_Report.qmd --to html --embed-resources
+```
+
+Then re-verify the Canvas-bound HTML still has zero `[FILL IN]`, the dataset filename, the app filename, and the outcome variable.
