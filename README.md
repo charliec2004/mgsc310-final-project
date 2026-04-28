@@ -1,3 +1,3 @@
 # MGSC 310 Final Project
 
-Charlie Conner, Arya Kumar, put your names here
+Charlie Conner, Arya Kumar, Steven Stanos
