@@ -307,7 +307,7 @@ The first version of the spec in AI-plan.md missed a plotOutput("predict_plot") 
 
 ## 3. How did your group catch and fix that issue?
 
-We investigated the rubric and our data with both human and AI eyes and found the README/reflection misses. We also decided to override the AI's choice of random forest and use logistic regression with 6 statisticallly significant predictors. For the layout bug, we used Playwright DOM inspection to determine the issue with the cards, and made them not fillable/0 height. 
+We investigated the rubric and our data with both human and AI eyes and found the README/reflection misses. We also decided to override the AI's choice of random forest and use logistic regression with 6 statistically significant predictors. For the layout bug, we used Playwright DOM inspection to determine the issue with the cards, and made them not fillable/0 height. 
 
 ## 4. What still required human judgment?
 
