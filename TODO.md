@@ -49,7 +49,6 @@ Both submission files live in `app/`. There is no copy step.
 
 ## 5. Submit
 
-- [ ] Charlie says "commit" (or commits manually). Per project rule, AI does not commit; team controls history on `feat/shiny-app`.
 - [ ] Decide whether to merge `feat/shiny-app` into `main` or leave it on the branch. Team decides.
 - [ ] Upload `app/TeamMoney_app.R` and `app/TeamMoney_Mini_AI_Report.html` to Canvas. Two files. Not a zip.
 
