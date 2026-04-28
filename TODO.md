@@ -23,7 +23,7 @@ After replacing each `[FILL IN]`, also delete the italicized recommendation bloc
 
 ## 3. Rebuild and re-verify (after the human edits above)
 
-- [ ] Re-render the report:
+- [x] Re-render the report. Render command (re-run any time the qmd is edited):
 
   ```bash
   cd /Users/charles/Documents/CLASSES/MGSC_310/mgsc310-final-project
@@ -33,23 +33,26 @@ After replacing each `[FILL IN]`, also delete the italicized recommendation bloc
 
   The `--embed-resources` flag is required because the template's malformed YAML doesn't pass the embed directive through automatically. Without it, the rendered HTML pulls in an external `TeamMoney_Mini_AI_Report_files/libs/` directory and the single-file submission breaks.
 
-- [ ] Confirm no `TeamMoney_Mini_AI_Report_files/` directory exists after render: `ls app/TeamMoney_Mini_AI_Report_files 2>/dev/null && echo FAIL || echo OK`.
-- [ ] Open `app/TeamMoney_Mini_AI_Report.html` in a browser. Visually confirm: Team table has all four roles filled in (no `[FILL IN]` left), all five Reflection answers are written, README/AI Build Log/Reflection sections all render.
+- [x] No `TeamMoney_Mini_AI_Report_files/` directory exists after render (HTML is self-contained, 1.24 MB).
+- [x] Rendered HTML opens cleanly: all four team roles in the table, all five Reflection answers written, README/AI Build Log/Reflection sections render.
 
 ## 4. Pre-flight before Canvas upload
 
-Both submission files live in `app/`. There is no copy step.
+Both submission files live in `app/`. There is no copy step. **All checks below pass as of last render.**
 
-- [ ] Both files exist: `ls -1 app/TeamMoney_app.R app/TeamMoney_Mini_AI_Report.html`.
-- [ ] Report contains the dataset filename: `grep -F "pacific_federal_loan_campaign.csv" app/TeamMoney_Mini_AI_Report.html` returns matches.
-- [ ] Report names the app file: `grep -F "TeamMoney_app.R" app/TeamMoney_Mini_AI_Report.html` returns matches.
-- [ ] Report names the outcome variable: `grep -F "Personal_Loan" app/TeamMoney_Mini_AI_Report.html` returns matches.
-- [ ] No `[FILL IN` strings remain in the rendered HTML: `grep -F -c "FILL IN" app/TeamMoney_Mini_AI_Report.html` should return `0`.
-- [ ] No zip file in the repo: `find . -name '*.zip' -not -path './.git/*' 2>/dev/null` should return nothing.
+- [x] Both files exist: `ls -1 app/TeamMoney_app.R app/TeamMoney_Mini_AI_Report.html` returns both.
+- [x] Report contains the dataset filename: 3 matches for `pacific_federal_loan_campaign.csv`.
+- [x] Report names the app file: 16 matches for `TeamMoney_app.R`.
+- [x] Report names the outcome variable: 5 matches for `Personal_Loan`.
+- [x] No `[FILL IN` strings remain in the rendered HTML.
+- [x] No zip file in the repo.
+
+> If the qmd is edited again after this point, re-run the §3 render command, then re-verify all six pre-flight items above.
 
 ## 5. Submit
 
-- [x] Merge `feat/shiny-app` into `main` (merge commit `e926e1a`, on `origin/main`).
+- [x] Merge `feat/shiny-app` into `main` (merge commits `e926e1a` and `26f50e8` on `origin/main`).
+- [x] `feat/shiny-app` branch deleted locally and on origin (work lives on `main` only now).
 - [ ] Upload `app/TeamMoney_app.R` and `app/TeamMoney_Mini_AI_Report.html` to Canvas. Two files. Not a zip.
 
 ## 6. Optional / stretch (rubric does not require)

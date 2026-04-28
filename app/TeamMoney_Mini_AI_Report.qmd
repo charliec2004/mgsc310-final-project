@@ -14,8 +14,6 @@ Team Money
 
 ## Team Members and Roles
 
-> **\[FILL IN - roles to be assigned by the team]**
-
 | Team Member | Role |
 |---|---|
 | Charlie Conner | App Developer |
