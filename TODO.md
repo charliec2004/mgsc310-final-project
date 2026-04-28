@@ -13,8 +13,8 @@ Everything still needing to be done before submission. Tasks are grouped: human-
 
 All five live in `app/TeamMoney_Mini_AI_Report.qmd` under `# 3. Reflection`. Each currently shows a recommendation paragraph plus a `[FILL IN - your answer here]` line. Keep answers specific to this build.
 
-- [ ] Q1 - "What did AI help your group do especially well?" Replace `[FILL IN]` under `## 1. What did AI help your group do especially well?`.
-- [ ] Q2 - "What did AI get wrong, miss, or oversimplify?" Replace `[FILL IN]` under `## 2. What did AI get wrong, miss, or oversimplify?`.
+- [x] Q1 - "What did AI help your group do especially well?" Replace `[FILL IN]` under `## 1. What did AI help your group do especially well?`.
+- [x] Q2 - "What did AI get wrong, miss, or oversimplify?" Replace `[FILL IN]` under `## 2. What did AI get wrong, miss, or oversimplify?`.
 - [ ] Q3 - "How did your group catch and fix that issue?" Replace `[FILL IN]` under `## 3. How did your group catch and fix that issue?`.
 - [ ] Q4 - "What still required human judgment?" Replace `[FILL IN]` under `## 4. What still required human judgment?`.
 - [x] Q5 - "If this tool were used in a real setting, what is one limitation or risk?" Replace `[FILL IN]` under `## 5. If this tool were used in a real setting, what is one limitation or risk?`.
