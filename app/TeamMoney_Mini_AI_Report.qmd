@@ -100,7 +100,7 @@ Six predictors per customer (the rubric requires at least three):
 
 1. **Income** (numeric, thousand $)
 2. **Family size** (1, 2, 3, or 4)
-3. **Credit card avg / month** (numeric, thousand $); column name `CCAvg`
+3. **Credit card avg / month** (numeric, thousand $), column name `CCAvg`
 4. **Education** (Undergrad / Graduate / Advanced/Professional)
 5. **CD account?** (Yes / No)
 6. **Mortgage** (numeric, thousand $)
@@ -155,7 +155,7 @@ Recommended logistic regression with six predictors: `Income + Family + CCAvg + 
 
 ### What We Changed, Fixed, or Rejected
 
-Accepted the 6-predictor logistic. **Rejected** random forest; the rubric rewards a working prototype over an ambitious one that breaks. Dropped `Age` (kept `Experience` was wrong; we actually dropped both because neither was in the recommended set, but kept `Family` and `CCAvg` from the dataset that the QMD model didn't use).
+Accepted the 6-predictor logistic. **Rejected** random forest; the rubric rewards a working prototype over an ambitious one that breaks. Dropped both `Age` and `Experience`; neither was in the recommended set. Kept `Family` and `CCAvg` from the dataset (these were not in the QMD model).
 
 ## Prompt 3: additional interactivity
 
@@ -183,7 +183,7 @@ Accepted. Implemented as `geom_point(alpha = 0.45) + geom_hline(yintercept = 0.5
 
 ## Prompt 5: library budget
 
-> *"What R libraries do we need for a proper Shiny dashboard? Stay within constraints; don't pile on packages. Ask first if you'd add anything beyond `shiny`, `tidyverse`, `rsample`."*
+> *"What R libraries do we need for a proper Shiny dashboard? Stay within constraints. Don't pile on packages. Ask first if you'd add anything beyond `shiny`, `tidyverse`, `rsample`."*
 
 ### What AI Returned
 

@@ -2331,7 +2331,7 @@ vertical-align: -.125em;
 <ol type="1">
 <li><strong>Income</strong> (numeric, thousand $)</li>
 <li><strong>Family size</strong> (1, 2, 3, or 4)</li>
-<li><strong>Credit card avg / month</strong> (numeric, thousand $); column name <code>CCAvg</code></li>
+<li><strong>Credit card avg / month</strong> (numeric, thousand $), column name <code>CCAvg</code></li>
 <li><strong>Education</strong> (Undergrad / Graduate / Advanced/Professional)</li>
 <li><strong>CD account?</strong> (Yes / No)</li>
 <li><strong>Mortgage</strong> (numeric, thousand $)</li>
@@ -2392,7 +2392,7 @@ vertical-align: -.125em;
 </section>
 <section id="what-we-changed-fixed-or-rejected-1" class="level3">
 <h3 class="anchored" data-anchor-id="what-we-changed-fixed-or-rejected-1">What We Changed, Fixed, or Rejected</h3>
-<p>Accepted the 6-predictor logistic. <strong>Rejected</strong> random forest; the rubric rewards a working prototype over an ambitious one that breaks. Dropped <code>Age</code> (kept <code>Experience</code> was wrong; we actually dropped both because neither was in the recommended set, but kept <code>Family</code> and <code>CCAvg</code> from the dataset that the QMD model didn’t use).</p>
+<p>Accepted the 6-predictor logistic. <strong>Rejected</strong> random forest; the rubric rewards a working prototype over an ambitious one that breaks. Dropped both <code>Age</code> and <code>Experience</code>; neither was in the recommended set. Kept <code>Family</code> and <code>CCAvg</code> from the dataset (these were not in the QMD model).</p>
 </section>
 </section>
 <section id="prompt-3-additional-interactivity" class="level2">
@@ -2426,7 +2426,7 @@ vertical-align: -.125em;
 <section id="prompt-5-library-budget" class="level2">
 <h2 class="anchored" data-anchor-id="prompt-5-library-budget">Prompt 5: library budget</h2>
 <blockquote class="blockquote">
-<p><em>“What R libraries do we need for a proper Shiny dashboard? Stay within constraints; don’t pile on packages. Ask first if you’d add anything beyond <code>shiny</code>, <code>tidyverse</code>, <code>rsample</code>.”</em></p>
+<p><em>“What R libraries do we need for a proper Shiny dashboard? Stay within constraints. Don’t pile on packages. Ask first if you’d add anything beyond <code>shiny</code>, <code>tidyverse</code>, <code>rsample</code>.”</em></p>
 </blockquote>
 <section id="what-ai-returned-4" class="level3">
 <h3 class="anchored" data-anchor-id="what-ai-returned-4">What AI Returned</h3>
