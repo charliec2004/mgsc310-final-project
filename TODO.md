@@ -64,4 +64,4 @@ Both submission files live in `app/`. There is no copy step.
 - `app/TeamMoney_app.R` - working Shiny app. Implementation complete.
 - `app/data/` - dev-only symlink to `../data` (gitignored).
 - `.gitignore` - already excludes `.env`, `app/data`, `.DS_Store`.
-- `~/.claude/projects/-Users-charles-Documents-CLASSES-MGSC-310-mgsc310-final-project/plans/2026-04-28-mini-ai-shiny-app.md` - the implementation plan AI followed (kept outside the repo per Charlie's direction).
+- `~/.claude/projects/-Users-charles-Documents-CLASSES-MGSC-310-mgsc310-final-project/plans/2026-04-28-mini-ai-shiny-app.md` - the implementation plan AI followed (kept outside the repo per team direction).

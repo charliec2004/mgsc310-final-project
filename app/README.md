@@ -57,6 +57,3 @@ No copy step. Both submission files are already in this folder:
 
 Upload these two directly to Canvas. Run the pre-flight check from `AI-plan.md` §11 step 4 first.
 
-## Build status
-
-Implementation complete. App runs cleanly, report renders cleanly. Awaiting team review and Charlie's go-ahead to commit.

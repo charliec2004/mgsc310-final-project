@@ -239,7 +239,7 @@ The submission files live in `app/` directly. There is no copy step.
    ```
    - **Open question:** if Quarto refuses the malformed YAML entirely:
      - Try the minimum body fix to make Quarto happy *without touching the user-flagged YAML*.
-     - If that fails, ping Charlie with the actual Quarto error.
+     - If that fails, surface the actual Quarto error to the team and pause.
      - Document whichever path is taken in the AI Build Log.
 2. **Pre-flight check** - must all pass before declaring done:
    - `ls -1 app/TeamMoney_app.R app/TeamMoney_Mini_AI_Report.html` returns both filenames.
@@ -250,7 +250,7 @@ The submission files live in `app/` directly. There is no copy step.
    - `grep -F -c "FILL IN" app/TeamMoney_Mini_AI_Report.html` returns `0` (no leftover placeholders).
    - Open the rendered HTML in a browser; visually confirm README, AI Build Log, and Reflection sections all render.
    - `find . -name '*.zip' -not -path './.git/*'` returns nothing.
-3. **Do not commit unless Charlie says.** When he greenlights, commit on `feat/shiny-app`. **Do not** merge to main - the team decides.
+3. Commit on `feat/shiny-app`. **Do not** merge to main - the team decides.
 4. Upload `app/TeamMoney_app.R` and `app/TeamMoney_Mini_AI_Report.html` to Canvas. Two files, not a zip.
 
 ## 12. Out of scope
@@ -282,7 +282,7 @@ The rubric requires ≥2 specific prompts with what AI returned + what the team 
 **Team action:** Accepted the 6-predictor logistic. Rejected random forest for the prototype.
 
 **Prompt 4:** *"How do we satisfy the 'additional interactivity' requirement beyond the predict button? The rubric is strict about this."*
-**AI returned:** Listed five rubric-acceptable patterns. Recommended the prediction-overlay-on-data plot (option B). Charlie upgraded the recommendation to "side-by-side scenario comparison + overlay" (A + B combined).
+**AI returned:** Listed five rubric-acceptable patterns. Recommended the prediction-overlay-on-data plot (option B). The team upgraded the recommendation to "side-by-side scenario comparison + overlay" (A + B combined).
 **Team action:** Accepted the upgraded combination. This drove the Customer A vs B layout.
 
 **Prompt 5:** *"What libraries do we need for a proper Shiny dashboard? Stay within constraints - don't pile on R packages, ask first if you'd add something."*
@@ -291,11 +291,11 @@ The rubric requires ≥2 specific prompts with what AI returned + what the team 
 
 **Prompt 6:** *"Before we start building - review the report template QMD for any issues."*
 **AI returned:** Caught that the YAML header in `app/TeamMoney_Mini_AI_Report.qmd` is malformed (`html:` keys are at the top level instead of nested under `format:`, plus stray leading-space indentation on headings). Recommended either fixing the YAML or documenting it as a known issue.
-**Team action:** Decided to leave the template untouched and document the catch in this Build Log (per Charlie's direction).
+**Team action:** Decided to leave the template untouched and document the catch in this Build Log (per team direction).
 
 **Prompt 7:** *"Save the validated design plan to `app/AI-plan.md` so the team can review before we touch any R code."*
 **AI returned:** Wrote a 14-section spec covering goal, submission artifacts, locked decisions, file layout, run flow, UI, server reactivity, factor handling, validation, verification, submission flow, scope, AI Build Log, and risks.
-**Team action:** Charlie approved section-by-section.
+**Team action:** The team approved section-by-section.
 
 ### Stage C - Spec verification (after AI-plan.md was saved)
 
@@ -343,7 +343,7 @@ When the report writer fills in the README section of `TeamMoney_Mini_AI_Report.
 
 **Team roles**
 
-> **`[FILL IN - Charlie will assign roles]`** Suggested layout (delete after filling):
+> **`[FILL IN - team to assign roles]`** Suggested layout (delete after filling):
 >
 > | Team Member | Role |
 > |---|---|
@@ -411,8 +411,8 @@ Per the rubric (*"All five questions answered with specifics tied to the team's 
 #### Q3. How did your group catch and fix that issue?
 
 *Recommendation:* describe the actual catch + fix process. Candidates:
-- Charlie sent out 9 parallel review agents - one per rubric line - to audit the AI-plan.md spec. Two agents reported material gaps (README plan, Reflection plan); four reported minor gaps. We patched the spec inline before writing any R code.
-- For the random-forest pushback: Charlie chose option B (logistic regression with a tuned 6-predictor set) when AI recommended option A (the existing 5-predictor logistic). We documented the reasoning in the locked-decisions table.
+- The team sent out 9 parallel review agents - one per rubric line - to audit the AI-plan.md spec. Two agents reported material gaps (README plan, Reflection plan); four reported minor gaps. We patched the spec inline before writing any R code.
+- For the random-forest pushback: the team chose option B (logistic regression with a tuned 6-predictor set) when AI recommended option A (the existing 5-predictor logistic). We documented the reasoning in the locked-decisions table.
 - *(Add the actual debug story from implementation here once it happens - see AI Build Log Stage D.)*
 
 *Your answer:* `[FILL IN]`
