@@ -15,8 +15,8 @@ All five live in `app/TeamMoney_Mini_AI_Report.qmd` under `# 3. Reflection`. Eac
 
 - [x] Q1 - "What did AI help your group do especially well?" Replace `[FILL IN]` under `## 1. What did AI help your group do especially well?`.
 - [x] Q2 - "What did AI get wrong, miss, or oversimplify?" Replace `[FILL IN]` under `## 2. What did AI get wrong, miss, or oversimplify?`.
-- [ ] Q3 - "How did your group catch and fix that issue?" Replace `[FILL IN]` under `## 3. How did your group catch and fix that issue?`.
-- [ ] Q4 - "What still required human judgment?" Replace `[FILL IN]` under `## 4. What still required human judgment?`.
+- [x] Q3 - "How did your group catch and fix that issue?" Replace `[FILL IN]` under `## 3. How did your group catch and fix that issue?`.
+- [x] Q4 - "What still required human judgment?" Replace `[FILL IN]` under `## 4. What still required human judgment?`.
 - [x] Q5 - "If this tool were used in a real setting, what is one limitation or risk?" Replace `[FILL IN]` under `## 5. If this tool were used in a real setting, what is one limitation or risk?`.
 
 After replacing each `[FILL IN]`, also delete the italicized recommendation blockquote above it (the `> *Recommendation: ...*` block) so the final report shows only the team's answers.
