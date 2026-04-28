@@ -1,0 +1,169 @@
+---
+title: "Mini AI Project Report"
+subtitle: "README, AI Build Log, and Reflection"
+author: "Team Name"
+html:
+  embed-resources: true
+---
+  
+  # Team Information
+  
+  ## Team Name
+  
+  [Write your team name]
+
+## Team Members and Suggested Roles
+
+[List all team members and the role each person played.]
+
+Example:
+  
+  | Team Member | Role |
+  |---|---|
+  | Name 1 | Data Lead |
+  | Name 2 | Modeling Lead |
+  | Name 3 | App Developer |
+  | Name 4 | Documentation Lead |
+  
+  # 1. README
+  
+  ## Project Topic
+  
+  [Briefly describe your final project topic, dataset, and the decision/problem your app addresses.]
+
+## App File
+
+Our Shiny app file is:
+  
+  ```text
+TeamName_app.R
+```
+
+## Dataset File Expected by the App
+
+Our app expects the dataset to be located at:
+  
+  ```text
+data/your_dataset_name.csv
+```
+
+## Required Packages
+
+[List the R packages needed to run your app.]
+
+Example:
+  
+  ```r
+library(shiny)
+library(tidyverse)
+library(rsample)
+library(caret)
+```
+
+## How to Run the App
+
+1. Open RStudio.
+2. Make sure the dataset is available in the expected `data` folder.
+3. Open `TeamName_app.R`.
+4. Install any required packages if needed.
+5. Click **Run App**.
+
+## What the App Does
+
+[Explain what the user can do in your app. Mention the visualization, the prediction tool, and the additional interactive element.]
+
+## Model Used
+
+[Briefly describe the model used in the app. For example: logistic regression, linear regression, random forest, decision tree, etc.]
+
+## Outcome Variable
+
+[State the outcome variable from your final project that the app predicts. If you used a simplified version, explain that clearly.]
+
+## Predictors Exposed in the App
+
+[List at least 3 predictors the user can change in the prediction tool.]
+
+## Train/Test Split or Cross-Validation
+
+[Briefly explain how you trained and tested the model. For example: 80/20 train/test split, 5-fold cross-validation, etc.]
+
+## Prediction Output
+
+[Explain what the prediction means. For example: predicted price, predicted probability, predicted category, risk score, etc.]
+
+## Simplifications or Known Issues
+
+[State any simplifications. For example: "We used a simpler logistic regression model in the Shiny app because our full random forest model had factor-level issues inside Shiny."]
+
+# 2. AI Build Log
+
+## AI Tool(s) Used
+
+[Example: ChatGPT, Claude, Gemini, Copilot, etc.]
+
+## What We Asked AI to Help With
+
+[Briefly describe the main tasks: app layout, Shiny code, debugging, model explanation, visualization ideas, etc.]
+
+## Example Prompt 1
+
+[Paste or summarize one specific prompt you used.]
+
+## What AI Returned
+
+[Briefly summarize what the AI suggested or generated.]
+
+## What We Changed, Fixed, or Rejected
+
+[Explain what your group edited, corrected, simplified, or rejected.]
+
+## Example Prompt 2
+
+[Paste or summarize another specific prompt you used.]
+
+## What AI Returned
+
+[Briefly summarize what the AI suggested or generated.]
+
+## What We Changed, Fixed, or Rejected
+
+[Explain what your group edited, corrected, simplified, or rejected.]
+
+## Debugging Issue
+
+[Describe at least one problem you ran into. Examples: package error, missing values, factor-level mismatch, prediction error, plot not updating, file path issue.]
+
+## How We Solved the Debugging Issue
+
+[Explain what you changed and how you verified that the app worked.]
+
+## Final AI Contribution
+
+[Briefly explain which parts of the final app were most influenced by AI and which parts were mainly your group's decisions.]
+
+# 3. Reflection
+
+## 1. What did AI help your group do especially well?
+
+[Your answer. Refer to your actual app, model, data, or debugging process.]
+
+## 2. What did AI get wrong, miss, or oversimplify?
+
+[Your answer. Be specific.]
+
+## 3. How did your group catch and fix that issue?
+
+[Your answer.]
+
+## 4. What still required human judgment?
+
+[Your answer.]
+
+## 5. If this tool were used in a real setting, what is one limitation or risk?
+
+[Your answer.]
+
+# 4. Final Notes
+
+[Optional: Add anything else you want me to know about your app, model, data, or submission.]
