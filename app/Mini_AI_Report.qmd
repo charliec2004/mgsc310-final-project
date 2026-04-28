@@ -19,9 +19,9 @@ Team Money
 | Team Member | Role |
 |---|---|
 | Charlie Conner | App Developer |
-| Arya Kumar | \[FILL IN: Data Lead / Modeling Lead / App Developer / Documentation Lead] |
-| Steven \[last name] | \[FILL IN] |
-| Ryan \[last name] | \[FILL IN] |
+| Arya Kumar | Modeling Lead |
+| Steven Stanos | Data Lead |
+| Ryan McMillan | Documentation Lead |
 
 # 1. README
 
