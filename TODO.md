@@ -55,12 +55,6 @@ Both submission files live in `app/`. There is no copy step. **All checks below 
 - [x] `feat/shiny-app` branch deleted locally and on origin (work lives on `main` only now).
 - [ ] Upload `app/TeamMoney_app.R` and `app/TeamMoney_Mini_AI_Report.html` to Canvas. Two files. Not a zip.
 
-## 6. Optional / stretch (rubric does not require)
-
-- [ ] Run `/security-review` on `app/TeamMoney_app.R` and document the result inline in the AI Build Log (currently the log mentions debug stories but not a security pass).
-- [ ] Deploy to shinyapps.io. Not required by the rubric. Would require a free shinyapps.io account and `rsconnect::deployApp("app")`.
-- [ ] Return to a richer model (random forest) for the final project report - currently flagged in `app/TeamMoney_Mini_AI_Report.qmd` "Simplifications and Known Issues" as future work.
-
 ## Files of record (read-only - no edits expected)
 
 - `app/AI-plan.md` - design spec, the source of truth for what we built and why.
