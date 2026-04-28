@@ -4,9 +4,9 @@ Everything still needing to be done before submission. Tasks are grouped: human-
 
 ## 1. Team needs to fill in (human-only)
 
-- [ ] Assign Arya's role. File: `app/README.md` line 10. File: `app/Mini_AI_Report.qmd` line 22. Choices: Data Lead / Modeling Lead / App Developer / Documentation Lead.
-- [ ] Assign Steven's role + last name. File: `app/README.md` line 11. File: `app/Mini_AI_Report.qmd` line 23.
-- [ ] Assign Ryan's role + last name. File: `app/README.md` line 12. File: `app/Mini_AI_Report.qmd` line 24.
+- [x] Assign Arya's role. File: `app/README.md` line 10. File: `app/Mini_AI_Report.qmd` line 22. Choices: Data Lead / Modeling Lead / App Developer / Documentation Lead.
+- [x] Assign Steven's role + last name. File: `app/README.md` line 11. File: `app/Mini_AI_Report.qmd` line 23.
+- [x] Assign Ryan's role + last name. File: `app/README.md` line 12. File: `app/Mini_AI_Report.qmd` line 24.
 - [x] Sync Charlie's role across both files. `app/Mini_AI_Report.qmd` line 21 and `app/README.md` line 9 both say "App Developer".
 
 ## 2. Reflection answers (human writes, AI gave recommendations)
