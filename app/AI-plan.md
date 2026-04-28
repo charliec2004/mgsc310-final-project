@@ -13,9 +13,12 @@ Build a Shiny app and rendered Quarto HTML report that lets a Pacific Federal ma
 
 ## 2. Submission artifacts
 
-- `TeamMoney_app.R` - the Shiny app (copy of `app/app.R` produced at submission time, not during development).
-- `TeamMoney_Mini_AI_Report.html` - rendered Quarto HTML (copy of `app/Mini_AI_Report.html` produced at submission time).
-- The repo also keeps `app/app.R`, `app/Mini_AI_Report.qmd`, `app/Mini_AI_Report.html`, and this design doc.
+Both submission files live at `app/` - no copy step.
+
+- `app/TeamMoney_app.R` - the Shiny app. Uploaded directly to Canvas.
+- `app/TeamMoney_Mini_AI_Report.html` - rendered Quarto HTML. Uploaded directly to Canvas.
+- `app/TeamMoney_Mini_AI_Report.qmd` - source for the rendered HTML (not submitted).
+- `app/AI-plan.md` and `app/README.md` are working docs (not submitted).
 
 ## 3. Locked decisions (no longer open)
 
@@ -40,18 +43,19 @@ Build a Shiny app and rendered Quarto HTML report that lets a Pacific Federal ma
 ```
 mgsc310-final-project/
 ├── app/
-│   ├── app.R                    # working Shiny app
-│   ├── Mini_AI_Report.qmd       # working Quarto report (template YAML untouched)
-│   ├── Mini_AI_Report.html      # rendered output (build artifact)
-│   ├── AI-plan.md               # this design doc
-│   └── README.md                # team's working README (roles, file map, status)
+│   ├── TeamMoney_app.R                  # Shiny app (submitted to Canvas as-is)
+│   ├── TeamMoney_Mini_AI_Report.qmd     # Quarto source (template YAML untouched)
+│   ├── TeamMoney_Mini_AI_Report.html    # Rendered report (submitted to Canvas as-is)
+│   ├── AI-plan.md                       # this design doc
+│   ├── README.md                        # team's working README
+│   └── data/                            # dev-only symlink to ../data (gitignored)
 ├── data/
 │   └── pacific_federal_loan_campaign.csv
-├── TeamMoney_app.R              # produced at submission only
-└── TeamMoney_Mini_AI_Report.html # produced at submission only
+├── README.md                            # repo-root README
+└── TODO.md                              # outstanding work
 ```
 
-The app loads data via `read.csv("data/pacific_federal_loan_campaign.csv", stringsAsFactors = TRUE)` - relative path, rubric-compliant. The grader can drop the dataset into `data/` and Run App without touching anything.
+The app loads data via `read.csv("data/pacific_federal_loan_campaign.csv", stringsAsFactors = TRUE)` - relative path, rubric-compliant. For local dev, the symlink at `app/data → ../data` lets `shiny::runApp("app/TeamMoney_app.R")` find the dataset (because `runApp` chdirs into the app directory). The grader places their own `data/` next to the downloaded `TeamMoney_app.R`, which works the same way.
 
 ## 5. Run flow at app startup (one-time setup)
 
@@ -213,8 +217,8 @@ build_new_obs <- function(suffix) {
 
 ## 10. Verification plan (must pass before claiming done)
 
-1. **Static read.** Read `app.R` end-to-end for syntax, undefined symbols, dangling references.
-2. **Headless launch.** Start the app via `Rscript -e 'shiny::runApp("app/app.R", port = 7654, launch.browser = FALSE)'` as a backgrounded Bash task. Confirm it binds to `127.0.0.1:7654` without stack traces in stderr.
+1. **Static read.** Read `TeamMoney_app.R` end-to-end for syntax, undefined symbols, dangling references.
+2. **Headless launch.** Start the app via `Rscript -e 'shiny::runApp("app/TeamMoney_app.R", port = 7654, launch.browser = FALSE)'` as a backgrounded Bash task. Confirm it binds to `127.0.0.1:7654` without stack traces in stderr.
 3. **Playwright MCP browse.** Open `http://127.0.0.1:7654`, screenshot:
    1. Explore tab on launch (filters at default, plot rendered, caption visible).
    2. Predict tab on launch (defaults visible, value boxes show "-", placeholder verdict).
@@ -226,21 +230,28 @@ build_new_obs <- function(suffix) {
 
 ## 11. Submission flow
 
-1. Render `app/Mini_AI_Report.qmd` to HTML. Run from the repo root: `quarto render app/Mini_AI_Report.qmd` (so the relative paths in the `.qmd` resolve the same way they would when a grader renders it).
-   - **Open question:** the malformed YAML may cause Quarto to fail. If it does:
-     - Try the minimum body fix to make Quarto happy *without touching the user-flagged YAML* (e.g., adjust heading indentation if Quarto chokes on it).
-     - If that fails, ping Charlie with the actual Quarto error and let him decide whether to allow a YAML touch.
+The submission files live in `app/` directly. There is no copy step.
+
+1. Render the report from the repo root with `--embed-resources` (the malformed YAML doesn't pass the embed directive through automatically; without the flag, the rendered HTML pulls in an external `TeamMoney_Mini_AI_Report_files/libs/` directory and the single-file submission breaks):
+   ```bash
+   rm -rf app/TeamMoney_Mini_AI_Report_files app/TeamMoney_Mini_AI_Report.html
+   quarto render app/TeamMoney_Mini_AI_Report.qmd --to html --embed-resources
+   ```
+   - **Open question:** if Quarto refuses the malformed YAML entirely:
+     - Try the minimum body fix to make Quarto happy *without touching the user-flagged YAML*.
+     - If that fails, ping Charlie with the actual Quarto error.
      - Document whichever path is taken in the AI Build Log.
-2. Copy `app/app.R` → `TeamMoney_app.R` at repo root.
-3. Copy `app/Mini_AI_Report.html` → `TeamMoney_Mini_AI_Report.html` at repo root.
-4. **Pre-flight check** - must all pass before declaring done:
-   - `ls -1 TeamMoney_app.R TeamMoney_Mini_AI_Report.html` returns both filenames (no typo, no missing file).
-   - `grep -F "pacific_federal_loan_campaign.csv" TeamMoney_Mini_AI_Report.html` finds the dataset filename in the rendered report (rubric requirement: README must state the exact data file name).
-   - `grep -F "TeamMoney_app.R" TeamMoney_Mini_AI_Report.html` finds the app filename in the report.
-   - `grep -F "Personal_Loan" TeamMoney_Mini_AI_Report.html` confirms the outcome variable is named.
-   - Open `TeamMoney_Mini_AI_Report.html` in a browser; visually confirm README, AI Build Log, and Reflection sections all render.
-   - The repo root has **exactly two submission files** (no zip).
-5. **Do not commit unless Charlie says.** When he greenlights, commit on `feat/shiny-app`. **Do not** merge to main - the team decides whether to take this branch.
+2. **Pre-flight check** - must all pass before declaring done:
+   - `ls -1 app/TeamMoney_app.R app/TeamMoney_Mini_AI_Report.html` returns both filenames.
+   - `ls app/TeamMoney_Mini_AI_Report_files 2>/dev/null` returns nothing (HTML must be self-contained).
+   - `grep -F "pacific_federal_loan_campaign.csv" app/TeamMoney_Mini_AI_Report.html` finds the dataset filename.
+   - `grep -F "TeamMoney_app.R" app/TeamMoney_Mini_AI_Report.html` finds the app filename.
+   - `grep -F "Personal_Loan" app/TeamMoney_Mini_AI_Report.html` confirms the outcome variable is named.
+   - `grep -F -c "FILL IN" app/TeamMoney_Mini_AI_Report.html` returns `0` (no leftover placeholders).
+   - Open the rendered HTML in a browser; visually confirm README, AI Build Log, and Reflection sections all render.
+   - `find . -name '*.zip' -not -path './.git/*'` returns nothing.
+3. **Do not commit unless Charlie says.** When he greenlights, commit on `feat/shiny-app`. **Do not** merge to main - the team decides.
+4. Upload `app/TeamMoney_app.R` and `app/TeamMoney_Mini_AI_Report.html` to Canvas. Two files, not a zip.
 
 ## 12. Out of scope
 
@@ -257,7 +268,7 @@ The rubric requires ≥2 specific prompts with what AI returned + what the team 
 ### Stage A - Project kickoff (before any code or plan)
 
 **Prompt 1:** *"Use context7 to understand what Shiny apps are and what we'd need to build for this assignment."*
-**AI returned:** Pulled current Shiny + bslib documentation; explained the reactive model (UI + server pair, `reactive()` / `eventReactive()` / `renderXxx`), the `app.R` single-file convention, and how a logistic-regression model can be fit once at startup and called from the server.
+**AI returned:** Pulled current Shiny + bslib documentation; explained the reactive model (UI + server pair, `reactive()` / `eventReactive()` / `renderXxx`), the `TeamMoney_app.R` single-file convention, and how a logistic-regression model can be fit once at startup and called from the server.
 **Team action:** Accepted; used this as the mental model for the rest of the build.
 
 **Prompt 2:** *"Confirm you understand the Mini AI Project assignment and ask your questions before implementing."*
@@ -279,7 +290,7 @@ The rubric requires ≥2 specific prompts with what AI returned + what the team 
 **Team action:** Approved both. Total library set: `shiny, tidyverse, rsample, bslib, bsicons`.
 
 **Prompt 6:** *"Before we start building - review the report template QMD for any issues."*
-**AI returned:** Caught that the YAML header in `app/Mini_AI_Report.qmd` is malformed (`html:` keys are at the top level instead of nested under `format:`, plus stray leading-space indentation on headings). Recommended either fixing the YAML or documenting it as a known issue.
+**AI returned:** Caught that the YAML header in `app/TeamMoney_Mini_AI_Report.qmd` is malformed (`html:` keys are at the top level instead of nested under `format:`, plus stray leading-space indentation on headings). Recommended either fixing the YAML or documenting it as a known issue.
 **Team action:** Decided to leave the template untouched and document the catch in this Build Log (per Charlie's direction).
 
 **Prompt 7:** *"Save the validated design plan to `app/AI-plan.md` so the team can review before we touch any R code."*
@@ -308,7 +319,7 @@ The rubric requires ≥2 specific prompts with what AI returned + what the team 
 
 **Debug story (≥1 required by rubric):** *[fill in during implementation - the most likely real bug is one of: factor-level mismatch in `predict()` after constructing the new observation; the prediction-overlay plot's stars landing in the wrong facet because `Education` wasn't carried through; the explore-tab plot failing to re-render because `filtered_data()` returned 0 rows. Document the actual bug, the diagnostic step, the fix, and how it was verified.]*
 
-**Prompt 12:** *"Run /security-review on the final app.R and report content."*
+**Prompt 12:** *"Run /security-review on the final TeamMoney_app.R and report content."*
 **AI returned:** *[fill at implementation time - expected: no PII in logs, parameterized data load, input validation, no `eval`/`parse` of user inputs.]*
 **Team action:** *[fill at implementation time]*
 
@@ -324,11 +335,11 @@ The rubric requires ≥2 specific prompts with what AI returned + what the team 
 
 ## 15. Report content plan
 
-The Quarto report `Mini_AI_Report.qmd` has three rubric-graded sections: README, AI Build Log, Reflection. §13 above already plans the AI Build Log content. This section plans the other two.
+The Quarto report `TeamMoney_Mini_AI_Report.qmd` has three rubric-graded sections: README, AI Build Log, Reflection. §13 above already plans the AI Build Log content. This section plans the other two.
 
 ### 15.1 README section content
 
-When the report writer fills in the README section of `Mini_AI_Report.qmd`, they should include all of the following (mapped to the rubric line: *"States dataset filename, packages, and run instructions; matches what the app actually does"* + the checklist line *"Your README lists team roles."*):
+When the report writer fills in the README section of `TeamMoney_Mini_AI_Report.qmd`, they should include all of the following (mapped to the rubric line: *"States dataset filename, packages, and run instructions; matches what the app actually does"* + the checklist line *"Your README lists team roles."*):
 
 **Team roles**
 
