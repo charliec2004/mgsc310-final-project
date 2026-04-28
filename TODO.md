@@ -1,4 +1,4 @@
-# Mini AI Project - Outstanding TODOs
+# Mini AI Project; Outstanding TODOs
 
 Everything still needing to be done before submission. Tasks are grouped: human-fill-in, rebuild-and-verify, submit, optional.
 
@@ -11,13 +11,13 @@ Everything still needing to be done before submission. Tasks are grouped: human-
 
 ## 2. Reflection answers (human writes, AI gave recommendations)
 
-All five live in `app/TeamMoney_Mini_AI_Report.qmd` under `# 3. Reflection`. Each currently shows a recommendation paragraph plus a `[FILL IN - your answer here]` line. Keep answers specific to this build.
+All five live in `app/TeamMoney_Mini_AI_Report.qmd` under `# 3. Reflection`. Each currently shows a recommendation paragraph plus a `[FILL IN; your answer here]` line. Keep answers specific to this build.
 
-- [x] Q1 - "What did AI help your group do especially well?" Replace `[FILL IN]` under `## 1. What did AI help your group do especially well?`.
-- [x] Q2 - "What did AI get wrong, miss, or oversimplify?" Replace `[FILL IN]` under `## 2. What did AI get wrong, miss, or oversimplify?`.
-- [x] Q3 - "How did your group catch and fix that issue?" Replace `[FILL IN]` under `## 3. How did your group catch and fix that issue?`.
-- [x] Q4 - "What still required human judgment?" Replace `[FILL IN]` under `## 4. What still required human judgment?`.
-- [x] Q5 - "If this tool were used in a real setting, what is one limitation or risk?" Replace `[FILL IN]` under `## 5. If this tool were used in a real setting, what is one limitation or risk?`.
+- [x] Q1; "What did AI help your group do especially well?" Replace `[FILL IN]` under `## 1. What did AI help your group do especially well?`.
+- [x] Q2; "What did AI get wrong, miss, or oversimplify?" Replace `[FILL IN]` under `## 2. What did AI get wrong, miss, or oversimplify?`.
+- [x] Q3; "How did your group catch and fix that issue?" Replace `[FILL IN]` under `## 3. How did your group catch and fix that issue?`.
+- [x] Q4; "What still required human judgment?" Replace `[FILL IN]` under `## 4. What still required human judgment?`.
+- [x] Q5; "If this tool were used in a real setting, what is one limitation or risk?" Replace `[FILL IN]` under `## 5. If this tool were used in a real setting, what is one limitation or risk?`.
 
 After replacing each `[FILL IN]`, also delete the italicized recommendation blockquote above it (the `> *Recommendation: ...*` block) so the final report shows only the team's answers.
 
@@ -55,10 +55,10 @@ Both submission files live in `app/`. There is no copy step. **All checks below 
 - [x] `feat/shiny-app` branch deleted locally and on origin (work lives on `main` only now).
 - [ ] Upload `app/TeamMoney_app.R` and `app/TeamMoney_Mini_AI_Report.html` to Canvas. Two files. Not a zip.
 
-## Files of record (read-only - no edits expected)
+## Files of record (read-only; no edits expected)
 
-- `app/AI-plan.md` - design spec, the source of truth for what we built and why.
-- `app/TeamMoney_app.R` - working Shiny app. Implementation complete.
-- `app/data/` - dev-only symlink to `../data` (gitignored).
-- `.gitignore` - already excludes `.env`, `app/data`, `.DS_Store`.
-- `~/.claude/projects/-Users-charles-Documents-CLASSES-MGSC-310-mgsc310-final-project/plans/2026-04-28-mini-ai-shiny-app.md` - the implementation plan AI followed (kept outside the repo per team direction).
+- `app/AI-plan.md`; design spec, the source of truth for what we built and why.
+- `app/TeamMoney_app.R`; working Shiny app. Implementation complete.
+- `app/data/`; dev-only symlink to `../data` (gitignored).
+- `.gitignore`; already excludes `.env`, `app/data`, `.DS_Store`.
+- `~/.claude/projects/-Users-charles-Documents-CLASSES-MGSC-310-mgsc310-final-project/plans/2026-04-28-mini-ai-shiny-app.md`; the implementation plan AI followed (kept outside the repo per team direction).

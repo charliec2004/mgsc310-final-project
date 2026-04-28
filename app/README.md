@@ -1,6 +1,6 @@
-# Team Money - Mini AI Project (working README)
+# Team Money; Mini AI Project (working README)
 
-This is the team's working README for the `app/` directory. It is **not** the README that gets graded - that one lives inside `TeamMoney_Mini_AI_Report.qmd`. Use this file to coordinate during the build; copy whatever's relevant into the report's README section at submission time.
+This is the team's working README for the `app/` directory. It is **not** the README that gets graded; that one lives inside `TeamMoney_Mini_AI_Report.qmd`. Use this file to coordinate during the build; copy whatever's relevant into the report's README section at submission time.
 
 ## Team
 
@@ -15,10 +15,10 @@ This is the team's working README for the `app/` directory. It is **not** the RE
 
 | File | What it is |
 |---|---|
-| `TeamMoney_app.R` | The Shiny app. **Uploaded to Canvas as-is** - no copy step. |
+| `TeamMoney_app.R` | The Shiny app. **Uploaded to Canvas as-is**; no copy step. |
 | `TeamMoney_Mini_AI_Report.qmd` | Quarto source for the report (README + AI Build Log + Reflection). |
 | `TeamMoney_Mini_AI_Report.html` | Rendered output of the .qmd. **Uploaded to Canvas as-is.** |
-| `AI-plan.md` | The full design spec - what we're building and why. Read this first. |
+| `AI-plan.md` | The full design spec; what we're building and why. Read this first. |
 | `README.md` | This file. |
 | `data/` | Dev-only symlink to `../data/` (gitignored). Lets `shiny::runApp` find the dataset locally. The grader supplies their own `data/` next to `TeamMoney_app.R`. |
 
@@ -46,7 +46,7 @@ In RStudio: open `TeamMoney_app.R` and click **Run App**.
 quarto render app/TeamMoney_Mini_AI_Report.qmd --to html --embed-resources
 ```
 
-The `--embed-resources` flag is required because the template's malformed YAML doesn't get the embed directive applied automatically - without it, the rendered HTML pulls in an external `_files/libs/` folder and the single-file submission breaks.
+The `--embed-resources` flag is required because the template's malformed YAML doesn't get the embed directive applied automatically; without it, the rendered HTML pulls in an external `_files/libs/` folder and the single-file submission breaks.
 
 ## Submission packaging
 

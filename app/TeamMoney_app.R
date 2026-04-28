@@ -1,7 +1,7 @@
 # ---------------------------------------------------------
-# Pacific Federal - Personal Loan Targeting Tool
+# Pacific Federal: Personal Loan Targeting Tool
 # Team Money: Charlie Conner, Arya Kumar, Steven, Ryan
-# MGSC 310 Final Project - Mini AI Shiny App Prototype
+# MGSC 310 Final Project: Mini AI Shiny App Prototype
 # ---------------------------------------------------------
 
 library(shiny)
@@ -82,7 +82,7 @@ test_perf_text <- sprintf(
     "Model: logistic regression. Trained on 80%% of %d customers. ",
     "Test accuracy: %.1f%% • Test AUC: %.2f. ",
     "Note: only ~%.1f%% of customers in the dataset accepted a loan, so a naive ",
-    "'predict No for everyone' baseline already scores ~%.0f%% accuracy - ",
+    "'predict No for everyone' baseline already scores ~%.0f%% accuracy; ",
     "AUC is the more honest single-number metric for this task."
   ),
   nrow(loans_clean),
@@ -209,7 +209,7 @@ INCOME_RANGE   <- range(loans_train$Income)
 MORTGAGE_RANGE <- c(0, max(loans_train$Mortgage) + 50)
 
 ui <- page_navbar(
-  title    = "Pacific Federal - Personal Loan Targeting Tool",
+  title    = "Pacific Federal: Personal Loan Targeting Tool",
   theme    = bs_theme(version = 5, bootswatch = "flatly"),
   bg       = "#1f3b57",
   fillable = FALSE,
@@ -275,11 +275,11 @@ ui <- page_navbar(
           tags$p(
             class = "text-muted small mb-3",
             "Choices: Undergrad, Graduate, Advanced/Professional. ",
-            "All three are selected by default - remove any with the × button."
+            "All three are selected by default; remove any with the × button."
           ),
           sliderInput(
             "income_filter",
-            label = "Income range (thousand $) - drag the handles",
+            label = "Income range (thousand $), drag the handles",
             min   = floor(INCOME_RANGE[1]),
             max   = ceiling(INCOME_RANGE[2]),
             value = c(floor(INCOME_RANGE[1]), ceiling(INCOME_RANGE[2])),
@@ -322,7 +322,7 @@ ui <- page_navbar(
         card_header(span(bs_icon("person"), " Customer A")),
         card_body(
           fillable = FALSE,
-          textInput   ("name_a",       "Name (label only - not used by the model)", value = "Customer A", placeholder = "e.g. Sarah K."),
+          textInput   ("name_a",       "Name (label only, not used by the model)", value = "Customer A", placeholder = "e.g. Sarah K."),
           numericInput("income_a",     "Income (thousand $)",          value = 40,  min = 0, max = 300, step = 1),
           selectInput ("family_a",     "Family size",                  choices = 1:4, selected = 2),
           numericInput("ccavg_a",      "Credit card avg / month (k$)", value = 1.0, min = 0, max = 10,  step = 0.1),
@@ -337,7 +337,7 @@ ui <- page_navbar(
         card_header(span(bs_icon("person-fill"), " Customer B")),
         card_body(
           fillable = FALSE,
-          textInput   ("name_b",       "Name (label only - not used by the model)", value = "Customer B", placeholder = "e.g. Marcus T."),
+          textInput   ("name_b",       "Name (label only, not used by the model)", value = "Customer B", placeholder = "e.g. Marcus T."),
           numericInput("income_b",     "Income (thousand $)",          value = 180, min = 0, max = 300, step = 1),
           selectInput ("family_b",     "Family size",                  choices = 1:4, selected = 2),
           numericInput("ccavg_b",      "Credit card avg / month (k$)", value = 4.0, min = 0, max = 10,  step = 0.1),
@@ -384,7 +384,7 @@ ui <- page_navbar(
           "would accept a personal-loan offer based on Income, Family size, monthly Credit Card ",
           "spending (CCAvg), Education level, whether they hold a CD with the bank, and Mortgage. ",
           "A higher probability does not mean the customer ", tags$strong("will"),
-          " accept - it means customers with similar profiles in the training data accepted ",
+          " accept; it means customers with similar profiles in the training data accepted ",
           "at that rate. The bank should treat this as a relative ranking signal, not a ",
           "guaranteed outcome."
         ),
@@ -392,11 +392,11 @@ ui <- page_navbar(
           tags$strong("What this model cannot tell you. "),
           "It cannot establish causation (high-income customers accept more often, but raising ",
           "someone's income won't change their behavior). It cannot predict reliably for ",
-          "customer profiles that are sparse in the training data - for example, low-income ",
+          "customer profiles that are sparse in the training data, for example low-income ",
           "Advanced/Professional households or unusually large mortgages. It cannot account for ",
           "changes in the loan-offer terms, the bank's pricing, or economic conditions since ",
           "this data was collected. And it doesn't measure whether the bank ", tags$em("should"),
-          " target a customer - that depends on profitability, churn risk, and regulatory ",
+          " target a customer; that depends on profitability, churn risk, and regulatory ",
           "context not captured here."
         )
       )
@@ -430,10 +430,10 @@ server <- function(input, output, session) {
   })
 
   output$title_a <- renderText({
-    paste0(safe_name(input$name_a, "Customer A"), " - P(accept)")
+    paste0(safe_name(input$name_a, "Customer A"), ": P(accept)")
   })
   output$title_b <- renderText({
-    paste0(safe_name(input$name_b, "Customer B"), " - P(accept)")
+    paste0(safe_name(input$name_b, "Customer B"), ": P(accept)")
   })
 
   prediction_result <- eventReactive(input$predict_btn, {
