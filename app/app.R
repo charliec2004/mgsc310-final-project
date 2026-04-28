@@ -1,7 +1,7 @@
 # ---------------------------------------------------------
 # Mini AI Project: Shiny App Template
 # Team Name: Team Money
-# Team Members: Charlie, Aria, Ryan, Steven
+# Team Members: Charlie, Arya, Ryan, Steven
 # ---------------------------------------------------------
 
 library(shiny)
