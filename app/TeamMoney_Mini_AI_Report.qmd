@@ -299,7 +299,7 @@ AI was most influential on the implementation in three places: (1) the **factor-
 
 ## 1. What did AI help your group do especially well?
 
-AI helped us to format our dashboard. Despite us creating the models and loading/cleaning the data, AI created the format and helped us incorporate user input. It also helped us to debug because whenever we came across an error or feature that didn't work as anticipated, we could simply paste the error message and immeadietly received numerous useable solutions. 
+AI helped us to format our dashboard. Despite us creating the models and loading/cleaning the data, AI created the format and helped us incorporate user input. It also helped us to debug because whenever we came across an error or feature that didn't work as anticipated, we could simply paste the error message and immediately received numerous useable solutions. 
 
 ## 2. What did AI get wrong, miss, or oversimplify?
 
@@ -315,7 +315,7 @@ The type of model (we leaned logistic regression over random forest because it w
 
 ## 5. If this tool were used in a real setting, what is one limitation or risk?
 
-Anything that is "vibe-coded" presents an inherent risk due to the fact that LLMs don't actually know anything, they simply make educated guesses. Being more specific to our model however, there is no way to measure the current customer base against the base which was used for the model, which means we need to stay on top of data-gathering and watching trends to ensure that our models are not out of date. Also, the cutoff of 0.5 is arbitrary, so we would need to do some analysis on the effects of over-offering loans versus under-offering loans to determine the ideal cutoff because it cannot measure its own hyperparameters. 
+Anything that is "vibe-coded" presents an inherent risk due to the fact that LLMs don't actually know anything, they simply make educated guesses. Being more specific to our model however, there is no way to measure the current customer base against the base which was used for the model, which means we need to stay on top of data-gathering and watching trends to ensure that our models are not out of date. Also, the 0.5 decision threshold is arbitrary — choosing the ideal cutoff requires analyzing the trade-off between over-offering and under-offering loans, and that is a business decision the model cannot make on its own. 
 
 # 4. Final Notes
 
