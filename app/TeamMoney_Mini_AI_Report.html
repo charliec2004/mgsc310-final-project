@@ -2370,8 +2370,8 @@ vertical-align: -.125em;
 <h2 class="anchored" data-anchor-id="what-we-asked-ai-to-help-with">What We Asked AI to Help With</h2>
 <p>Researching Shiny + bslib via the <strong>context7 MCP</strong> before writing any code; choosing the model and predictor set; designing the factor-handling pattern; scaffolding the dashboard with <code>bslib::page_navbar</code>; running an end-to-end visual verification of the running app with the <strong>Playwright MCP</strong> (and a Python-Playwright fallback when the MCP wasn’t installed); and debugging a series of layout, reactivity, and verdict-formatting bugs surfaced by that visual pass.</p>
 </section>
-<section id="example-prompt-1---research-shiny-via-context7" class="level2">
-<h2 class="anchored" data-anchor-id="example-prompt-1---research-shiny-via-context7">Example Prompt 1 - research Shiny via context7</h2>
+<section id="prompt-1---research-shiny-via-context7" class="level2">
+<h2 class="anchored" data-anchor-id="prompt-1---research-shiny-via-context7">Prompt 1 - research Shiny via context7</h2>
 <blockquote class="blockquote">
 <p><em>“Use context7 to look up the current Shiny + bslib documentation. Specifically: how <code>reactive()</code> differs from <code>eventReactive()</code>, how to fit a <code>glm()</code> once at startup and call it from inside <code>server()</code>, what <code>bslib::page_navbar</code> ships out of the box, and how factor levels need to be handled when constructing a new observation for <code>predict()</code>.”</em></p>
 </blockquote>
@@ -2384,8 +2384,8 @@ vertical-align: -.125em;
 <p>Adopted the factor pattern verbatim - it’s the foundation of <code>build_new_obs()</code> in our <code>TeamMoney_app.R</code>. Adopted <code>eventReactive(input$predict_btn, …, ignoreNULL = TRUE)</code> for the prediction pipeline so it only re-runs on click.</p>
 </section>
 </section>
-<section id="example-prompt-2---model-and-predictor-set" class="level2">
-<h2 class="anchored" data-anchor-id="example-prompt-2---model-and-predictor-set">Example Prompt 2 - model and predictor set</h2>
+<section id="prompt-2---model-and-predictor-set" class="level2">
+<h2 class="anchored" data-anchor-id="prompt-2---model-and-predictor-set">Prompt 2 - model and predictor set</h2>
 <blockquote class="blockquote">
 <p><em>“Which model and predictor set should we use? We already have logistic regression with <code>Age + Experience + Income + Education + Mortgage</code> in our QMD. The dataset also has <code>Family</code>, <code>CCAvg</code>, <code>CD_Account</code>, <code>Securities_Account</code>, <code>Online</code>, <code>CreditCard</code>. Recommend a final set.”</em></p>
 </blockquote>
@@ -2398,8 +2398,8 @@ vertical-align: -.125em;
 <p>Accepted the 6-predictor logistic. <strong>Rejected</strong> random forest - the rubric rewards a working prototype over an ambitious one that breaks. Dropped <code>Age</code> (kept <code>Experience</code> was wrong; we actually dropped both because neither was in the recommended set, but kept <code>Family</code> and <code>CCAvg</code> from the dataset that the QMD model didn’t use).</p>
 </section>
 </section>
-<section id="example-prompt-3---additional-interactivity" class="level2">
-<h2 class="anchored" data-anchor-id="example-prompt-3---additional-interactivity">Example Prompt 3 - additional interactivity</h2>
+<section id="prompt-3---additional-interactivity" class="level2">
+<h2 class="anchored" data-anchor-id="prompt-3---additional-interactivity">Prompt 3 - additional interactivity</h2>
 <blockquote class="blockquote">
 <p><em>“How do we satisfy the rubric’s ‘additional interactivity’ requirement beyond the predict button? The rubric explicitly says a numeric-input + button alone doesn’t count.”</em></p>
 </blockquote>
@@ -2412,8 +2412,8 @@ vertical-align: -.125em;
 <p><strong>Upgraded</strong> AI’s recommendation. Went with side-by-side Customer A vs Customer B inputs (one button, two predictions at once) <strong>and</strong> the overlay plot, so the app satisfies the “additional interactivity” requirement from two independent angles. Also kept the live filter on the Explore tab as a third interactive element.</p>
 </section>
 </section>
-<section id="example-prompt-4---outcome-connected-visualization" class="level2">
-<h2 class="anchored" data-anchor-id="example-prompt-4---outcome-connected-visualization">Example Prompt 4 - outcome-connected visualization</h2>
+<section id="prompt-4---outcome-connected-visualization" class="level2">
+<h2 class="anchored" data-anchor-id="prompt-4---outcome-connected-visualization">Prompt 4 - outcome-connected visualization</h2>
 <blockquote class="blockquote">
 <p><em>“Pick the outcome-connected viz. Three candidates: (a) Income × predicted probability, points colored by actual <code>Personal_Loan</code>, faceted by Education; (b) Income density faceted by <code>Personal_Loan</code> and Education; (c) predicted-probability curve with confidence ribbons. Which best supports the prediction overlay?”</em></p>
 </blockquote>
@@ -2426,8 +2426,8 @@ vertical-align: -.125em;
 <p>Accepted. Implemented as <code>geom_point(alpha = 0.45) + geom_hline(yintercept = 0.5, linetype = &quot;dashed&quot;) + facet_wrap(~ Education)</code>.</p>
 </section>
 </section>
-<section id="example-prompt-5---library-budget" class="level2">
-<h2 class="anchored" data-anchor-id="example-prompt-5---library-budget">Example Prompt 5 - library budget</h2>
+<section id="prompt-5---library-budget" class="level2">
+<h2 class="anchored" data-anchor-id="prompt-5---library-budget">Prompt 5 - library budget</h2>
 <blockquote class="blockquote">
 <p><em>“What R libraries do we need for a proper Shiny dashboard? Stay within constraints - don’t pile on packages. Ask first if you’d add anything beyond <code>shiny</code>, <code>tidyverse</code>, <code>rsample</code>.”</em></p>
 </blockquote>
@@ -2440,8 +2440,8 @@ vertical-align: -.125em;
 <p>Approved <code>bslib</code> + <code>bsicons</code>. <strong>Rejected</strong> <code>caret</code>, <code>pROC</code>, <code>DT</code>, <code>shinyWidgets</code>. Adopted the by-hand AUC: <code>compute_auc()</code> in <code>TeamMoney_app.R</code>.</p>
 </section>
 </section>
-<section id="example-prompt-6---implement-teammoney_app.r-end-to-end" class="level2">
-<h2 class="anchored" data-anchor-id="example-prompt-6---implement-teammoney_app.r-end-to-end">Example Prompt 6 - implement <code>TeamMoney_app.R</code> end to end</h2>
+<section id="prompt-6---implement-teammoney_app.r-end-to-end" class="level2">
+<h2 class="anchored" data-anchor-id="prompt-6---implement-teammoney_app.r-end-to-end">Prompt 6 - implement <code>TeamMoney_app.R</code> end to end</h2>
 <blockquote class="blockquote">
 <p><em>“Write <code>app/TeamMoney_app.R</code> end to end based on the locked decisions: data prep + cleaning + 80/20 stratified split + <code>glm(Personal_Loan ~ Income + Family + CCAvg + Education + CD_Account + Mortgage, family = binomial)</code> fit at startup, helper functions, UI with <code>page_navbar</code> + two <code>nav_panel</code>s, server with <code>eventReactive</code> for predictions and <code>reactive</code> for the explore filter. Then verify it parses and the model fits.”</em></p>
 </blockquote>
@@ -2454,8 +2454,8 @@ vertical-align: -.125em;
 <p>Accepted. The factor sanity probe in particular gave us confidence the prediction UI would not crash on submit.</p>
 </section>
 </section>
-<section id="example-prompt-7---visual-verification-with-playwright-mcp" class="level2">
-<h2 class="anchored" data-anchor-id="example-prompt-7---visual-verification-with-playwright-mcp">Example Prompt 7 - visual verification with Playwright MCP</h2>
+<section id="prompt-7---visual-verification-with-playwright-mcp" class="level2">
+<h2 class="anchored" data-anchor-id="prompt-7---visual-verification-with-playwright-mcp">Prompt 7 - visual verification with Playwright MCP</h2>
 <blockquote class="blockquote">
 <p><em>“Use the Playwright MCP to load the running Shiny app in a headless browser, walk through both tabs, click Compare Predictions, and screenshot each state. Verify the UI is rendering correctly before claiming done.”</em></p>
 </blockquote>
@@ -2468,8 +2468,8 @@ vertical-align: -.125em;
 <p>Accepted the Python-Playwright fallback. The visual pass surfaced the layout, reactivity, and verdict bugs documented under “Debugging Issues” below.</p>
 </section>
 </section>
-<section id="example-prompt-8---add-a-name-field-per-customer" class="level2">
-<h2 class="anchored" data-anchor-id="example-prompt-8---add-a-name-field-per-customer">Example Prompt 8 - add a Name field per customer</h2>
+<section id="prompt-8---add-a-name-field-per-customer" class="level2">
+<h2 class="anchored" data-anchor-id="prompt-8---add-a-name-field-per-customer">Prompt 8 - add a Name field per customer</h2>
 <blockquote class="blockquote">
 <p><em>“For Make a Prediction, add a Name field per customer and integrate it. The name should flow into the value-box title, the verdict sentence, and the plot star labels. The name should be a label only, not a model predictor.”</em></p>
 </blockquote>
@@ -2540,38 +2540,23 @@ vertical-align: -.125em;
 <h1>3. Reflection</h1>
 <section id="what-did-ai-help-your-group-do-especially-well" class="level2">
 <h2 class="anchored" data-anchor-id="what-did-ai-help-your-group-do-especially-well">1. What did AI help your group do especially well?</h2>
-<blockquote class="blockquote">
-<p><em>Recommendation: cite specific things AI accelerated - mapping the rubric line-by-line and asking clarifying questions before any code was written, recommending the bslib + bsicons library combo and explaining why it was the right minimal stack, designing the factor-handling pattern (<code>build_new_obs</code> wrapping every categorical in <code>factor(value, levels = levels(loans_train$&lt;col&gt;))</code>), catching the malformed Quarto YAML before we wasted a render cycle, and dispatching nine parallel review agents to find spec gaps before any R code was written.</em></p>
-</blockquote>
-<p>[FILL IN - your answer here]</p>
+<p>AI helped us to format our dashboard. Despite us creating the models and loading/cleaning the data, AI created the format and helped us incorporate user input. It also helped us to debug because whenever we came across an error or feature that didn’t work as anticipated, we could simply paste the error message and immeadietly received numerous useable solutions.</p>
 </section>
 <section id="what-did-ai-get-wrong-miss-or-oversimplify" class="level2">
 <h2 class="anchored" data-anchor-id="what-did-ai-get-wrong-miss-or-oversimplify">2. What did AI get wrong, miss, or oversimplify?</h2>
-<blockquote class="blockquote">
-<p><em>Recommendation: be specific. Candidates: the first version of the spec at <code>AI-plan.md</code> was missing a <code>plotOutput(&quot;predict_plot&quot;)</code> placeholder in the UI section - the server defined <code>output$predict_plot</code> but the UI never referenced it; the first spec also had no plan for the README and Reflection sections of the report; AI’s first model recommendation was random forest, which would have been more accurate but was wrong for this prototype because of factor-level fragility inside Shiny; the static caption on the Explore-tab plot won’t reflect filtered subsets, which could create a small honesty gap if the user filters out the segments the caption describes.</em></p>
-</blockquote>
-<p>[FILL IN - your answer here]</p>
+<p>The first version of the spec in AI-plan.md missed a plotOutput(“predict_plot”) placeholder in the UI, even though the server already defined output$predict_plot. It also did not include a plan for the README and Reflection sections of the report. AI initially recommended a random forest model, which may have offered better accuracy, but it was not a good fit for this prototype.</p>
 </section>
 <section id="how-did-your-group-catch-and-fix-that-issue" class="level2">
 <h2 class="anchored" data-anchor-id="how-did-your-group-catch-and-fix-that-issue">3. How did your group catch and fix that issue?</h2>
-<blockquote class="blockquote">
-<p><em>Recommendation: describe the actual catch + fix process. Candidates: we sent out nine parallel review agents - one per rubric line - to audit the design spec; two agents reported material gaps (README plan, Reflection plan); four reported minor gaps; we patched the spec inline before writing any R code. For the random-forest pushback, the team chose logistic regression with a tuned 6-predictor set when AI recommended random forest. For the layout bug during implementation, we used Playwright DOM inspection to confirm cards were rendering at zero height under <code>fillable = TRUE</code>, then disabled fillable at the page and column level.</em></p>
-</blockquote>
-<p>[FILL IN - your answer here]</p>
+<p>We investigated the rubric and our data with both human and AI eyes and found the README/reflection misses. We also decided to override the AI’s choice of random forest and use logistic regression with 6 statisticallly significant predictors. For the layout bug, we used Playwright DOM inspection to determine the issue with the cards, and made them not fillable/0 height.</p>
 </section>
 <section id="what-still-required-human-judgment" class="level2">
 <h2 class="anchored" data-anchor-id="what-still-required-human-judgment">4. What still required human judgment?</h2>
-<blockquote class="blockquote">
-<p><em>Recommendation: point at concrete decisions humans owned. Candidates: picking the predictor set (option B over A or C) based on what we know about Pacific Federal’s customer base; choosing logistic regression over random forest for the prototype; deciding to leave the malformed Quarto YAML untouched and document the catch instead of fixing it; setting the asymmetric default values for Customer A and Customer B so the launch demo is immediately interesting; assigning team roles (Data Lead, Modeling Lead, App Developer, Documentation Lead); deciding what counts as “honest” in the prediction-interpretation paragraph - what to admit the model cannot tell you.</em></p>
-</blockquote>
-<p>[FILL IN - your answer here]</p>
+<p>The type of model (we leaned logistic regression over random forest because it worked better for our choice of variable), the determination for the app to show Customer A vs B, figuring out what the AI cannot do (eg. hyperparameters), double-checking what it gave us, communicating on how best to proceed and instruct the AI, and dealing with the deformed Quarto YAML.</p>
 </section>
 <section id="if-this-tool-were-used-in-a-real-setting-what-is-one-limitation-or-risk" class="level2">
 <h2 class="anchored" data-anchor-id="if-this-tool-were-used-in-a-real-setting-what-is-one-limitation-or-risk">5. If this tool were used in a real setting, what is one limitation or risk?</h2>
-<blockquote class="blockquote">
-<p><em>Recommendation: avoid generic AI risks; tie the answer to <strong>this app</strong>. Candidates: the model is trained on a 5,000-customer snapshot, so if Pacific Federal’s customer base or the loan offer’s terms have changed since the data was collected the predictions will drift, and there’s no monitoring or retraining loop in this prototype; the model has no fairness audit, so if <code>Education</code> or <code>Family</code> size correlates with a protected class in this customer base, using the predictions to direct marketing spend could create disparate outcomes the bank would have to defend; a non-technical user might see a 95% probability and treat it as a sales certainty even though the in-app interpretation is honest about it being a relative ranking signal; the 9.6% positive class rate means small changes in the threshold (currently 0.5) would meaningfully shift who gets contacted, and that’s a business-policy decision the model can inform but cannot make.</em></p>
-</blockquote>
-<p>[FILL IN - your answer here]</p>
+<p>Anything that is “vibe-coded” presents an inherent risk due to the fact that LLMs don’t actually know anything, they simply make educated guesses. Being more specific to our model however, there is no way to measure the current customer base against the base which was used for the model, which means we need to stay on top of data-gathering and watching trends to ensure that our models are not out of date. Also, the cutoff of 0.5 is arbitrary, so we would need to do some analysis on the effects of over-offering loans versus under-offering loans to determine the ideal cutoff because it cannot measure its own hyperparameters.</p>
 </section>
 </section>
 <section id="final-notes" class="level1">

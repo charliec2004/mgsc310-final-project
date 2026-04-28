@@ -135,7 +135,7 @@ Claude Code (Anthropic) running locally with the Shiny + bslib + tidyverse R too
 
 Researching Shiny + bslib via the **context7 MCP** before writing any code; choosing the model and predictor set; designing the factor-handling pattern; scaffolding the dashboard with `bslib::page_navbar`; running an end-to-end visual verification of the running app with the **Playwright MCP** (and a Python-Playwright fallback when the MCP wasn't installed); and debugging a series of layout, reactivity, and verdict-formatting bugs surfaced by that visual pass.
 
-## Example Prompt 1 - research Shiny via context7
+## Prompt 1 - research Shiny via context7
 
 > *"Use context7 to look up the current Shiny + bslib documentation. Specifically: how `reactive()` differs from `eventReactive()`, how to fit a `glm()` once at startup and call it from inside `server()`, what `bslib::page_navbar` ships out of the box, and how factor levels need to be handled when constructing a new observation for `predict()`."*
 
@@ -147,7 +147,7 @@ Pulled the latest Shiny + bslib docs through context7. Explained that `reactive(
 
 Adopted the factor pattern verbatim - it's the foundation of `build_new_obs()` in our `TeamMoney_app.R`. Adopted `eventReactive(input$predict_btn, …, ignoreNULL = TRUE)` for the prediction pipeline so it only re-runs on click.
 
-## Example Prompt 2 - model and predictor set
+## Prompt 2 - model and predictor set
 
 > *"Which model and predictor set should we use? We already have logistic regression with `Age + Experience + Income + Education + Mortgage` in our QMD. The dataset also has `Family`, `CCAvg`, `CD_Account`, `Securities_Account`, `Online`, `CreditCard`. Recommend a final set."*
 
@@ -159,7 +159,7 @@ Recommended logistic regression with `Income + Family + CCAvg + Education + CD_A
 
 Accepted the 6-predictor logistic. **Rejected** random forest - the rubric rewards a working prototype over an ambitious one that breaks. Dropped `Age` (kept `Experience` was wrong; we actually dropped both because neither was in the recommended set, but kept `Family` and `CCAvg` from the dataset that the QMD model didn't use).
 
-## Example Prompt 3 - additional interactivity
+## Prompt 3 - additional interactivity
 
 > *"How do we satisfy the rubric's 'additional interactivity' requirement beyond the predict button? The rubric explicitly says a numeric-input + button alone doesn't count."*
 
@@ -171,7 +171,7 @@ Listed the rubric-acceptable patterns: a reactive filter that updates a viz live
 
 **Upgraded** AI's recommendation. Went with side-by-side Customer A vs Customer B inputs (one button, two predictions at once) **and** the overlay plot, so the app satisfies the "additional interactivity" requirement from two independent angles. Also kept the live filter on the Explore tab as a third interactive element.
 
-## Example Prompt 4 - outcome-connected visualization
+## Prompt 4 - outcome-connected visualization
 
 > *"Pick the outcome-connected viz. Three candidates: (a) Income × predicted probability, points colored by actual `Personal_Loan`, faceted by Education; (b) Income density faceted by `Personal_Loan` and Education; (c) predicted-probability curve with confidence ribbons. Which best supports the prediction overlay?"*
 
@@ -183,7 +183,7 @@ Recommended (a) for simplicity and direct alignment with the prediction overlay:
 
 Accepted. Implemented as `geom_point(alpha = 0.45) + geom_hline(yintercept = 0.5, linetype = "dashed") + facet_wrap(~ Education)`.
 
-## Example Prompt 5 - library budget
+## Prompt 5 - library budget
 
 > *"What R libraries do we need for a proper Shiny dashboard? Stay within constraints - don't pile on packages. Ask first if you'd add anything beyond `shiny`, `tidyverse`, `rsample`."*
 
@@ -195,7 +195,7 @@ Explained that `bslib` (Bootstrap 5 theming, `card`, `value_box`, `page_navbar`,
 
 Approved `bslib` + `bsicons`. **Rejected** `caret`, `pROC`, `DT`, `shinyWidgets`. Adopted the by-hand AUC: `compute_auc()` in `TeamMoney_app.R`.
 
-## Example Prompt 6 - implement `TeamMoney_app.R` end to end
+## Prompt 6 - implement `TeamMoney_app.R` end to end
 
 > *"Write `app/TeamMoney_app.R` end to end based on the locked decisions: data prep + cleaning + 80/20 stratified split + `glm(Personal_Loan ~ Income + Family + CCAvg + Education + CD_Account + Mortgage, family = binomial)` fit at startup, helper functions, UI with `page_navbar` + two `nav_panel`s, server with `eventReactive` for predictions and `reactive` for the explore filter. Then verify it parses and the model fits."*
 
@@ -207,7 +207,7 @@ Wrote `TeamMoney_app.R` (~330 lines) in one pass: data load with explicit relati
 
 Accepted. The factor sanity probe in particular gave us confidence the prediction UI would not crash on submit.
 
-## Example Prompt 7 - visual verification with Playwright MCP
+## Prompt 7 - visual verification with Playwright MCP
 
 > *"Use the Playwright MCP to load the running Shiny app in a headless browser, walk through both tabs, click Compare Predictions, and screenshot each state. Verify the UI is rendering correctly before claiming done."*
 
@@ -219,7 +219,7 @@ The Playwright MCP server was not installed in this environment, so AI fell back
 
 Accepted the Python-Playwright fallback. The visual pass surfaced the layout, reactivity, and verdict bugs documented under "Debugging Issues" below.
 
-## Example Prompt 8 - add a Name field per customer
+## Prompt 8 - add a Name field per customer
 
 > *"For Make a Prediction, add a Name field per customer and integrate it. The name should flow into the value-box title, the verdict sentence, and the plot star labels. The name should be a label only, not a model predictor."*
 
