@@ -2,7 +2,7 @@
 
 **Project:** MGSC 310 Final Project: Mini AI Shiny App Prototype
 **Team:** Team Money (Charlie, Arya, Steven, Ryan)
-**Branch:** `feat/shiny-app`
+**Branch:** `main` (the prototype branch `feat/shiny-app` was merged and deleted on 2026-04-28)
 **Date:** 2026-04-28
 
 ---
@@ -24,7 +24,7 @@ Both submission files live at `app/`; no copy step.
 
 | Decision | Choice |
 | --- | --- |
-| Working branch | `feat/shiny-app` (on main tree, no worktree) |
+| Working branch | `feat/shiny-app` during the build (merged into `main` and deleted on 2026-04-28) |
 | Outcome variable | `Personal_Loan` (binary, factor with labels "No"/"Yes") |
 | Model | Logistic regression (`glm(..., family = binomial)`) |
 | Predictors | `Income`, `Family`, `CCAvg`, `Education`, `CD_Account`, `Mortgage` |
@@ -237,10 +237,7 @@ The submission files live in `app/` directly. There is no copy step.
    rm -rf app/TeamMoney_Mini_AI_Report_files app/TeamMoney_Mini_AI_Report.html
    quarto render app/TeamMoney_Mini_AI_Report.qmd --to html --embed-resources
    ```
-  ; **Open question:** if Quarto refuses the malformed YAML entirely:
-    ; Try the minimum body fix to make Quarto happy *without touching the user-flagged YAML*.
-    ; If that fails, surface the actual Quarto error to the team and pause.
-    ; Document whichever path is taken in the AI Build Log.
+   The malformed-YAML render risk was raised as an open question in earlier drafts of this spec; in practice, Quarto accepts the malformed header silently and the `--embed-resources` CLI flag fully resolves the embed-directive issue. No body fix to the qmd was needed.
 2. **Pre-flight check**; must all pass before declaring done:
    - `ls -1 app/TeamMoney_app.R app/TeamMoney_Mini_AI_Report.html` returns both filenames.
    - `ls app/TeamMoney_Mini_AI_Report_files 2>/dev/null` returns nothing (HTML must be self-contained).
@@ -250,7 +247,7 @@ The submission files live in `app/` directly. There is no copy step.
    - `grep -F -c "FILL IN" app/TeamMoney_Mini_AI_Report.html` returns `0` (no leftover placeholders).
   ; Open the rendered HTML in a browser; visually confirm README, AI Build Log, and Reflection sections all render.
    - `find . -name '*.zip' -not -path './.git/*'` returns nothing.
-3. Commit on `feat/shiny-app`. **Do not** merge to main; the team decides.
+3. Commit on `main` (the work has been merged from `feat/shiny-app`; that branch is deleted).
 4. Upload `app/TeamMoney_app.R` and `app/TeamMoney_Mini_AI_Report.html` to Canvas. Two files, not a zip.
 
 ## 12. Out of scope
@@ -313,9 +310,11 @@ The implementation phase produced 8 prompts and 8 documented debug stories. Thos
 
 ## 14. Open questions / risks
 
-- **Quarto render risk**; see §11 step 1. We won't know until we try.
-- **AUC by hand**; small risk of a numerical edge case if the test set has tied probabilities. Mitigation: standard pair-counting AUC, which handles ties correctly.
-- **Plot performance** - 5000 points faceted by Education is fine; if the prediction overlay plot feels slow, drop to `geom_point(alpha = 0.3, size = 0.6)` and the stars stay visible.
+All risks listed during planning have been resolved during the build:
+
+- **Quarto render risk**: resolved. `--embed-resources` produces a clean self-contained HTML; no body fix was needed.
+- **AUC by hand**: resolved. The hand-rolled `compute_auc()` returns 0.961 on the test set with no edge-case warnings.
+- **Plot performance**: resolved. 5000 points faceted by Education render quickly; no fallback needed.
 
 ## 15. Report content plan (now superseded)
 
