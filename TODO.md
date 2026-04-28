@@ -1,4 +1,4 @@
-# Mini AI Project; Outstanding TODOs
+# Mini AI Project: Outstanding TODOs
 
 Sections 1-4 (team roles, reflection answers, rebuild + re-verify, pre-flight checks) are all complete and removed. Only one task left.
 
@@ -8,12 +8,12 @@ Sections 1-4 (team roles, reflection answers, rebuild + re-verify, pre-flight ch
 
 ## Files of record (read-only; no edits expected)
 
-- `app/AI-plan.md`; design spec, the source of truth for what we built and why.
-- `app/TeamMoney_app.R`; working Shiny app. Implementation complete.
-- `app/TeamMoney_Mini_AI_Report.qmd` + `.html`; rendered report (the `.html` is what gets submitted).
-- `app/data/`; dev-only symlink to `../data` (gitignored).
-- `.gitignore`; already excludes `.env`, `app/data`, `.DS_Store`.
-- `~/.claude/projects/-Users-charles-Documents-CLASSES-MGSC-310-mgsc310-final-project/plans/2026-04-28-mini-ai-shiny-app.md`; the implementation plan AI followed (kept outside the repo per team direction).
+- `app/AI-plan.md`: design spec, the source of truth for what we built and why.
+- `app/TeamMoney_app.R`: working Shiny app. Implementation complete.
+- `app/TeamMoney_Mini_AI_Report.qmd` + `.html`: rendered report (the `.html` is what gets submitted).
+- `app/data/`: dev-only symlink to `../data` (gitignored).
+- `.gitignore`: already excludes `.env`, `app/data`, `.DS_Store`.
+- `~/.claude/projects/-Users-charles-Documents-CLASSES-MGSC-310-mgsc310-final-project/plans/2026-04-28-mini-ai-shiny-app.md`: the implementation plan AI followed (kept outside the repo per team direction).
 
 ## If the qmd gets edited after this point
 

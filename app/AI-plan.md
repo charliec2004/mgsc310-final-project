@@ -13,11 +13,11 @@ Build a Shiny app and rendered Quarto HTML report that lets a Pacific Federal ma
 
 ## 2. Submission artifacts
 
-Both submission files live at `app/`; no copy step.
+Both submission files live at `app/`. No copy step.
 
-- `app/TeamMoney_app.R`; the Shiny app. Uploaded directly to Canvas.
-- `app/TeamMoney_Mini_AI_Report.html`; rendered Quarto HTML. Uploaded directly to Canvas.
-- `app/TeamMoney_Mini_AI_Report.qmd`; source for the rendered HTML (not submitted).
+- `app/TeamMoney_app.R`: the Shiny app. Uploaded directly to Canvas.
+- `app/TeamMoney_Mini_AI_Report.html`: rendered Quarto HTML. Uploaded directly to Canvas.
+- `app/TeamMoney_Mini_AI_Report.qmd`: source for the rendered HTML (not submitted).
 - `app/AI-plan.md` and `app/README.md` are working docs (not submitted).
 
 ## 3. Locked decisions (no longer open)
@@ -55,14 +55,14 @@ mgsc310-final-project/
 └── TODO.md                              # outstanding work
 ```
 
-The app loads data via `read.csv("data/pacific_federal_loan_campaign.csv", stringsAsFactors = TRUE)`; relative path, rubric-compliant. For local dev, the symlink at `app/data → ../data` lets `shiny::runApp("app/TeamMoney_app.R")` find the dataset (because `runApp` chdirs into the app directory). The grader places their own `data/` next to the downloaded `TeamMoney_app.R`, which works the same way.
+The app loads data via `read.csv("data/pacific_federal_loan_campaign.csv", stringsAsFactors = TRUE)`. The path is relative and rubric-compliant. For local dev, the symlink at `app/data → ../data` lets `shiny::runApp("app/TeamMoney_app.R")` find the dataset (because `runApp` chdirs into the app directory). The grader places their own `data/` next to the downloaded `TeamMoney_app.R`, which works the same way.
 
 ## 5. Run flow at app startup (one-time setup)
 
 1. `library()` calls: shiny, tidyverse, rsample, bslib, bsicons.
 2. `read.csv` loads the dataset.
 3. Cleaning pipeline produces `loans_clean`:
-  ; drop `ID` and `ZIPCode`
+   - drop `ID` and `ZIPCode`
    - `filter(Experience >= 0)` (drops ~50 known data-entry-error rows with negative experience)
    - `Personal_Loan` → factor with levels `c(0,1)`, labels `c("No","Yes")`
    - `Education` → factor with levels `c(1,2,3)`, labels `c("Undergrad","Graduate","Advanced/Professional")`
@@ -123,7 +123,7 @@ The asymmetric defaults mean the demo on launch is immediately interesting witho
 **Zone 2. Action + result row.** Centered `actionButton("predict_btn", "Compare Predictions", class = "btn-primary btn-lg")`. Then `layout_columns(col_widths = c(3, 3, 6))`:
 - `value_box("Customer A: P(accept)", textOutput("prob_a"), showcase = bs_icon("person"), theme = "primary")`
 - `value_box("Customer B: P(accept)", textOutput("prob_b"), showcase = bs_icon("person-fill"), theme = "success")`
-- `card(card_header("Verdict"), textOutput("verdict"))`; sentence such as *"Customer B is **3.2× more likely** to accept the loan offer."*
+- `card(card_header("Verdict"), textOutput("verdict"))`. Sentence such as *"Customer B is **3.2× more likely** to accept the loan offer."*
 
 Before the user has clicked the button: value boxes show "-" and the verdict card shows a friendly placeholder ("Click *Compare Predictions* to see results.").
 
@@ -208,8 +208,8 @@ build_new_obs <- function(suffix) {
 ## 9. Input validation & error handling
 
 - `validate(need(...))` gates `prediction_result`:
- ; Income, CCAvg, Mortgage: numeric and ≥ 0.
- ; Family: must coerce to one of {1,2,3,4} (enforced by `selectInput`).
+   - Income, CCAvg, Mortgage: numeric and ≥ 0.
+   - Family: must coerce to one of {1,2,3,4} (enforced by `selectInput`).
 - Numeric inputs declare `min` / `max` / `step` matching the training-data range (with a small headroom) so the spinner can't generate nonsense.
 - Startup: if `data/pacific_federal_loan_campaign.csv` is missing, `stop()` with a clear message naming the expected path.
 - `predict()` is wrapped in `tryCatch`; failures render as a red inline message, never crash the app.
@@ -238,14 +238,14 @@ The submission files live in `app/` directly. There is no copy step.
    quarto render app/TeamMoney_Mini_AI_Report.qmd --to html --embed-resources
    ```
    The malformed-YAML render risk was raised as an open question in earlier drafts of this spec; in practice, Quarto accepts the malformed header silently and the `--embed-resources` CLI flag fully resolves the embed-directive issue. No body fix to the qmd was needed.
-2. **Pre-flight check**; must all pass before declaring done:
+2. **Pre-flight check.** All of the following must pass before declaring done:
    - `ls -1 app/TeamMoney_app.R app/TeamMoney_Mini_AI_Report.html` returns both filenames.
    - `ls app/TeamMoney_Mini_AI_Report_files 2>/dev/null` returns nothing (HTML must be self-contained).
    - `grep -F "pacific_federal_loan_campaign.csv" app/TeamMoney_Mini_AI_Report.html` finds the dataset filename.
    - `grep -F "TeamMoney_app.R" app/TeamMoney_Mini_AI_Report.html` finds the app filename.
    - `grep -F "Personal_Loan" app/TeamMoney_Mini_AI_Report.html` confirms the outcome variable is named.
    - `grep -F -c "FILL IN" app/TeamMoney_Mini_AI_Report.html` returns `0` (no leftover placeholders).
-  ; Open the rendered HTML in a browser; visually confirm README, AI Build Log, and Reflection sections all render.
+   - Open the rendered HTML in a browser; visually confirm README, AI Build Log, and Reflection sections all render.
    - `find . -name '*.zip' -not -path './.git/*'` returns nothing.
 3. Commit on `main` (the work has been merged from `feat/shiny-app`; that branch is deleted).
 4. Upload `app/TeamMoney_app.R` and `app/TeamMoney_Mini_AI_Report.html` to Canvas. Two files, not a zip.
@@ -286,7 +286,7 @@ The rubric requires ≥2 specific prompts with what AI returned + what the team 
 **AI returned:** Explained that bslib (Bootstrap 5 theming, cards, value boxes) is the standard for modern Shiny dashboards, and bsicons is its small icon helper. Asked before adding either.
 **Team action:** Approved both. Total library set: `shiny, tidyverse, rsample, bslib, bsicons`.
 
-**Prompt 6:** *"Before we start building; review the report template QMD for any issues."*
+**Prompt 6:** *"Before we start building, review the report template QMD for any issues."*
 **AI returned:** Caught that the YAML header in `app/TeamMoney_Mini_AI_Report.qmd` is malformed (`html:` keys are at the top level instead of nested under `format:`, plus stray leading-space indentation on headings). Recommended either fixing the YAML or documenting it as a known issue.
 **Team action:** Decided to leave the template untouched and document the catch in this Build Log (per team direction).
 
@@ -300,7 +300,7 @@ The rubric requires ≥2 specific prompts with what AI returned + what the team 
 **AI returned:** Dispatched 9 parallel review agents (Working app / Data prep / Visualization / Prediction & interactivity / README / AI Build Log / Reflection / Overall thoughtfulness / Submission packaging). Two came back with material gaps (no README plan, no Reflection plan); four with minor gaps; three clean.
 **Team action:** Accepted the findings. Asked for fixes inline.
 
-**Prompt 9:** *"Patch the spec based on the reviewer findings; fix the missing `plotOutput("predict_plot")` placeholder, strengthen the interpretation paragraph with model limitations, add a class-imbalance caveat, expand the AI Build Log entries, add a Report Content plan section, and add a submission pre-flight check."*
+**Prompt 9:** *"Patch the spec based on the reviewer findings: fix the missing `plotOutput("predict_plot")` placeholder, strengthen the interpretation paragraph with model limitations, add a class-imbalance caveat, expand the AI Build Log entries, add a Report Content plan section, and add a submission pre-flight check."*
 **AI returned:** Made surgical edits to §6, §11, §13; added a new §15 "Report content plan"; created a working `app/README.md` with a roles-blank section.
 **Team action:** Reviewed diff. *(This is the prompt that produced the version of `AI-plan.md` you are reading.)*
 

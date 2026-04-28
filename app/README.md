@@ -1,6 +1,6 @@
-# Team Money; Mini AI Project (working README)
+# Team Money: Mini AI Project (working README)
 
-This is the team's working README for the `app/` directory. It is **not** the README that gets graded; that one lives inside `TeamMoney_Mini_AI_Report.qmd`. Use this file to coordinate during the build; copy whatever's relevant into the report's README section at submission time.
+This is the team's working README for the `app/` directory. It is **not** the README that gets graded; that one lives inside `TeamMoney_Mini_AI_Report.qmd`. Use this file to coordinate during the build, and copy whatever's relevant into the report's README section at submission time.
 
 ## Team
 
@@ -15,10 +15,10 @@ This is the team's working README for the `app/` directory. It is **not** the RE
 
 | File | What it is |
 |---|---|
-| `TeamMoney_app.R` | The Shiny app. **Uploaded to Canvas as-is**; no copy step. |
+| `TeamMoney_app.R` | The Shiny app. **Uploaded to Canvas as-is.** No copy step. |
 | `TeamMoney_Mini_AI_Report.qmd` | Quarto source for the report (README + AI Build Log + Reflection). |
 | `TeamMoney_Mini_AI_Report.html` | Rendered output of the .qmd. **Uploaded to Canvas as-is.** |
-| `AI-plan.md` | The full design spec; what we're building and why. Read this first. |
+| `AI-plan.md` | The full design spec: what we're building and why. Read this first. |
 | `README.md` | This file. |
 | `data/` | Dev-only symlink to `../data/` (gitignored). Lets `shiny::runApp` find the dataset locally. The grader supplies their own `data/` next to `TeamMoney_app.R`. |
 
