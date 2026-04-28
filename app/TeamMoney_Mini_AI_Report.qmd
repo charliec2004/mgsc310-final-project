@@ -309,15 +309,11 @@ The first version of the spec in AI-plan.md missed a plotOutput("predict_plot") 
 
 ## 3. How did your group catch and fix that issue?
 
-> *Recommendation: describe the actual catch + fix process. Candidates: we sent out nine parallel review agents - one per rubric line - to audit the design spec; two agents reported material gaps (README plan, Reflection plan); four reported minor gaps; we patched the spec inline before writing any R code. For the random-forest pushback, the team chose logistic regression with a tuned 6-predictor set when AI recommended random forest. For the layout bug during implementation, we used Playwright DOM inspection to confirm cards were rendering at zero height under `fillable = TRUE`, then disabled fillable at the page and column level.*
-
-\[FILL IN - your answer here]
+We investigated the rubric and our data with both human and AI eyes and found the README/reflection misses. We also decided to override the AI's choice of random forest and use logistic regression with 6 statisticallly significant predictors. For the layout bug, we used Playwright DOM inspection to determine the issue with the cards, and made them not fillable/0 height. 
 
 ## 4. What still required human judgment?
 
-> *Recommendation: point at concrete decisions humans owned. Candidates: picking the predictor set (option B over A or C) based on what we know about Pacific Federal's customer base; choosing logistic regression over random forest for the prototype; deciding to leave the malformed Quarto YAML untouched and document the catch instead of fixing it; setting the asymmetric default values for Customer A and Customer B so the launch demo is immediately interesting; assigning team roles (Data Lead, Modeling Lead, App Developer, Documentation Lead); deciding what counts as "honest" in the prediction-interpretation paragraph - what to admit the model cannot tell you.*
-
-\[FILL IN - your answer here]
+The type of model (we leaned logistic regression over random forest because it worked better for our choice of variable), the determination for the app to show Customer A vs B, figuring out what the AI cannot do (eg. hyperparameters), double-checking what it gave us, communicating on how best to proceed and instruct the AI, and dealing with the deformed Quarto YAML. 
 
 ## 5. If this tool were used in a real setting, what is one limitation or risk?
 
