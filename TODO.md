@@ -49,7 +49,7 @@ Both submission files live in `app/`. There is no copy step.
 
 ## 5. Submit
 
-- [ ] Decide whether to merge `feat/shiny-app` into `main` or leave it on the branch. Team decides.
+- [x] Merge `feat/shiny-app` into `main` (merge commit `e926e1a`, on `origin/main`).
 - [ ] Upload `app/TeamMoney_app.R` and `app/TeamMoney_Mini_AI_Report.html` to Canvas. Two files. Not a zip.
 
 ## 6. Optional / stretch (rubric does not require)
