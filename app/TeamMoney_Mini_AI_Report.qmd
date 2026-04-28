@@ -301,15 +301,11 @@ AI was most influential on the implementation in three places: (1) the **factor-
 
 ## 1. What did AI help your group do especially well?
 
-> *Recommendation: cite specific things AI accelerated - mapping the rubric line-by-line and asking clarifying questions before any code was written, recommending the bslib + bsicons library combo and explaining why it was the right minimal stack, designing the factor-handling pattern (`build_new_obs` wrapping every categorical in `factor(value, levels = levels(loans_train$<col>))`), catching the malformed Quarto YAML before we wasted a render cycle, and dispatching nine parallel review agents to find spec gaps before any R code was written.*
-
-\[FILL IN - your answer here]
+AI helped us to format our dashboard. Despite us creating the models and loading/cleaning the data, AI created the format and helped us incorporate user input. It also helped us to debug because whenever we came across an error or feature that didn't work as anticipated, we could simply paste the error message and immeadietly received numerous useable solutions. 
 
 ## 2. What did AI get wrong, miss, or oversimplify?
 
-> *Recommendation: be specific. Candidates: the first version of the spec at `AI-plan.md` was missing a `plotOutput("predict_plot")` placeholder in the UI section - the server defined `output$predict_plot` but the UI never referenced it; the first spec also had no plan for the README and Reflection sections of the report; AI's first model recommendation was random forest, which would have been more accurate but was wrong for this prototype because of factor-level fragility inside Shiny; the static caption on the Explore-tab plot won't reflect filtered subsets, which could create a small honesty gap if the user filters out the segments the caption describes.*
-
-\[FILL IN - your answer here]
+The first version of the spec in AI-plan.md missed a plotOutput("predict_plot") placeholder in the UI, even though the server already defined output$predict_plot. It also did not include a plan for the README and Reflection sections of the report. AI initially recommended a random forest model, which may have offered better accuracy, but it was not a good fit for this prototype.
 
 ## 3. How did your group catch and fix that issue?
 
