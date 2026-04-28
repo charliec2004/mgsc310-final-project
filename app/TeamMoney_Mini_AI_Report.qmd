@@ -325,9 +325,7 @@ AI was most influential on the implementation in three places: (1) the **factor-
 
 ## 5. If this tool were used in a real setting, what is one limitation or risk?
 
-> *Recommendation: avoid generic AI risks; tie the answer to **this app**. Candidates: the model is trained on a 5,000-customer snapshot, so if Pacific Federal's customer base or the loan offer's terms have changed since the data was collected the predictions will drift, and there's no monitoring or retraining loop in this prototype; the model has no fairness audit, so if `Education` or `Family` size correlates with a protected class in this customer base, using the predictions to direct marketing spend could create disparate outcomes the bank would have to defend; a non-technical user might see a 95% probability and treat it as a sales certainty even though the in-app interpretation is honest about it being a relative ranking signal; the 9.6% positive class rate means small changes in the threshold (currently 0.5) would meaningfully shift who gets contacted, and that's a business-policy decision the model can inform but cannot make.*
-
-\[FILL IN - your answer here]
+Anything that is "vibe-coded" presents an inherent risk due to the fact that LLMs don't actually know anything, they simply make educated guesses. Being more specific to our model however, there is no way to measure the current customer base against the base which was used for the model, which means we need to stay on top of data-gathering and watching trends to ensure that our models are not out of date. Also, the cutoff of 0.5 is arbitrary, so we would need to do some analysis on the effects of over-offering loans versus under-offering loans to determine the ideal cutoff because it cannot measure its own hyperparameters. 
 
 # 4. Final Notes
 
