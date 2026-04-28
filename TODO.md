@@ -7,7 +7,7 @@ Everything still needing to be done before submission. Tasks are grouped: human-
 - [ ] Assign Arya's role. File: `app/README.md` line 10. File: `app/Mini_AI_Report.qmd` line 22. Choices: Data Lead / Modeling Lead / App Developer / Documentation Lead.
 - [ ] Assign Steven's role + last name. File: `app/README.md` line 11. File: `app/Mini_AI_Report.qmd` line 23.
 - [ ] Assign Ryan's role + last name. File: `app/README.md` line 12. File: `app/Mini_AI_Report.qmd` line 24.
-- [ ] Sync Charlie's role across both files. Currently `app/Mini_AI_Report.qmd` line 21 says "App Developer" but `app/README.md` line 9 still shows `[FILL IN]`. Decide which is right and update the other.
+- [x] Sync Charlie's role across both files. `app/Mini_AI_Report.qmd` line 21 and `app/README.md` line 9 both say "App Developer".
 
 ## 2. Reflection answers (human writes, AI gave recommendations)
 

@@ -6,7 +6,7 @@ This is the team's working README for the `app/` directory. It is **not** the RE
 
 | Member | Role |
 |---|---|
-| Charlie Conner | _[FILL IN: Data Lead / Modeling Lead / App Developer / Documentation Lead]_ |
+| Charlie Conner | App Developer |
 | Arya Kumar | _[FILL IN]_ |
 | Steven _[last name]_ | _[FILL IN]_ |
 | Ryan _[last name]_ | _[FILL IN]_ |
