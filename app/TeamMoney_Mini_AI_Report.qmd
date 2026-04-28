@@ -315,7 +315,7 @@ The type of model (we leaned logistic regression over random forest because it w
 
 ## 5. If this tool were used in a real setting, what is one limitation or risk?
 
-Anything that is "vibe-coded" presents an inherent risk due to the fact that LLMs don't actually know anything, they simply make educated guesses. Being more specific to our model however, there is no way to measure the current customer base against the base which was used for the model, which means we need to stay on top of data-gathering and watching trends to ensure that our models are not out of date. Also, the 0.5 decision threshold is arbitrary — choosing the ideal cutoff requires analyzing the trade-off between over-offering and under-offering loans, and that is a business decision the model cannot make on its own. 
+Anything that is "vibe-coded" presents an inherent risk due to the fact that LLMs don't actually know anything, they simply make educated guesses. Being more specific to our model however, there is no way to measure the current customer base against the base which was used for the model, which means we need to stay on top of data-gathering and watching trends to ensure that our models are not out of date. Also, the 0.5 decision threshold is arbitrary - choosing the ideal cutoff requires analyzing the trade-off between over-offering and under-offering loans, and that is a business decision the model cannot make on its own. 
 
 # 4. Final Notes
 
