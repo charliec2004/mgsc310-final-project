@@ -14,7 +14,7 @@ Team Money
 
 ## Team Members and Roles
 
-> **\[FILL IN — roles to be assigned by the team]**
+> **\[FILL IN - roles to be assigned by the team]**
 
 | Team Member | Role |
 |---|---|
@@ -63,7 +63,7 @@ install.packages(c("shiny", "tidyverse", "rsample", "bslib", "bsicons"))
 
 ## How to Run the App
 
-**Option A — RStudio (easiest):**
+**Option A - RStudio (easiest):**
 
 1. Open RStudio.
 2. Make sure the dataset `pacific_federal_loan_campaign.csv` is in a `data/` folder next to `TeamMoney_app.R`.
@@ -71,7 +71,7 @@ install.packages(c("shiny", "tidyverse", "rsample", "bslib", "bsicons"))
 4. Install any missing packages (see list above).
 5. Click **Run App**.
 
-**Option B — Command line / dev server:**
+**Option B - Command line / dev server:**
 
 From the directory containing `TeamMoney_app.R` and the `data/` folder, run:
 
@@ -79,14 +79,14 @@ From the directory containing `TeamMoney_app.R` and the `data/` folder, run:
 Rscript -e 'shiny::runApp("TeamMoney_app.R", port = 7654, launch.browser = FALSE)'
 ```
 
-Then open `http://127.0.0.1:7654` in your browser. Press `Ctrl+C` in the terminal to stop the app. Drop `port = 7654` to let Shiny pick a free port, and drop `launch.browser = FALSE` to have it open your default browser automatically.
+Then open `http://127.0.0.1:7654` in your browser.
 
 ## What the App Does
 
 The app is a two-tab dashboard themed for Pacific Federal's personal-loan campaign:
 
 - **Explore the Data tab.** A faceted scatter plot shows the relationship between customer Income and the model's predicted probability of accepting a loan, broken out by Education level. A multi-select for Education and a two-handle Income range slider filter the chart in real time. A static caption beneath the chart calls out the headline pattern (higher-income customers, especially in the Graduate and Advanced/Professional segments, are far more likely to accept).
-- **Make a Prediction tab.** Side-by-side input cards for two customers expose six predictors each (Income, Family size, monthly Credit Card spending, Education, CD account, Mortgage), plus an editable **Name** field that lets the user label each customer (defaults to "Customer A" / "Customer B"). The Name field is a label only and is not used by the model — it flows into the value-box title, the verdict sentence, and the labeled stars on the plot, so the analyst can compare two named prospects rather than abstract A/B labels. The numeric defaults pre-load a low-likelihood and a high-likelihood customer so the demo on launch is immediately interesting. A single **Compare Predictions** button runs both predictions, displays each in a value box, computes a comparative verdict (e.g. *"Sarah K. (98.1%) is far more likely to accept the loan offer than Marcus T. (1.2%)"*), and overlays both customers as labeled red stars on the same Income × probability plot so the user can see exactly where each one falls relative to the rest of the data. A two-paragraph interpretation block below the plot explains what the prediction means and what it explicitly cannot tell the user. A small footnote at the bottom shows test-set accuracy and AUC alongside a class-imbalance caveat.
+- **Make a Prediction tab.** Side-by-side input cards for two customers expose six predictors each (Income, Family size, monthly Credit Card spending, Education, CD account, Mortgage), plus an editable **Name** field that lets the user label each customer (defaults to "Customer A" / "Customer B"). The Name field is a label only and is not used by the model - it flows into the value-box title, the verdict sentence, and the labeled stars on the plot, so the analyst can compare two named prospects rather than abstract A/B labels. The numeric defaults pre-load a low-likelihood and a high-likelihood customer so the demo on launch is immediately interesting. A single **Compare Predictions** button runs both predictions, displays each in a value box, computes a comparative verdict (e.g. *"Sarah K. (98.1%) is far more likely to accept the loan offer than Marcus T. (1.2%)"*), and overlays both customers as labeled red stars on the same Income × probability plot so the user can see exactly where each one falls relative to the rest of the data. A two-paragraph interpretation block below the plot explains what the prediction means and what it explicitly cannot tell the user. A small footnote at the bottom shows test-set accuracy and AUC alongside a class-imbalance caveat.
 
 ## Model Used
 
@@ -94,7 +94,7 @@ Logistic regression (`glm(..., family = binomial)`).
 
 ## Outcome Variable
 
-`Personal_Loan` — a binary outcome from the project dataset indicating whether the customer accepted the personal-loan offer (`Yes` / `No`). This is the same outcome our team uses in our final-project analysis; we did not simplify it.
+`Personal_Loan` - a binary outcome from the project dataset indicating whether the customer accepted the personal-loan offer (`Yes` / `No`). This is the same outcome our team uses in our final-project analysis; we did not simplify it.
 
 ## Predictors Exposed in the App
 
@@ -102,7 +102,7 @@ Six predictors per customer (the rubric requires at least three):
 
 1. **Income** (numeric, thousand $)
 2. **Family size** (1, 2, 3, or 4)
-3. **Credit card avg / month** (numeric, thousand $) — `CCAvg`
+3. **Credit card avg / month** (numeric, thousand $) - `CCAvg`
 4. **Education** (Undergrad / Graduate / Advanced/Professional)
 5. **CD account?** (Yes / No)
 6. **Mortgage** (numeric, thousand $)
@@ -115,7 +115,7 @@ Education and CD account are categorical. The dropdowns for both are populated f
 
 ## Prediction Output
 
-A predicted probability between 0% and 100% per customer, plus a comparative verdict that pairs them ("Customer B (99.8%) is far more likely to accept the loan offer than Customer A (0.0%)"). The probabilities are population-level signals — they describe the rate at which similar customers in the training data accepted the loan, not whether this specific customer **will** accept. The in-app interpretation block makes this distinction explicit.
+A predicted probability between 0% and 100% per customer, plus a comparative verdict that pairs them ("Customer B (99.8%) is far more likely to accept the loan offer than Customer A (0.0%)"). The probabilities are population-level signals - they describe the rate at which similar customers in the training data accepted the loan, not whether this specific customer **will** accept. The in-app interpretation block makes this distinction explicit.
 
 ## Simplifications and Known Issues
 
@@ -123,7 +123,7 @@ A predicted probability between 0% and 100% per customer, plus a comparative ver
 - We expose six of eleven candidate predictors. We picked the predictors with the strongest signals in the bank-marketing literature (Income, CD_Account) plus complementary demographic and credit signals (Family, CCAvg, Education, Mortgage). `Age` and `Experience` are nearly collinear and were dropped; `Securities_Account`, `Online`, and `CreditCard` were excluded for parsimony.
 - 52 rows with `Experience < 0` (a known data-entry quirk in this dataset) are dropped during cleaning.
 - The Quarto template's YAML header that we received was malformed (`html:` was at the top level instead of nested under `format:`). Per team direction we left the YAML untouched and documented the catch in the AI Build Log below.
-- AUC is computed by hand (Mann–Whitney U / pair-counting method) so the app does not depend on the `pROC` package — keeping the library footprint small.
+- AUC is computed by hand (Mann–Whitney U / pair-counting method) so the app does not depend on the `pROC` package - keeping the library footprint small.
 
 # 2. AI Build Log
 
@@ -135,31 +135,31 @@ Claude Code (Anthropic) running locally with the Shiny + bslib + tidyverse R too
 
 Researching Shiny + bslib via the **context7 MCP** before writing any code; choosing the model and predictor set; designing the factor-handling pattern; scaffolding the dashboard with `bslib::page_navbar`; running an end-to-end visual verification of the running app with the **Playwright MCP** (and a Python-Playwright fallback when the MCP wasn't installed); and debugging a series of layout, reactivity, and verdict-formatting bugs surfaced by that visual pass.
 
-## Example Prompt 1 — research Shiny via context7
+## Example Prompt 1 - research Shiny via context7
 
 > *"Use context7 to look up the current Shiny + bslib documentation. Specifically: how `reactive()` differs from `eventReactive()`, how to fit a `glm()` once at startup and call it from inside `server()`, what `bslib::page_navbar` ships out of the box, and how factor levels need to be handled when constructing a new observation for `predict()`."*
 
 ### What AI Returned
 
-Pulled the latest Shiny + bslib docs through context7. Explained that `reactive()` re-fires whenever any of its inputs change, while `eventReactive(input$btn, …)` only fires on the triggering input — exactly the right primitive for a Predict button. Confirmed `glm()` can be fit at the top of `app.R` outside `server()`, then called from any reactive: the model is just an R object. Walked through `page_navbar` / `nav_panel` / `layout_columns` / `card` / `value_box`. Explicitly flagged the factor-handling trap: in the new observation passed to `predict()`, every categorical column must be re-wrapped as `factor(value, levels = levels(training_data$col))` or the model either crashes or silently hallucinates a level.
+Pulled the latest Shiny + bslib docs through context7. Explained that `reactive()` re-fires whenever any of its inputs change, while `eventReactive(input$btn, …)` only fires on the triggering input - exactly the right primitive for a Predict button. Confirmed `glm()` can be fit at the top of `app.R` outside `server()`, then called from any reactive: the model is just an R object. Walked through `page_navbar` / `nav_panel` / `layout_columns` / `card` / `value_box`. Explicitly flagged the factor-handling trap: in the new observation passed to `predict()`, every categorical column must be re-wrapped as `factor(value, levels = levels(training_data$col))` or the model either crashes or silently hallucinates a level.
 
 ### What We Changed, Fixed, or Rejected
 
-Adopted the factor pattern verbatim — it's the foundation of `build_new_obs()` in our `app.R`. Adopted `eventReactive(input$predict_btn, …, ignoreNULL = TRUE)` for the prediction pipeline so it only re-runs on click.
+Adopted the factor pattern verbatim - it's the foundation of `build_new_obs()` in our `app.R`. Adopted `eventReactive(input$predict_btn, …, ignoreNULL = TRUE)` for the prediction pipeline so it only re-runs on click.
 
-## Example Prompt 2 — model and predictor set
+## Example Prompt 2 - model and predictor set
 
 > *"Which model and predictor set should we use? We already have logistic regression with `Age + Experience + Income + Education + Mortgage` in our QMD. The dataset also has `Family`, `CCAvg`, `CD_Account`, `Securities_Account`, `Online`, `CreditCard`. Recommend a final set."*
 
 ### What AI Returned
 
-Recommended logistic regression with `Income + Family + CCAvg + Education + CD_Account + Mortgage` — six predictors. Justification: `CD_Account` is one of the strongest single signals of loan acceptance in this kind of bank-marketing data; `Age` and `Experience` are nearly perfectly collinear and pick whichever single one you want; `Securities_Account`, `Online`, and `CreditCard` add little signal and would just bloat the prediction UI. Offered random forest as an alternative but flagged it as fragile inside Shiny because of factor-level handling and slower model loading.
+Recommended logistic regression with `Income + Family + CCAvg + Education + CD_Account + Mortgage` - six predictors. Justification: `CD_Account` is one of the strongest single signals of loan acceptance in this kind of bank-marketing data; `Age` and `Experience` are nearly perfectly collinear and pick whichever single one you want; `Securities_Account`, `Online`, and `CreditCard` add little signal and would just bloat the prediction UI. Offered random forest as an alternative but flagged it as fragile inside Shiny because of factor-level handling and slower model loading.
 
 ### What We Changed, Fixed, or Rejected
 
-Accepted the 6-predictor logistic. **Rejected** random forest — the rubric rewards a working prototype over an ambitious one that breaks. Dropped `Age` (kept `Experience` was wrong; we actually dropped both because neither was in the recommended set, but kept `Family` and `CCAvg` from the dataset that the QMD model didn't use).
+Accepted the 6-predictor logistic. **Rejected** random forest - the rubric rewards a working prototype over an ambitious one that breaks. Dropped `Age` (kept `Experience` was wrong; we actually dropped both because neither was in the recommended set, but kept `Family` and `CCAvg` from the dataset that the QMD model didn't use).
 
-## Example Prompt 3 — additional interactivity
+## Example Prompt 3 - additional interactivity
 
 > *"How do we satisfy the rubric's 'additional interactivity' requirement beyond the predict button? The rubric explicitly says a numeric-input + button alone doesn't count."*
 
@@ -171,7 +171,7 @@ Listed the rubric-acceptable patterns: a reactive filter that updates a viz live
 
 **Upgraded** AI's recommendation. Went with side-by-side Customer A vs Customer B inputs (one button, two predictions at once) **and** the overlay plot, so the app satisfies the "additional interactivity" requirement from two independent angles. Also kept the live filter on the Explore tab as a third interactive element.
 
-## Example Prompt 4 — outcome-connected visualization
+## Example Prompt 4 - outcome-connected visualization
 
 > *"Pick the outcome-connected viz. Three candidates: (a) Income × predicted probability, points colored by actual `Personal_Loan`, faceted by Education; (b) Income density faceted by `Personal_Loan` and Education; (c) predicted-probability curve with confidence ribbons. Which best supports the prediction overlay?"*
 
@@ -183,9 +183,9 @@ Recommended (a) for simplicity and direct alignment with the prediction overlay:
 
 Accepted. Implemented as `geom_point(alpha = 0.45) + geom_hline(yintercept = 0.5, linetype = "dashed") + facet_wrap(~ Education)`.
 
-## Example Prompt 5 — library budget
+## Example Prompt 5 - library budget
 
-> *"What R libraries do we need for a proper Shiny dashboard? Stay within constraints — don't pile on packages. Ask first if you'd add anything beyond `shiny`, `tidyverse`, `rsample`."*
+> *"What R libraries do we need for a proper Shiny dashboard? Stay within constraints - don't pile on packages. Ask first if you'd add anything beyond `shiny`, `tidyverse`, `rsample`."*
 
 ### What AI Returned
 
@@ -195,7 +195,7 @@ Explained that `bslib` (Bootstrap 5 theming, `card`, `value_box`, `page_navbar`,
 
 Approved `bslib` + `bsicons`. **Rejected** `caret`, `pROC`, `DT`, `shinyWidgets`. Adopted the by-hand AUC: `compute_auc()` in `app.R`.
 
-## Example Prompt 6 — implement `app.R` end to end
+## Example Prompt 6 - implement `app.R` end to end
 
 > *"Write `app/app.R` end to end based on the locked decisions: data prep + cleaning + 80/20 stratified split + `glm(Personal_Loan ~ Income + Family + CCAvg + Education + CD_Account + Mortgage, family = binomial)` fit at startup, helper functions, UI with `page_navbar` + two `nav_panel`s, server with `eventReactive` for predictions and `reactive` for the explore filter. Then verify it parses and the model fits."*
 
@@ -207,7 +207,7 @@ Wrote `app.R` (~330 lines) in one pass: data load with explicit relative-path ch
 
 Accepted. The factor sanity probe in particular gave us confidence the prediction UI would not crash on submit.
 
-## Example Prompt 7 — visual verification with Playwright MCP
+## Example Prompt 7 - visual verification with Playwright MCP
 
 > *"Use the Playwright MCP to load the running Shiny app in a headless browser, walk through both tabs, click Compare Predictions, and screenshot each state. Verify the UI is rendering correctly before claiming done."*
 
@@ -219,13 +219,13 @@ The Playwright MCP server was not installed in this environment, so AI fell back
 
 Accepted the Python-Playwright fallback. The visual pass surfaced the layout, reactivity, and verdict bugs documented under "Debugging Issues" below.
 
-## Example Prompt 8 — add a Name field per customer
+## Example Prompt 8 - add a Name field per customer
 
 > *"For Make a Prediction, add a Name field per customer and integrate it. The name should flow into the value-box title, the verdict sentence, and the plot star labels. The name should be a label only, not a model predictor."*
 
 ### What AI Returned
 
-Added `textInput("name_a")` and `textInput("name_b")` at the top of each customer card with helper text *"Name (label only — not used by the model)"*. Switched the value-box titles from static strings to `textOutput("title_a")` / `textOutput("title_b")` populated reactively from the name fields. Updated `format_verdict()` to take `name_a` / `name_b` arguments and inline them in the sentence. Updated `build_predict_plot()` to use the names (truncated to 14 chars to fit the plot) as the star labels. Wrote `safe_name()` so empty names fall back to "Customer A" / "Customer B".
+Added `textInput("name_a")` and `textInput("name_b")` at the top of each customer card with helper text *"Name (label only - not used by the model)"*. Switched the value-box titles from static strings to `textOutput("title_a")` / `textOutput("title_b")` populated reactively from the name fields. Updated `format_verdict()` to take `name_a` / `name_b` arguments and inline them in the sentence. Updated `build_predict_plot()` to use the names (truncated to 14 chars to fit the plot) as the star labels. Wrote `safe_name()` so empty names fall back to "Customer A" / "Customer B".
 
 ### What We Changed, Fixed, or Rejected
 
@@ -235,100 +235,100 @@ Accepted as-is. Verified by typing "Sarah K." and "Marcus T." into the fields: t
 
 The Playwright pass surfaced eight real bugs. Each one is documented with the diagnostic step and the fix. The rubric requires at least one debug story; we kept all eight because every one of them describes a real fix that landed in `app.R`.
 
-### Debug 1 — `runApp()` couldn't find the dataset
+### Debug 1 - `runApp()` couldn't find the dataset
 
 **Symptom:** First launch failed with *"Could not find dataset at 'data/pacific_federal_loan_campaign.csv'."*
 
 **Diagnostic:** `shiny::runApp("app/app.R")` chdirs into the app directory before sourcing, so the relative path `data/...` was now interpreted as `app/data/...` (which doesn't exist; our dataset lives at the repo root's `data/`).
 
-**Fix:** Created a dev-only symlink `app/data → ../data` (added to `.gitignore`). The submission environment doesn't need this — the grader places `data/` next to `TeamMoney_app.R` themselves, which is exactly what the relative path in the app expects.
+**Fix:** Created a dev-only symlink `app/data → ../data` (added to `.gitignore`). The submission environment doesn't need this - the grader places `data/` next to `TeamMoney_app.R` themselves, which is exactly what the relative path in the app expects.
 
-### Debug 2 — Value boxes were blank before the first click
+### Debug 2 - Value boxes were blank before the first click
 
-**Symptom:** On the Predict tab, before clicking Compare Predictions, the value boxes were completely empty (no "—" placeholder, just blank).
+**Symptom:** On the Predict tab, before clicking Compare Predictions, the value boxes were completely empty (no "-" placeholder, just blank).
 
-**Diagnostic:** `output$prob_a` and `output$prob_b` depended on `prediction_result()`, an `eventReactive` with `ignoreNULL = TRUE` — meaning the reactive never fires until the button is clicked, and so the `renderText` block never runs even once on launch.
+**Diagnostic:** `output$prob_a` and `output$prob_b` depended on `prediction_result()`, an `eventReactive` with `ignoreNULL = TRUE` - meaning the reactive never fires until the button is clicked, and so the `renderText` block never runs even once on launch.
 
-**Fix:** Added `if (input$predict_btn == 0) return("—")` at the top of each renderText. The renderText now reactively depends on the click counter directly and fires immediately on launch with the placeholder, then re-fires on each click with the new probability.
+**Fix:** Added `if (input$predict_btn == 0) return("-")` at the top of each renderText. The renderText now reactively depends on the click counter directly and fires immediately on launch with the placeholder, then re-fires on each click with the new probability.
 
-### Debug 3 — Verdict was "18664.9× more likely"
+### Debug 3 - Verdict was "18664.9× more likely"
 
 **Symptom:** First successful prediction produced *"Customer B is 18664.9x more likely to accept than Customer A."* Technically correct (Customer A's probability is ~0.00005), but unreadable.
 
 **Fix:** Extended `format_verdict()` to (a) show absolute percentages alongside the ratio so the user always sees both customers' probabilities, (b) cap displayed ratios at 100×, and (c) switch to *"far more likely"* language when the smaller probability falls below 0.5%. Verified by re-clicking: *"Customer B (99.8%) is far more likely to accept the loan offer than Customer A (0.0%)."*
 
-### Debug 4 — Customer cards collapsed to height 0
+### Debug 4 - Customer cards collapsed to height 0
 
 **Symptom:** Playwright screenshot showed the Customer A and B input cards rendering with only 2 of 6 inputs visible. DOM inspection (`getBoundingClientRect()`) confirmed `card_height: 0` even though all 6 input elements were in the DOM at non-zero `y` coordinates outside the cards.
 
-**Diagnostic:** `bslib::page_navbar` defaults to `fillable = TRUE`, which forces all nav-panel content to share the viewport height. The `layout_columns` containing the input cards then assigned each card the leftover space *after* the value-boxes, predict button, and overlay plot — which was zero. The inputs were rendering outside their parent card with `overflow: auto`, so they were effectively hidden behind the surrounding sections.
+**Diagnostic:** `bslib::page_navbar` defaults to `fillable = TRUE`, which forces all nav-panel content to share the viewport height. The `layout_columns` containing the input cards then assigned each card the leftover space *after* the value-boxes, predict button, and overlay plot - which was zero. The inputs were rendering outside their parent card with `overflow: auto`, so they were effectively hidden behind the surrounding sections.
 
 **Fix:** `page_navbar(fillable = FALSE)` so the page becomes naturally scrollable instead of fitting in the viewport, plus `layout_columns(fillable = FALSE)`, `card(fill = FALSE)`, and `card_body(fillable = FALSE)` on the input row. Cards now size to their content. Re-verified with Playwright: all six inputs visible per card, no overlap.
 
-### Debug 5 — Active navbar tab was invisible against navy background
+### Debug 5 - Active navbar tab was invisible against navy background
 
-**Symptom:** User screenshot showed the active tab text rendering at very low contrast against the dark-navy navbar — the *"Explore the Data"* label was barely visible. Hover state was also too dark to read.
+**Symptom:** User screenshot showed the active tab text rendering at very low contrast against the dark-navy navbar - the *"Explore the Data"* label was barely visible. Hover state was also too dark to read.
 
 **Diagnostic:** `bslib`'s `flatly` theme defaults to dark-text-on-active-tab, which becomes invisible on a navy `bg`. The bg was `#1f3b57`, the active tab text was a similar dark blue.
 
 **Fix:** Added explicit CSS in `tags$head(tags$style(HTML(...)))`: `.navbar .nav-link` gets `color: rgba(255, 255, 255, 0.85)` by default; `.nav-link:hover` gets `color: #ffffff` plus a 10%-white background tint; `.nav-link.active` stays solid white with a 6%-white background and a white underline accent. Both tabs now read clearly white on navy at all times.
 
-### Debug 6 — Filter input had no visible affordance for adding levels back
+### Debug 6 - Filter input had no visible affordance for adding levels back
 
 **Symptom:** User flagged *"there is no way to know what filter inputs are accepted."* When the Education multi-select had all three levels pre-selected and the user removed one with the × button, the empty space gave no hint that you could click to add it back.
 
-**Fix:** Added a `placeholder = "Click to add an Education level..."` to the `selectizeInput` options so the empty state is self-explanatory, and the dropdown auto-opens on focus. Added an intro paragraph to the Filters card (*"Use these controls to narrow which customers appear in the chart on the right…"*) and relabeled both inputs with their interaction hint: *"Education levels to include (click below to remove or add)"* and *"Income range (thousand $) — drag the handles."*
+**Fix:** Added a `placeholder = "Click to add an Education level..."` to the `selectizeInput` options so the empty state is self-explanatory, and the dropdown auto-opens on focus. Added an intro paragraph to the Filters card (*"Use these controls to narrow which customers appear in the chart on the right…"*) and relabeled both inputs with their interaction hint: *"Education levels to include (click below to remove or add)"* and *"Income range (thousand $) - drag the handles."*
 
-### Debug 7 — Navbar tabs needed more interior padding
+### Debug 7 - Navbar tabs needed more interior padding
 
-**Symptom:** User flagged that the tab buttons looked cramped — text touched the edges.
+**Symptom:** User flagged that the tab buttons looked cramped - text touched the edges.
 
 **Fix:** Added `padding-left: 1.4rem` and `padding-right: 1.4rem` to `.navbar .nav-link`, plus a small `margin-left: 0.4rem` between adjacent nav-items so the buttons read as distinct units instead of running together.
 
-### Debug 8 — Quarto rendered with external dependencies
+### Debug 8 - Quarto rendered with external dependencies
 
-**Symptom:** First `quarto render app/Mini_AI_Report.qmd` produced an HTML file *plus* a `Mini_AI_Report_files/libs/` directory of external CSS/JS — meaning the single-file submission would render as a broken page on the grader's machine because that directory wouldn't ship.
+**Symptom:** First `quarto render app/Mini_AI_Report.qmd` produced an HTML file *plus* a `Mini_AI_Report_files/libs/` directory of external CSS/JS - meaning the single-file submission would render as a broken page on the grader's machine because that directory wouldn't ship.
 
 **Diagnostic:** The template's malformed YAML header puts `html: embed-resources: true` at the top level instead of nested under `format:`, so Quarto silently ignored the directive. Per team direction we did not modify the YAML.
 
-**Fix:** Pass `--embed-resources` on the command line to override: `quarto render app/Mini_AI_Report.qmd --to html --embed-resources`. The single rendered file is now 1.23 MB and self-contained — no `_files/libs/` directory.
+**Fix:** Pass `--embed-resources` on the command line to override: `quarto render app/Mini_AI_Report.qmd --to html --embed-resources`. The single rendered file is now 1.23 MB and self-contained - no `_files/libs/` directory.
 
 ## Final AI Contribution
 
-AI was most influential on the implementation in three places: (1) the **factor-handling pattern** in `build_new_obs()` — the single most rubric-failed item across student teams, surfaced by the context7 docs lookup before any code was written; (2) the **bslib component map** that lets the app feel like a real dashboard with five lines of layout code instead of fifty lines of CSS; (3) the **Playwright-driven debug loop** — every one of the eight bugs above was caught by AI walking the running app and screenshotting the result, not by code review. Human judgment owned the final calls on model choice (logistic over random forest), the 6-predictor set, the asymmetric defaults that make the launch demo immediately interesting, the verdict-formatting policy when the probability ratio is extreme, and the decision to keep the malformed YAML untouched and work around it with a CLI flag at render time.
+AI was most influential on the implementation in three places: (1) the **factor-handling pattern** in `build_new_obs()` - the single most rubric-failed item across student teams, surfaced by the context7 docs lookup before any code was written; (2) the **bslib component map** that lets the app feel like a real dashboard with five lines of layout code instead of fifty lines of CSS; (3) the **Playwright-driven debug loop** - every one of the eight bugs above was caught by AI walking the running app and screenshotting the result, not by code review. Human judgment owned the final calls on model choice (logistic over random forest), the 6-predictor set, the asymmetric defaults that make the launch demo immediately interesting, the verdict-formatting policy when the probability ratio is extreme, and the decision to keep the malformed YAML untouched and work around it with a CLI flag at render time.
 
 # 3. Reflection
 
 ## 1. What did AI help your group do especially well?
 
-> *Recommendation: cite specific things AI accelerated — mapping the rubric line-by-line and asking clarifying questions before any code was written, recommending the bslib + bsicons library combo and explaining why it was the right minimal stack, designing the factor-handling pattern (`build_new_obs` wrapping every categorical in `factor(value, levels = levels(loans_train$<col>))`), catching the malformed Quarto YAML before we wasted a render cycle, and dispatching nine parallel review agents to find spec gaps before any R code was written.*
+> *Recommendation: cite specific things AI accelerated - mapping the rubric line-by-line and asking clarifying questions before any code was written, recommending the bslib + bsicons library combo and explaining why it was the right minimal stack, designing the factor-handling pattern (`build_new_obs` wrapping every categorical in `factor(value, levels = levels(loans_train$<col>))`), catching the malformed Quarto YAML before we wasted a render cycle, and dispatching nine parallel review agents to find spec gaps before any R code was written.*
 
-\[FILL IN — your answer here]
+\[FILL IN - your answer here]
 
 ## 2. What did AI get wrong, miss, or oversimplify?
 
-> *Recommendation: be specific. Candidates: the first version of the spec at `AI-plan.md` was missing a `plotOutput("predict_plot")` placeholder in the UI section — the server defined `output$predict_plot` but the UI never referenced it; the first spec also had no plan for the README and Reflection sections of the report; AI's first model recommendation was random forest, which would have been more accurate but was wrong for this prototype because of factor-level fragility inside Shiny; the static caption on the Explore-tab plot won't reflect filtered subsets, which could create a small honesty gap if the user filters out the segments the caption describes.*
+> *Recommendation: be specific. Candidates: the first version of the spec at `AI-plan.md` was missing a `plotOutput("predict_plot")` placeholder in the UI section - the server defined `output$predict_plot` but the UI never referenced it; the first spec also had no plan for the README and Reflection sections of the report; AI's first model recommendation was random forest, which would have been more accurate but was wrong for this prototype because of factor-level fragility inside Shiny; the static caption on the Explore-tab plot won't reflect filtered subsets, which could create a small honesty gap if the user filters out the segments the caption describes.*
 
-\[FILL IN — your answer here]
+\[FILL IN - your answer here]
 
 ## 3. How did your group catch and fix that issue?
 
-> *Recommendation: describe the actual catch + fix process. Candidates: we sent out nine parallel review agents — one per rubric line — to audit the design spec; two agents reported material gaps (README plan, Reflection plan); four reported minor gaps; we patched the spec inline before writing any R code. For the random-forest pushback, the team chose logistic regression with a tuned 6-predictor set when AI recommended random forest. For the layout bug during implementation, we used Playwright DOM inspection to confirm cards were rendering at zero height under `fillable = TRUE`, then disabled fillable at the page and column level.*
+> *Recommendation: describe the actual catch + fix process. Candidates: we sent out nine parallel review agents - one per rubric line - to audit the design spec; two agents reported material gaps (README plan, Reflection plan); four reported minor gaps; we patched the spec inline before writing any R code. For the random-forest pushback, the team chose logistic regression with a tuned 6-predictor set when AI recommended random forest. For the layout bug during implementation, we used Playwright DOM inspection to confirm cards were rendering at zero height under `fillable = TRUE`, then disabled fillable at the page and column level.*
 
-\[FILL IN — your answer here]
+\[FILL IN - your answer here]
 
 ## 4. What still required human judgment?
 
-> *Recommendation: point at concrete decisions humans owned. Candidates: picking the predictor set (option B over A or C) based on what we know about Pacific Federal's customer base; choosing logistic regression over random forest for the prototype; deciding to leave the malformed Quarto YAML untouched and document the catch instead of fixing it; setting the asymmetric default values for Customer A and Customer B so the launch demo is immediately interesting; assigning team roles (Data Lead, Modeling Lead, App Developer, Documentation Lead); deciding what counts as "honest" in the prediction-interpretation paragraph — what to admit the model cannot tell you.*
+> *Recommendation: point at concrete decisions humans owned. Candidates: picking the predictor set (option B over A or C) based on what we know about Pacific Federal's customer base; choosing logistic regression over random forest for the prototype; deciding to leave the malformed Quarto YAML untouched and document the catch instead of fixing it; setting the asymmetric default values for Customer A and Customer B so the launch demo is immediately interesting; assigning team roles (Data Lead, Modeling Lead, App Developer, Documentation Lead); deciding what counts as "honest" in the prediction-interpretation paragraph - what to admit the model cannot tell you.*
 
-\[FILL IN — your answer here]
+\[FILL IN - your answer here]
 
 ## 5. If this tool were used in a real setting, what is one limitation or risk?
 
 > *Recommendation: avoid generic AI risks; tie the answer to **this app**. Candidates: the model is trained on a 5,000-customer snapshot, so if Pacific Federal's customer base or the loan offer's terms have changed since the data was collected the predictions will drift, and there's no monitoring or retraining loop in this prototype; the model has no fairness audit, so if `Education` or `Family` size correlates with a protected class in this customer base, using the predictions to direct marketing spend could create disparate outcomes the bank would have to defend; a non-technical user might see a 95% probability and treat it as a sales certainty even though the in-app interpretation is honest about it being a relative ranking signal; the 9.6% positive class rate means small changes in the threshold (currently 0.5) would meaningfully shift who gets contacted, and that's a business-policy decision the model can inform but cannot make.*
 
-\[FILL IN — your answer here]
+\[FILL IN - your answer here]
 
 # 4. Final Notes
 
-The repository is organized so the working app lives at `app/app.R` during development and is copied to `TeamMoney_app.R` at the repo root only at submission. The full design spec — the artifact AI wrote in collaboration with the team before any R code was written — lives at `app/AI-plan.md` and remains the source of truth for what the prototype is and is not.
+The repository is organized so the working app lives at `app/app.R` during development and is copied to `TeamMoney_app.R` at the repo root only at submission. The full design spec - the artifact AI wrote in collaboration with the team before any R code was written - lives at `app/AI-plan.md` and remains the source of truth for what the prototype is and is not.

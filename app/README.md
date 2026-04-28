@@ -1,6 +1,6 @@
-# Team Money — Mini AI Project (working README)
+# Team Money - Mini AI Project (working README)
 
-This is the team's working README for the `app/` directory. It is **not** the README that gets graded — that one lives inside `Mini_AI_Report.qmd`. Use this file to coordinate during the build; copy whatever's relevant into the report's README section at submission time.
+This is the team's working README for the `app/` directory. It is **not** the README that gets graded - that one lives inside `Mini_AI_Report.qmd`. Use this file to coordinate during the build; copy whatever's relevant into the report's README section at submission time.
 
 ## Team
 
@@ -19,7 +19,7 @@ This is the team's working README for the `app/` directory. It is **not** the RE
 |---|---|
 | `app.R` | The Shiny app. At submission, gets copied to `../TeamMoney_app.R`. |
 | `Mini_AI_Report.qmd` | The Quarto report (README + AI Build Log + Reflection). Renders to `Mini_AI_Report.html`, then copied to `../TeamMoney_Mini_AI_Report.html` at submission. |
-| `AI-plan.md` | The full design spec — what we're building and why. Read this first. |
+| `AI-plan.md` | The full design spec - what we're building and why. Read this first. |
 | `README.md` | This file. |
 
 ## Dataset
@@ -46,7 +46,7 @@ In RStudio: open `app.R` and click **Run App**.
 quarto render app/Mini_AI_Report.qmd --to html --embed-resources
 ```
 
-The `--embed-resources` flag is required because the template's malformed YAML doesn't get the embed directive applied automatically — without it, the rendered HTML pulls in an external `_files/libs/` folder and the single-file submission breaks.
+The `--embed-resources` flag is required because the template's malformed YAML doesn't get the embed directive applied automatically - without it, the rendered HTML pulls in an external `_files/libs/` folder and the single-file submission breaks.
 
 ## Submission packaging
 

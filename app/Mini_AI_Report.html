@@ -2241,7 +2241,7 @@ vertical-align: -.125em;
 <section id="team-members-and-roles" class="level2">
 <h2 class="anchored" data-anchor-id="team-members-and-roles">Team Members and Roles</h2>
 <blockquote class="blockquote">
-<p><strong>[FILL IN — roles to be assigned by the team]</strong></p>
+<p><strong>[FILL IN - roles to be assigned by the team]</strong></p>
 </blockquote>
 <table class="caption-top table">
 <colgroup>
@@ -2257,11 +2257,11 @@ vertical-align: -.125em;
 <tbody>
 <tr class="odd">
 <td>Charlie Conner</td>
-<td>[FILL IN: Data Lead / Modeling Lead / App Developer / Documentation Lead]</td>
+<td>App Developer</td>
 </tr>
 <tr class="even">
 <td>Arya Kumar</td>
-<td>[FILL IN]</td>
+<td>[FILL IN: Data Lead / Modeling Lead / App Developer / Documentation Lead]</td>
 </tr>
 <tr class="odd">
 <td>Steven [last name]</td>
@@ -2303,7 +2303,7 @@ vertical-align: -.125em;
 </section>
 <section id="how-to-run-the-app" class="level2">
 <h2 class="anchored" data-anchor-id="how-to-run-the-app">How to Run the App</h2>
-<p><strong>Option A — RStudio (easiest):</strong></p>
+<p><strong>Option A - RStudio (easiest):</strong></p>
 <ol type="1">
 <li>Open RStudio.</li>
 <li>Make sure the dataset <code>pacific_federal_loan_campaign.csv</code> is in a <code>data/</code> folder next to <code>TeamMoney_app.R</code>.</li>
@@ -2311,17 +2311,17 @@ vertical-align: -.125em;
 <li>Install any missing packages (see list above).</li>
 <li>Click <strong>Run App</strong>.</li>
 </ol>
-<p><strong>Option B — Command line / dev server:</strong></p>
+<p><strong>Option B - Command line / dev server:</strong></p>
 <p>From the directory containing <code>TeamMoney_app.R</code> and the <code>data/</code> folder, run:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> <span class="at">-e</span> <span class="st">&#39;shiny::runApp(&quot;TeamMoney_app.R&quot;, port = 7654, launch.browser = FALSE)&#39;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Then open <code>http://127.0.0.1:7654</code> in your browser. Press <code>Ctrl+C</code> in the terminal to stop the app. Drop <code>port = 7654</code> to let Shiny pick a free port, and drop <code>launch.browser = FALSE</code> to have it open your default browser automatically.</p>
+<p>Then open <code>http://127.0.0.1:7654</code> in your browser.</p>
 </section>
 <section id="what-the-app-does" class="level2">
 <h2 class="anchored" data-anchor-id="what-the-app-does">What the App Does</h2>
 <p>The app is a two-tab dashboard themed for Pacific Federal’s personal-loan campaign:</p>
 <ul>
 <li><strong>Explore the Data tab.</strong> A faceted scatter plot shows the relationship between customer Income and the model’s predicted probability of accepting a loan, broken out by Education level. A multi-select for Education and a two-handle Income range slider filter the chart in real time. A static caption beneath the chart calls out the headline pattern (higher-income customers, especially in the Graduate and Advanced/Professional segments, are far more likely to accept).</li>
-<li><strong>Make a Prediction tab.</strong> Side-by-side input cards for two customers expose six predictors each (Income, Family size, monthly Credit Card spending, Education, CD account, Mortgage), plus an editable <strong>Name</strong> field that lets the user label each customer (defaults to “Customer A” / “Customer B”). The Name field is a label only and is not used by the model — it flows into the value-box title, the verdict sentence, and the labeled stars on the plot, so the analyst can compare two named prospects rather than abstract A/B labels. The numeric defaults pre-load a low-likelihood and a high-likelihood customer so the demo on launch is immediately interesting. A single <strong>Compare Predictions</strong> button runs both predictions, displays each in a value box, computes a comparative verdict (e.g. <em>“Sarah K. (98.1%) is far more likely to accept the loan offer than Marcus T. (1.2%)”</em>), and overlays both customers as labeled red stars on the same Income × probability plot so the user can see exactly where each one falls relative to the rest of the data. A two-paragraph interpretation block below the plot explains what the prediction means and what it explicitly cannot tell the user. A small footnote at the bottom shows test-set accuracy and AUC alongside a class-imbalance caveat.</li>
+<li><strong>Make a Prediction tab.</strong> Side-by-side input cards for two customers expose six predictors each (Income, Family size, monthly Credit Card spending, Education, CD account, Mortgage), plus an editable <strong>Name</strong> field that lets the user label each customer (defaults to “Customer A” / “Customer B”). The Name field is a label only and is not used by the model - it flows into the value-box title, the verdict sentence, and the labeled stars on the plot, so the analyst can compare two named prospects rather than abstract A/B labels. The numeric defaults pre-load a low-likelihood and a high-likelihood customer so the demo on launch is immediately interesting. A single <strong>Compare Predictions</strong> button runs both predictions, displays each in a value box, computes a comparative verdict (e.g. <em>“Sarah K. (98.1%) is far more likely to accept the loan offer than Marcus T. (1.2%)”</em>), and overlays both customers as labeled red stars on the same Income × probability plot so the user can see exactly where each one falls relative to the rest of the data. A two-paragraph interpretation block below the plot explains what the prediction means and what it explicitly cannot tell the user. A small footnote at the bottom shows test-set accuracy and AUC alongside a class-imbalance caveat.</li>
 </ul>
 </section>
 <section id="model-used" class="level2">
@@ -2330,7 +2330,7 @@ vertical-align: -.125em;
 </section>
 <section id="outcome-variable" class="level2">
 <h2 class="anchored" data-anchor-id="outcome-variable">Outcome Variable</h2>
-<p><code>Personal_Loan</code> — a binary outcome from the project dataset indicating whether the customer accepted the personal-loan offer (<code>Yes</code> / <code>No</code>). This is the same outcome our team uses in our final-project analysis; we did not simplify it.</p>
+<p><code>Personal_Loan</code> - a binary outcome from the project dataset indicating whether the customer accepted the personal-loan offer (<code>Yes</code> / <code>No</code>). This is the same outcome our team uses in our final-project analysis; we did not simplify it.</p>
 </section>
 <section id="predictors-exposed-in-the-app" class="level2">
 <h2 class="anchored" data-anchor-id="predictors-exposed-in-the-app">Predictors Exposed in the App</h2>
@@ -2338,7 +2338,7 @@ vertical-align: -.125em;
 <ol type="1">
 <li><strong>Income</strong> (numeric, thousand $)</li>
 <li><strong>Family size</strong> (1, 2, 3, or 4)</li>
-<li><strong>Credit card avg / month</strong> (numeric, thousand $) — <code>CCAvg</code></li>
+<li><strong>Credit card avg / month</strong> (numeric, thousand $) - <code>CCAvg</code></li>
 <li><strong>Education</strong> (Undergrad / Graduate / Advanced/Professional)</li>
 <li><strong>CD account?</strong> (Yes / No)</li>
 <li><strong>Mortgage</strong> (numeric, thousand $)</li>
@@ -2351,7 +2351,7 @@ vertical-align: -.125em;
 </section>
 <section id="prediction-output" class="level2">
 <h2 class="anchored" data-anchor-id="prediction-output">Prediction Output</h2>
-<p>A predicted probability between 0% and 100% per customer, plus a comparative verdict that pairs them (“Customer B (99.8%) is far more likely to accept the loan offer than Customer A (0.0%)”). The probabilities are population-level signals — they describe the rate at which similar customers in the training data accepted the loan, not whether this specific customer <strong>will</strong> accept. The in-app interpretation block makes this distinction explicit.</p>
+<p>A predicted probability between 0% and 100% per customer, plus a comparative verdict that pairs them (“Customer B (99.8%) is far more likely to accept the loan offer than Customer A (0.0%)”). The probabilities are population-level signals - they describe the rate at which similar customers in the training data accepted the loan, not whether this specific customer <strong>will</strong> accept. The in-app interpretation block makes this distinction explicit.</p>
 </section>
 <section id="simplifications-and-known-issues" class="level2">
 <h2 class="anchored" data-anchor-id="simplifications-and-known-issues">Simplifications and Known Issues</h2>
@@ -2360,7 +2360,7 @@ vertical-align: -.125em;
 <li>We expose six of eleven candidate predictors. We picked the predictors with the strongest signals in the bank-marketing literature (Income, CD_Account) plus complementary demographic and credit signals (Family, CCAvg, Education, Mortgage). <code>Age</code> and <code>Experience</code> are nearly collinear and were dropped; <code>Securities_Account</code>, <code>Online</code>, and <code>CreditCard</code> were excluded for parsimony.</li>
 <li>52 rows with <code>Experience &lt; 0</code> (a known data-entry quirk in this dataset) are dropped during cleaning.</li>
 <li>The Quarto template’s YAML header that we received was malformed (<code>html:</code> was at the top level instead of nested under <code>format:</code>). Per team direction we left the YAML untouched and documented the catch in the AI Build Log below.</li>
-<li>AUC is computed by hand (Mann–Whitney U / pair-counting method) so the app does not depend on the <code>pROC</code> package — keeping the library footprint small.</li>
+<li>AUC is computed by hand (Mann–Whitney U / pair-counting method) so the app does not depend on the <code>pROC</code> package - keeping the library footprint small.</li>
 </ul>
 </section>
 </section>
@@ -2374,36 +2374,36 @@ vertical-align: -.125em;
 <h2 class="anchored" data-anchor-id="what-we-asked-ai-to-help-with">What We Asked AI to Help With</h2>
 <p>Researching Shiny + bslib via the <strong>context7 MCP</strong> before writing any code; choosing the model and predictor set; designing the factor-handling pattern; scaffolding the dashboard with <code>bslib::page_navbar</code>; running an end-to-end visual verification of the running app with the <strong>Playwright MCP</strong> (and a Python-Playwright fallback when the MCP wasn’t installed); and debugging a series of layout, reactivity, and verdict-formatting bugs surfaced by that visual pass.</p>
 </section>
-<section id="example-prompt-1-research-shiny-via-context7" class="level2">
-<h2 class="anchored" data-anchor-id="example-prompt-1-research-shiny-via-context7">Example Prompt 1 — research Shiny via context7</h2>
+<section id="example-prompt-1---research-shiny-via-context7" class="level2">
+<h2 class="anchored" data-anchor-id="example-prompt-1---research-shiny-via-context7">Example Prompt 1 - research Shiny via context7</h2>
 <blockquote class="blockquote">
 <p><em>“Use context7 to look up the current Shiny + bslib documentation. Specifically: how <code>reactive()</code> differs from <code>eventReactive()</code>, how to fit a <code>glm()</code> once at startup and call it from inside <code>server()</code>, what <code>bslib::page_navbar</code> ships out of the box, and how factor levels need to be handled when constructing a new observation for <code>predict()</code>.”</em></p>
 </blockquote>
 <section id="what-ai-returned" class="level3">
 <h3 class="anchored" data-anchor-id="what-ai-returned">What AI Returned</h3>
-<p>Pulled the latest Shiny + bslib docs through context7. Explained that <code>reactive()</code> re-fires whenever any of its inputs change, while <code>eventReactive(input$btn, …)</code> only fires on the triggering input — exactly the right primitive for a Predict button. Confirmed <code>glm()</code> can be fit at the top of <code>app.R</code> outside <code>server()</code>, then called from any reactive: the model is just an R object. Walked through <code>page_navbar</code> / <code>nav_panel</code> / <code>layout_columns</code> / <code>card</code> / <code>value_box</code>. Explicitly flagged the factor-handling trap: in the new observation passed to <code>predict()</code>, every categorical column must be re-wrapped as <code>factor(value, levels = levels(training_data$col))</code> or the model either crashes or silently hallucinates a level.</p>
+<p>Pulled the latest Shiny + bslib docs through context7. Explained that <code>reactive()</code> re-fires whenever any of its inputs change, while <code>eventReactive(input$btn, …)</code> only fires on the triggering input - exactly the right primitive for a Predict button. Confirmed <code>glm()</code> can be fit at the top of <code>app.R</code> outside <code>server()</code>, then called from any reactive: the model is just an R object. Walked through <code>page_navbar</code> / <code>nav_panel</code> / <code>layout_columns</code> / <code>card</code> / <code>value_box</code>. Explicitly flagged the factor-handling trap: in the new observation passed to <code>predict()</code>, every categorical column must be re-wrapped as <code>factor(value, levels = levels(training_data$col))</code> or the model either crashes or silently hallucinates a level.</p>
 </section>
 <section id="what-we-changed-fixed-or-rejected" class="level3">
 <h3 class="anchored" data-anchor-id="what-we-changed-fixed-or-rejected">What We Changed, Fixed, or Rejected</h3>
-<p>Adopted the factor pattern verbatim — it’s the foundation of <code>build_new_obs()</code> in our <code>app.R</code>. Adopted <code>eventReactive(input$predict_btn, …, ignoreNULL = TRUE)</code> for the prediction pipeline so it only re-runs on click.</p>
+<p>Adopted the factor pattern verbatim - it’s the foundation of <code>build_new_obs()</code> in our <code>app.R</code>. Adopted <code>eventReactive(input$predict_btn, …, ignoreNULL = TRUE)</code> for the prediction pipeline so it only re-runs on click.</p>
 </section>
 </section>
-<section id="example-prompt-2-model-and-predictor-set" class="level2">
-<h2 class="anchored" data-anchor-id="example-prompt-2-model-and-predictor-set">Example Prompt 2 — model and predictor set</h2>
+<section id="example-prompt-2---model-and-predictor-set" class="level2">
+<h2 class="anchored" data-anchor-id="example-prompt-2---model-and-predictor-set">Example Prompt 2 - model and predictor set</h2>
 <blockquote class="blockquote">
 <p><em>“Which model and predictor set should we use? We already have logistic regression with <code>Age + Experience + Income + Education + Mortgage</code> in our QMD. The dataset also has <code>Family</code>, <code>CCAvg</code>, <code>CD_Account</code>, <code>Securities_Account</code>, <code>Online</code>, <code>CreditCard</code>. Recommend a final set.”</em></p>
 </blockquote>
 <section id="what-ai-returned-1" class="level3">
 <h3 class="anchored" data-anchor-id="what-ai-returned-1">What AI Returned</h3>
-<p>Recommended logistic regression with <code>Income + Family + CCAvg + Education + CD_Account + Mortgage</code> — six predictors. Justification: <code>CD_Account</code> is one of the strongest single signals of loan acceptance in this kind of bank-marketing data; <code>Age</code> and <code>Experience</code> are nearly perfectly collinear and pick whichever single one you want; <code>Securities_Account</code>, <code>Online</code>, and <code>CreditCard</code> add little signal and would just bloat the prediction UI. Offered random forest as an alternative but flagged it as fragile inside Shiny because of factor-level handling and slower model loading.</p>
+<p>Recommended logistic regression with <code>Income + Family + CCAvg + Education + CD_Account + Mortgage</code> - six predictors. Justification: <code>CD_Account</code> is one of the strongest single signals of loan acceptance in this kind of bank-marketing data; <code>Age</code> and <code>Experience</code> are nearly perfectly collinear and pick whichever single one you want; <code>Securities_Account</code>, <code>Online</code>, and <code>CreditCard</code> add little signal and would just bloat the prediction UI. Offered random forest as an alternative but flagged it as fragile inside Shiny because of factor-level handling and slower model loading.</p>
 </section>
 <section id="what-we-changed-fixed-or-rejected-1" class="level3">
 <h3 class="anchored" data-anchor-id="what-we-changed-fixed-or-rejected-1">What We Changed, Fixed, or Rejected</h3>
-<p>Accepted the 6-predictor logistic. <strong>Rejected</strong> random forest — the rubric rewards a working prototype over an ambitious one that breaks. Dropped <code>Age</code> (kept <code>Experience</code> was wrong; we actually dropped both because neither was in the recommended set, but kept <code>Family</code> and <code>CCAvg</code> from the dataset that the QMD model didn’t use).</p>
+<p>Accepted the 6-predictor logistic. <strong>Rejected</strong> random forest - the rubric rewards a working prototype over an ambitious one that breaks. Dropped <code>Age</code> (kept <code>Experience</code> was wrong; we actually dropped both because neither was in the recommended set, but kept <code>Family</code> and <code>CCAvg</code> from the dataset that the QMD model didn’t use).</p>
 </section>
 </section>
-<section id="example-prompt-3-additional-interactivity" class="level2">
-<h2 class="anchored" data-anchor-id="example-prompt-3-additional-interactivity">Example Prompt 3 — additional interactivity</h2>
+<section id="example-prompt-3---additional-interactivity" class="level2">
+<h2 class="anchored" data-anchor-id="example-prompt-3---additional-interactivity">Example Prompt 3 - additional interactivity</h2>
 <blockquote class="blockquote">
 <p><em>“How do we satisfy the rubric’s ‘additional interactivity’ requirement beyond the predict button? The rubric explicitly says a numeric-input + button alone doesn’t count.”</em></p>
 </blockquote>
@@ -2416,8 +2416,8 @@ vertical-align: -.125em;
 <p><strong>Upgraded</strong> AI’s recommendation. Went with side-by-side Customer A vs Customer B inputs (one button, two predictions at once) <strong>and</strong> the overlay plot, so the app satisfies the “additional interactivity” requirement from two independent angles. Also kept the live filter on the Explore tab as a third interactive element.</p>
 </section>
 </section>
-<section id="example-prompt-4-outcome-connected-visualization" class="level2">
-<h2 class="anchored" data-anchor-id="example-prompt-4-outcome-connected-visualization">Example Prompt 4 — outcome-connected visualization</h2>
+<section id="example-prompt-4---outcome-connected-visualization" class="level2">
+<h2 class="anchored" data-anchor-id="example-prompt-4---outcome-connected-visualization">Example Prompt 4 - outcome-connected visualization</h2>
 <blockquote class="blockquote">
 <p><em>“Pick the outcome-connected viz. Three candidates: (a) Income × predicted probability, points colored by actual <code>Personal_Loan</code>, faceted by Education; (b) Income density faceted by <code>Personal_Loan</code> and Education; (c) predicted-probability curve with confidence ribbons. Which best supports the prediction overlay?”</em></p>
 </blockquote>
@@ -2430,10 +2430,10 @@ vertical-align: -.125em;
 <p>Accepted. Implemented as <code>geom_point(alpha = 0.45) + geom_hline(yintercept = 0.5, linetype = &quot;dashed&quot;) + facet_wrap(~ Education)</code>.</p>
 </section>
 </section>
-<section id="example-prompt-5-library-budget" class="level2">
-<h2 class="anchored" data-anchor-id="example-prompt-5-library-budget">Example Prompt 5 — library budget</h2>
+<section id="example-prompt-5---library-budget" class="level2">
+<h2 class="anchored" data-anchor-id="example-prompt-5---library-budget">Example Prompt 5 - library budget</h2>
 <blockquote class="blockquote">
-<p><em>“What R libraries do we need for a proper Shiny dashboard? Stay within constraints — don’t pile on packages. Ask first if you’d add anything beyond <code>shiny</code>, <code>tidyverse</code>, <code>rsample</code>.”</em></p>
+<p><em>“What R libraries do we need for a proper Shiny dashboard? Stay within constraints - don’t pile on packages. Ask first if you’d add anything beyond <code>shiny</code>, <code>tidyverse</code>, <code>rsample</code>.”</em></p>
 </blockquote>
 <section id="what-ai-returned-4" class="level3">
 <h3 class="anchored" data-anchor-id="what-ai-returned-4">What AI Returned</h3>
@@ -2444,8 +2444,8 @@ vertical-align: -.125em;
 <p>Approved <code>bslib</code> + <code>bsicons</code>. <strong>Rejected</strong> <code>caret</code>, <code>pROC</code>, <code>DT</code>, <code>shinyWidgets</code>. Adopted the by-hand AUC: <code>compute_auc()</code> in <code>app.R</code>.</p>
 </section>
 </section>
-<section id="example-prompt-6-implement-app.r-end-to-end" class="level2">
-<h2 class="anchored" data-anchor-id="example-prompt-6-implement-app.r-end-to-end">Example Prompt 6 — implement <code>app.R</code> end to end</h2>
+<section id="example-prompt-6---implement-app.r-end-to-end" class="level2">
+<h2 class="anchored" data-anchor-id="example-prompt-6---implement-app.r-end-to-end">Example Prompt 6 - implement <code>app.R</code> end to end</h2>
 <blockquote class="blockquote">
 <p><em>“Write <code>app/app.R</code> end to end based on the locked decisions: data prep + cleaning + 80/20 stratified split + <code>glm(Personal_Loan ~ Income + Family + CCAvg + Education + CD_Account + Mortgage, family = binomial)</code> fit at startup, helper functions, UI with <code>page_navbar</code> + two <code>nav_panel</code>s, server with <code>eventReactive</code> for predictions and <code>reactive</code> for the explore filter. Then verify it parses and the model fits.”</em></p>
 </blockquote>
@@ -2458,8 +2458,8 @@ vertical-align: -.125em;
 <p>Accepted. The factor sanity probe in particular gave us confidence the prediction UI would not crash on submit.</p>
 </section>
 </section>
-<section id="example-prompt-7-visual-verification-with-playwright-mcp" class="level2">
-<h2 class="anchored" data-anchor-id="example-prompt-7-visual-verification-with-playwright-mcp">Example Prompt 7 — visual verification with Playwright MCP</h2>
+<section id="example-prompt-7---visual-verification-with-playwright-mcp" class="level2">
+<h2 class="anchored" data-anchor-id="example-prompt-7---visual-verification-with-playwright-mcp">Example Prompt 7 - visual verification with Playwright MCP</h2>
 <blockquote class="blockquote">
 <p><em>“Use the Playwright MCP to load the running Shiny app in a headless browser, walk through both tabs, click Compare Predictions, and screenshot each state. Verify the UI is rendering correctly before claiming done.”</em></p>
 </blockquote>
@@ -2472,14 +2472,14 @@ vertical-align: -.125em;
 <p>Accepted the Python-Playwright fallback. The visual pass surfaced the layout, reactivity, and verdict bugs documented under “Debugging Issues” below.</p>
 </section>
 </section>
-<section id="example-prompt-8-add-a-name-field-per-customer" class="level2">
-<h2 class="anchored" data-anchor-id="example-prompt-8-add-a-name-field-per-customer">Example Prompt 8 — add a Name field per customer</h2>
+<section id="example-prompt-8---add-a-name-field-per-customer" class="level2">
+<h2 class="anchored" data-anchor-id="example-prompt-8---add-a-name-field-per-customer">Example Prompt 8 - add a Name field per customer</h2>
 <blockquote class="blockquote">
 <p><em>“For Make a Prediction, add a Name field per customer and integrate it. The name should flow into the value-box title, the verdict sentence, and the plot star labels. The name should be a label only, not a model predictor.”</em></p>
 </blockquote>
 <section id="what-ai-returned-7" class="level3">
 <h3 class="anchored" data-anchor-id="what-ai-returned-7">What AI Returned</h3>
-<p>Added <code>textInput(&quot;name_a&quot;)</code> and <code>textInput(&quot;name_b&quot;)</code> at the top of each customer card with helper text <em>“Name (label only — not used by the model)”</em>. Switched the value-box titles from static strings to <code>textOutput(&quot;title_a&quot;)</code> / <code>textOutput(&quot;title_b&quot;)</code> populated reactively from the name fields. Updated <code>format_verdict()</code> to take <code>name_a</code> / <code>name_b</code> arguments and inline them in the sentence. Updated <code>build_predict_plot()</code> to use the names (truncated to 14 chars to fit the plot) as the star labels. Wrote <code>safe_name()</code> so empty names fall back to “Customer A” / “Customer B”.</p>
+<p>Added <code>textInput(&quot;name_a&quot;)</code> and <code>textInput(&quot;name_b&quot;)</code> at the top of each customer card with helper text <em>“Name (label only - not used by the model)”</em>. Switched the value-box titles from static strings to <code>textOutput(&quot;title_a&quot;)</code> / <code>textOutput(&quot;title_b&quot;)</code> populated reactively from the name fields. Updated <code>format_verdict()</code> to take <code>name_a</code> / <code>name_b</code> arguments and inline them in the sentence. Updated <code>build_predict_plot()</code> to use the names (truncated to 14 chars to fit the plot) as the star labels. Wrote <code>safe_name()</code> so empty names fall back to “Customer A” / “Customer B”.</p>
 </section>
 <section id="what-we-changed-fixed-or-rejected-7" class="level3">
 <h3 class="anchored" data-anchor-id="what-we-changed-fixed-or-rejected-7">What We Changed, Fixed, or Rejected</h3>
@@ -2489,55 +2489,55 @@ vertical-align: -.125em;
 <section id="debugging-issues" class="level2">
 <h2 class="anchored" data-anchor-id="debugging-issues">Debugging Issues</h2>
 <p>The Playwright pass surfaced eight real bugs. Each one is documented with the diagnostic step and the fix. The rubric requires at least one debug story; we kept all eight because every one of them describes a real fix that landed in <code>app.R</code>.</p>
-<section id="debug-1-runapp-couldnt-find-the-dataset" class="level3">
-<h3 class="anchored" data-anchor-id="debug-1-runapp-couldnt-find-the-dataset">Debug 1 — <code>runApp()</code> couldn’t find the dataset</h3>
+<section id="debug-1---runapp-couldnt-find-the-dataset" class="level3">
+<h3 class="anchored" data-anchor-id="debug-1---runapp-couldnt-find-the-dataset">Debug 1 - <code>runApp()</code> couldn’t find the dataset</h3>
 <p><strong>Symptom:</strong> First launch failed with <em>“Could not find dataset at ‘data/pacific_federal_loan_campaign.csv’.”</em></p>
 <p><strong>Diagnostic:</strong> <code>shiny::runApp(&quot;app/app.R&quot;)</code> chdirs into the app directory before sourcing, so the relative path <code>data/...</code> was now interpreted as <code>app/data/...</code> (which doesn’t exist; our dataset lives at the repo root’s <code>data/</code>).</p>
-<p><strong>Fix:</strong> Created a dev-only symlink <code>app/data → ../data</code> (added to <code>.gitignore</code>). The submission environment doesn’t need this — the grader places <code>data/</code> next to <code>TeamMoney_app.R</code> themselves, which is exactly what the relative path in the app expects.</p>
+<p><strong>Fix:</strong> Created a dev-only symlink <code>app/data → ../data</code> (added to <code>.gitignore</code>). The submission environment doesn’t need this - the grader places <code>data/</code> next to <code>TeamMoney_app.R</code> themselves, which is exactly what the relative path in the app expects.</p>
 </section>
-<section id="debug-2-value-boxes-were-blank-before-the-first-click" class="level3">
-<h3 class="anchored" data-anchor-id="debug-2-value-boxes-were-blank-before-the-first-click">Debug 2 — Value boxes were blank before the first click</h3>
-<p><strong>Symptom:</strong> On the Predict tab, before clicking Compare Predictions, the value boxes were completely empty (no “—” placeholder, just blank).</p>
-<p><strong>Diagnostic:</strong> <code>output$prob_a</code> and <code>output$prob_b</code> depended on <code>prediction_result()</code>, an <code>eventReactive</code> with <code>ignoreNULL = TRUE</code> — meaning the reactive never fires until the button is clicked, and so the <code>renderText</code> block never runs even once on launch.</p>
-<p><strong>Fix:</strong> Added <code>if (input$predict_btn == 0) return(&quot;—&quot;)</code> at the top of each renderText. The renderText now reactively depends on the click counter directly and fires immediately on launch with the placeholder, then re-fires on each click with the new probability.</p>
+<section id="debug-2---value-boxes-were-blank-before-the-first-click" class="level3">
+<h3 class="anchored" data-anchor-id="debug-2---value-boxes-were-blank-before-the-first-click">Debug 2 - Value boxes were blank before the first click</h3>
+<p><strong>Symptom:</strong> On the Predict tab, before clicking Compare Predictions, the value boxes were completely empty (no “-” placeholder, just blank).</p>
+<p><strong>Diagnostic:</strong> <code>output$prob_a</code> and <code>output$prob_b</code> depended on <code>prediction_result()</code>, an <code>eventReactive</code> with <code>ignoreNULL = TRUE</code> - meaning the reactive never fires until the button is clicked, and so the <code>renderText</code> block never runs even once on launch.</p>
+<p><strong>Fix:</strong> Added <code>if (input$predict_btn == 0) return(&quot;-&quot;)</code> at the top of each renderText. The renderText now reactively depends on the click counter directly and fires immediately on launch with the placeholder, then re-fires on each click with the new probability.</p>
 </section>
-<section id="debug-3-verdict-was-18664.9-more-likely" class="level3">
-<h3 class="anchored" data-anchor-id="debug-3-verdict-was-18664.9-more-likely">Debug 3 — Verdict was “18664.9× more likely”</h3>
+<section id="debug-3---verdict-was-18664.9-more-likely" class="level3">
+<h3 class="anchored" data-anchor-id="debug-3---verdict-was-18664.9-more-likely">Debug 3 - Verdict was “18664.9× more likely”</h3>
 <p><strong>Symptom:</strong> First successful prediction produced <em>“Customer B is 18664.9x more likely to accept than Customer A.”</em> Technically correct (Customer A’s probability is ~0.00005), but unreadable.</p>
 <p><strong>Fix:</strong> Extended <code>format_verdict()</code> to (a) show absolute percentages alongside the ratio so the user always sees both customers’ probabilities, (b) cap displayed ratios at 100×, and (c) switch to <em>“far more likely”</em> language when the smaller probability falls below 0.5%. Verified by re-clicking: <em>“Customer B (99.8%) is far more likely to accept the loan offer than Customer A (0.0%).”</em></p>
 </section>
-<section id="debug-4-customer-cards-collapsed-to-height-0" class="level3">
-<h3 class="anchored" data-anchor-id="debug-4-customer-cards-collapsed-to-height-0">Debug 4 — Customer cards collapsed to height 0</h3>
+<section id="debug-4---customer-cards-collapsed-to-height-0" class="level3">
+<h3 class="anchored" data-anchor-id="debug-4---customer-cards-collapsed-to-height-0">Debug 4 - Customer cards collapsed to height 0</h3>
 <p><strong>Symptom:</strong> Playwright screenshot showed the Customer A and B input cards rendering with only 2 of 6 inputs visible. DOM inspection (<code>getBoundingClientRect()</code>) confirmed <code>card_height: 0</code> even though all 6 input elements were in the DOM at non-zero <code>y</code> coordinates outside the cards.</p>
-<p><strong>Diagnostic:</strong> <code>bslib::page_navbar</code> defaults to <code>fillable = TRUE</code>, which forces all nav-panel content to share the viewport height. The <code>layout_columns</code> containing the input cards then assigned each card the leftover space <em>after</em> the value-boxes, predict button, and overlay plot — which was zero. The inputs were rendering outside their parent card with <code>overflow: auto</code>, so they were effectively hidden behind the surrounding sections.</p>
+<p><strong>Diagnostic:</strong> <code>bslib::page_navbar</code> defaults to <code>fillable = TRUE</code>, which forces all nav-panel content to share the viewport height. The <code>layout_columns</code> containing the input cards then assigned each card the leftover space <em>after</em> the value-boxes, predict button, and overlay plot - which was zero. The inputs were rendering outside their parent card with <code>overflow: auto</code>, so they were effectively hidden behind the surrounding sections.</p>
 <p><strong>Fix:</strong> <code>page_navbar(fillable = FALSE)</code> so the page becomes naturally scrollable instead of fitting in the viewport, plus <code>layout_columns(fillable = FALSE)</code>, <code>card(fill = FALSE)</code>, and <code>card_body(fillable = FALSE)</code> on the input row. Cards now size to their content. Re-verified with Playwright: all six inputs visible per card, no overlap.</p>
 </section>
-<section id="debug-5-active-navbar-tab-was-invisible-against-navy-background" class="level3">
-<h3 class="anchored" data-anchor-id="debug-5-active-navbar-tab-was-invisible-against-navy-background">Debug 5 — Active navbar tab was invisible against navy background</h3>
-<p><strong>Symptom:</strong> User screenshot showed the active tab text rendering at very low contrast against the dark-navy navbar — the <em>“Explore the Data”</em> label was barely visible. Hover state was also too dark to read.</p>
+<section id="debug-5---active-navbar-tab-was-invisible-against-navy-background" class="level3">
+<h3 class="anchored" data-anchor-id="debug-5---active-navbar-tab-was-invisible-against-navy-background">Debug 5 - Active navbar tab was invisible against navy background</h3>
+<p><strong>Symptom:</strong> User screenshot showed the active tab text rendering at very low contrast against the dark-navy navbar - the <em>“Explore the Data”</em> label was barely visible. Hover state was also too dark to read.</p>
 <p><strong>Diagnostic:</strong> <code>bslib</code>’s <code>flatly</code> theme defaults to dark-text-on-active-tab, which becomes invisible on a navy <code>bg</code>. The bg was <code>#1f3b57</code>, the active tab text was a similar dark blue.</p>
 <p><strong>Fix:</strong> Added explicit CSS in <code>tags$head(tags$style(HTML(...)))</code>: <code>.navbar .nav-link</code> gets <code>color: rgba(255, 255, 255, 0.85)</code> by default; <code>.nav-link:hover</code> gets <code>color: #ffffff</code> plus a 10%-white background tint; <code>.nav-link.active</code> stays solid white with a 6%-white background and a white underline accent. Both tabs now read clearly white on navy at all times.</p>
 </section>
-<section id="debug-6-filter-input-had-no-visible-affordance-for-adding-levels-back" class="level3">
-<h3 class="anchored" data-anchor-id="debug-6-filter-input-had-no-visible-affordance-for-adding-levels-back">Debug 6 — Filter input had no visible affordance for adding levels back</h3>
+<section id="debug-6---filter-input-had-no-visible-affordance-for-adding-levels-back" class="level3">
+<h3 class="anchored" data-anchor-id="debug-6---filter-input-had-no-visible-affordance-for-adding-levels-back">Debug 6 - Filter input had no visible affordance for adding levels back</h3>
 <p><strong>Symptom:</strong> User flagged <em>“there is no way to know what filter inputs are accepted.”</em> When the Education multi-select had all three levels pre-selected and the user removed one with the × button, the empty space gave no hint that you could click to add it back.</p>
-<p><strong>Fix:</strong> Added a <code>placeholder = &quot;Click to add an Education level...&quot;</code> to the <code>selectizeInput</code> options so the empty state is self-explanatory, and the dropdown auto-opens on focus. Added an intro paragraph to the Filters card (<em>“Use these controls to narrow which customers appear in the chart on the right…”</em>) and relabeled both inputs with their interaction hint: <em>“Education levels to include (click below to remove or add)”</em> and <em>“Income range (thousand $) — drag the handles.”</em></p>
+<p><strong>Fix:</strong> Added a <code>placeholder = &quot;Click to add an Education level...&quot;</code> to the <code>selectizeInput</code> options so the empty state is self-explanatory, and the dropdown auto-opens on focus. Added an intro paragraph to the Filters card (<em>“Use these controls to narrow which customers appear in the chart on the right…”</em>) and relabeled both inputs with their interaction hint: <em>“Education levels to include (click below to remove or add)”</em> and <em>“Income range (thousand $) - drag the handles.”</em></p>
 </section>
-<section id="debug-7-navbar-tabs-needed-more-interior-padding" class="level3">
-<h3 class="anchored" data-anchor-id="debug-7-navbar-tabs-needed-more-interior-padding">Debug 7 — Navbar tabs needed more interior padding</h3>
-<p><strong>Symptom:</strong> User flagged that the tab buttons looked cramped — text touched the edges.</p>
+<section id="debug-7---navbar-tabs-needed-more-interior-padding" class="level3">
+<h3 class="anchored" data-anchor-id="debug-7---navbar-tabs-needed-more-interior-padding">Debug 7 - Navbar tabs needed more interior padding</h3>
+<p><strong>Symptom:</strong> User flagged that the tab buttons looked cramped - text touched the edges.</p>
 <p><strong>Fix:</strong> Added <code>padding-left: 1.4rem</code> and <code>padding-right: 1.4rem</code> to <code>.navbar .nav-link</code>, plus a small <code>margin-left: 0.4rem</code> between adjacent nav-items so the buttons read as distinct units instead of running together.</p>
 </section>
-<section id="debug-8-quarto-rendered-with-external-dependencies" class="level3">
-<h3 class="anchored" data-anchor-id="debug-8-quarto-rendered-with-external-dependencies">Debug 8 — Quarto rendered with external dependencies</h3>
-<p><strong>Symptom:</strong> First <code>quarto render app/Mini_AI_Report.qmd</code> produced an HTML file <em>plus</em> a <code>Mini_AI_Report_files/libs/</code> directory of external CSS/JS — meaning the single-file submission would render as a broken page on the grader’s machine because that directory wouldn’t ship.</p>
+<section id="debug-8---quarto-rendered-with-external-dependencies" class="level3">
+<h3 class="anchored" data-anchor-id="debug-8---quarto-rendered-with-external-dependencies">Debug 8 - Quarto rendered with external dependencies</h3>
+<p><strong>Symptom:</strong> First <code>quarto render app/Mini_AI_Report.qmd</code> produced an HTML file <em>plus</em> a <code>Mini_AI_Report_files/libs/</code> directory of external CSS/JS - meaning the single-file submission would render as a broken page on the grader’s machine because that directory wouldn’t ship.</p>
 <p><strong>Diagnostic:</strong> The template’s malformed YAML header puts <code>html: embed-resources: true</code> at the top level instead of nested under <code>format:</code>, so Quarto silently ignored the directive. Per team direction we did not modify the YAML.</p>
-<p><strong>Fix:</strong> Pass <code>--embed-resources</code> on the command line to override: <code>quarto render app/Mini_AI_Report.qmd --to html --embed-resources</code>. The single rendered file is now 1.23 MB and self-contained — no <code>_files/libs/</code> directory.</p>
+<p><strong>Fix:</strong> Pass <code>--embed-resources</code> on the command line to override: <code>quarto render app/Mini_AI_Report.qmd --to html --embed-resources</code>. The single rendered file is now 1.23 MB and self-contained - no <code>_files/libs/</code> directory.</p>
 </section>
 </section>
 <section id="final-ai-contribution" class="level2">
 <h2 class="anchored" data-anchor-id="final-ai-contribution">Final AI Contribution</h2>
-<p>AI was most influential on the implementation in three places: (1) the <strong>factor-handling pattern</strong> in <code>build_new_obs()</code> — the single most rubric-failed item across student teams, surfaced by the context7 docs lookup before any code was written; (2) the <strong>bslib component map</strong> that lets the app feel like a real dashboard with five lines of layout code instead of fifty lines of CSS; (3) the <strong>Playwright-driven debug loop</strong> — every one of the eight bugs above was caught by AI walking the running app and screenshotting the result, not by code review. Human judgment owned the final calls on model choice (logistic over random forest), the 6-predictor set, the asymmetric defaults that make the launch demo immediately interesting, the verdict-formatting policy when the probability ratio is extreme, and the decision to keep the malformed YAML untouched and work around it with a CLI flag at render time.</p>
+<p>AI was most influential on the implementation in three places: (1) the <strong>factor-handling pattern</strong> in <code>build_new_obs()</code> - the single most rubric-failed item across student teams, surfaced by the context7 docs lookup before any code was written; (2) the <strong>bslib component map</strong> that lets the app feel like a real dashboard with five lines of layout code instead of fifty lines of CSS; (3) the <strong>Playwright-driven debug loop</strong> - every one of the eight bugs above was caught by AI walking the running app and screenshotting the result, not by code review. Human judgment owned the final calls on model choice (logistic over random forest), the 6-predictor set, the asymmetric defaults that make the launch demo immediately interesting, the verdict-formatting policy when the probability ratio is extreme, and the decision to keep the malformed YAML untouched and work around it with a CLI flag at render time.</p>
 </section>
 </section>
 <section id="reflection" class="level1">
@@ -2545,42 +2545,42 @@ vertical-align: -.125em;
 <section id="what-did-ai-help-your-group-do-especially-well" class="level2">
 <h2 class="anchored" data-anchor-id="what-did-ai-help-your-group-do-especially-well">1. What did AI help your group do especially well?</h2>
 <blockquote class="blockquote">
-<p><em>Recommendation: cite specific things AI accelerated — mapping the rubric line-by-line and asking clarifying questions before any code was written, recommending the bslib + bsicons library combo and explaining why it was the right minimal stack, designing the factor-handling pattern (<code>build_new_obs</code> wrapping every categorical in <code>factor(value, levels = levels(loans_train$&lt;col&gt;))</code>), catching the malformed Quarto YAML before we wasted a render cycle, and dispatching nine parallel review agents to find spec gaps before any R code was written.</em></p>
+<p><em>Recommendation: cite specific things AI accelerated - mapping the rubric line-by-line and asking clarifying questions before any code was written, recommending the bslib + bsicons library combo and explaining why it was the right minimal stack, designing the factor-handling pattern (<code>build_new_obs</code> wrapping every categorical in <code>factor(value, levels = levels(loans_train$&lt;col&gt;))</code>), catching the malformed Quarto YAML before we wasted a render cycle, and dispatching nine parallel review agents to find spec gaps before any R code was written.</em></p>
 </blockquote>
-<p>[FILL IN — your answer here]</p>
+<p>[FILL IN - your answer here]</p>
 </section>
 <section id="what-did-ai-get-wrong-miss-or-oversimplify" class="level2">
 <h2 class="anchored" data-anchor-id="what-did-ai-get-wrong-miss-or-oversimplify">2. What did AI get wrong, miss, or oversimplify?</h2>
 <blockquote class="blockquote">
-<p><em>Recommendation: be specific. Candidates: the first version of the spec at <code>AI-plan.md</code> was missing a <code>plotOutput(&quot;predict_plot&quot;)</code> placeholder in the UI section — the server defined <code>output$predict_plot</code> but the UI never referenced it; the first spec also had no plan for the README and Reflection sections of the report; AI’s first model recommendation was random forest, which would have been more accurate but was wrong for this prototype because of factor-level fragility inside Shiny; the static caption on the Explore-tab plot won’t reflect filtered subsets, which could create a small honesty gap if the user filters out the segments the caption describes.</em></p>
+<p><em>Recommendation: be specific. Candidates: the first version of the spec at <code>AI-plan.md</code> was missing a <code>plotOutput(&quot;predict_plot&quot;)</code> placeholder in the UI section - the server defined <code>output$predict_plot</code> but the UI never referenced it; the first spec also had no plan for the README and Reflection sections of the report; AI’s first model recommendation was random forest, which would have been more accurate but was wrong for this prototype because of factor-level fragility inside Shiny; the static caption on the Explore-tab plot won’t reflect filtered subsets, which could create a small honesty gap if the user filters out the segments the caption describes.</em></p>
 </blockquote>
-<p>[FILL IN — your answer here]</p>
+<p>[FILL IN - your answer here]</p>
 </section>
 <section id="how-did-your-group-catch-and-fix-that-issue" class="level2">
 <h2 class="anchored" data-anchor-id="how-did-your-group-catch-and-fix-that-issue">3. How did your group catch and fix that issue?</h2>
 <blockquote class="blockquote">
-<p><em>Recommendation: describe the actual catch + fix process. Candidates: we sent out nine parallel review agents — one per rubric line — to audit the design spec; two agents reported material gaps (README plan, Reflection plan); four reported minor gaps; we patched the spec inline before writing any R code. For the random-forest pushback, the team chose logistic regression with a tuned 6-predictor set when AI recommended random forest. For the layout bug during implementation, we used Playwright DOM inspection to confirm cards were rendering at zero height under <code>fillable = TRUE</code>, then disabled fillable at the page and column level.</em></p>
+<p><em>Recommendation: describe the actual catch + fix process. Candidates: we sent out nine parallel review agents - one per rubric line - to audit the design spec; two agents reported material gaps (README plan, Reflection plan); four reported minor gaps; we patched the spec inline before writing any R code. For the random-forest pushback, the team chose logistic regression with a tuned 6-predictor set when AI recommended random forest. For the layout bug during implementation, we used Playwright DOM inspection to confirm cards were rendering at zero height under <code>fillable = TRUE</code>, then disabled fillable at the page and column level.</em></p>
 </blockquote>
-<p>[FILL IN — your answer here]</p>
+<p>[FILL IN - your answer here]</p>
 </section>
 <section id="what-still-required-human-judgment" class="level2">
 <h2 class="anchored" data-anchor-id="what-still-required-human-judgment">4. What still required human judgment?</h2>
 <blockquote class="blockquote">
-<p><em>Recommendation: point at concrete decisions humans owned. Candidates: picking the predictor set (option B over A or C) based on what we know about Pacific Federal’s customer base; choosing logistic regression over random forest for the prototype; deciding to leave the malformed Quarto YAML untouched and document the catch instead of fixing it; setting the asymmetric default values for Customer A and Customer B so the launch demo is immediately interesting; assigning team roles (Data Lead, Modeling Lead, App Developer, Documentation Lead); deciding what counts as “honest” in the prediction-interpretation paragraph — what to admit the model cannot tell you.</em></p>
+<p><em>Recommendation: point at concrete decisions humans owned. Candidates: picking the predictor set (option B over A or C) based on what we know about Pacific Federal’s customer base; choosing logistic regression over random forest for the prototype; deciding to leave the malformed Quarto YAML untouched and document the catch instead of fixing it; setting the asymmetric default values for Customer A and Customer B so the launch demo is immediately interesting; assigning team roles (Data Lead, Modeling Lead, App Developer, Documentation Lead); deciding what counts as “honest” in the prediction-interpretation paragraph - what to admit the model cannot tell you.</em></p>
 </blockquote>
-<p>[FILL IN — your answer here]</p>
+<p>[FILL IN - your answer here]</p>
 </section>
 <section id="if-this-tool-were-used-in-a-real-setting-what-is-one-limitation-or-risk" class="level2">
 <h2 class="anchored" data-anchor-id="if-this-tool-were-used-in-a-real-setting-what-is-one-limitation-or-risk">5. If this tool were used in a real setting, what is one limitation or risk?</h2>
 <blockquote class="blockquote">
 <p><em>Recommendation: avoid generic AI risks; tie the answer to <strong>this app</strong>. Candidates: the model is trained on a 5,000-customer snapshot, so if Pacific Federal’s customer base or the loan offer’s terms have changed since the data was collected the predictions will drift, and there’s no monitoring or retraining loop in this prototype; the model has no fairness audit, so if <code>Education</code> or <code>Family</code> size correlates with a protected class in this customer base, using the predictions to direct marketing spend could create disparate outcomes the bank would have to defend; a non-technical user might see a 95% probability and treat it as a sales certainty even though the in-app interpretation is honest about it being a relative ranking signal; the 9.6% positive class rate means small changes in the threshold (currently 0.5) would meaningfully shift who gets contacted, and that’s a business-policy decision the model can inform but cannot make.</em></p>
 </blockquote>
-<p>[FILL IN — your answer here]</p>
+<p>[FILL IN - your answer here]</p>
 </section>
 </section>
 <section id="final-notes" class="level1">
 <h1>4. Final Notes</h1>
-<p>The repository is organized so the working app lives at <code>app/app.R</code> during development and is copied to <code>TeamMoney_app.R</code> at the repo root only at submission. The full design spec — the artifact AI wrote in collaboration with the team before any R code was written — lives at <code>app/AI-plan.md</code> and remains the source of truth for what the prototype is and is not.</p>
+<p>The repository is organized so the working app lives at <code>app/app.R</code> during development and is copied to <code>TeamMoney_app.R</code> at the repo root only at submission. The full design spec - the artifact AI wrote in collaboration with the team before any R code was written - lives at <code>app/AI-plan.md</code> and remains the source of truth for what the prototype is and is not.</p>
 </section>
 
 </main>
