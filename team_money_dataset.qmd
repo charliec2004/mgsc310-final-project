@@ -38,6 +38,10 @@ knitr::opts_chunk$set(
   )
 ```
 
+# Business Problem
+
+Pacific Federal is a regional bank whose liability (deposit) customers outnumber its asset (loan) customers. The retail banking division recently ran a campaign offering personal loans to its deposit holders, but fewer than 10% accepted. The Chief Retail Officer wants to understand what distinguishes customers who accepted the loan from those who didn't, and build a system to identify high-potential targets for the next campaign round.
+
 # Load the Data
 
 ```{r}
@@ -65,31 +69,55 @@ head(loans)
 summary(loans)
 ```
 
+-   9.6% of users accepted the loan offer
+
+-   Average household size is around 2.396
+
+    -   Vast majority are couples with 0-1 kids
+
+-   10.4% of users have a securities account
+
+-   6% of users have a CD
+
+-   29.4% of users have an active credit card
+
 # Data Cleaning
 
 ```{r}
 loans_clean <- 
   loans %>% 
   mutate(
-    Education = factor(Education),
+    Education = factor(Education, 
+                       levels = c(1, 2, 3),
+                       labels = c("Undergraduate", "Graduate", "Professional")),
     Personal_Loan = factor(Personal_Loan),
     Securities_Account = factor(Securities_Account),
     CD_Account = factor(CD_Account),
     Online = factor(Online),
-    CreditCard = factor(CreditCard)
+    CreditCard = factor(CreditCard),
+    Income_Per_Family_Member = (Income / Family), 
+    Monthly_Income = Income * 12,
+    Monthly_CC_Spending_to_Income = CCAvg / Monthly_Income 
   )
 ```
+
+-   Education changed to factor with labels in order to make visualizations with this predictor easier to interpret
+
+-   Income_Per_Family_Member created to find contribution of each member (gives insight into how much is going to expenses if family is larger)
+
+-   Monthly_CC_Spending_to_Income created to see how much of monthly income goes towards credit card
 
 # Model
 
 ```{r}
 library(caret)
 library(rsample)
+
 set.seed(310)
 loans_split <- initial_split(loans_clean, prop=0.8)
 loans_train <- training(loans_split)
 loans_test  <- testing(loans_split)
-logit1 <- glm(Personal_Loan ~ Age + Experience + Income + Education + Mortgage, 
+logit1 <- glm(Personal_Loan ~ Experience + Income + Education + Monthly_CC_Spending_to_Income + Family + CD_Account + CreditCard,
               data=loans_train, 
               family = binomial)
 
@@ -98,10 +126,36 @@ summary(logit1)
 scores_train <- predict(logit1, newdata=loans_train, type="response")
 results_train <- 
   loans_train %>% 
-    mutate(scores = scores_train)
+    mutate(scores_tr = scores_train)
+
+scores_test <- predict(logit1, newdata=loans_test, type="response")
+results_test <- 
+  loans_test %>% 
+    mutate(scores_te = scores_test)
+
+pred_class <- ifelse(scores_test > 0.6, 1, 0)
 
 
+actual <- factor(loans_test$Personal_Loan,
+          levels = c(0,1))
+
+predicted <- factor(pred_class,
+              levels = c(0,1))
+
+cm <- confusionMatrix(predicted,
+      actual,
+      positive = "1")
+
+cm
 ```
+
+-   Mortgage removed due to low significance
+
+-   Age removed due to likely high correlation with experience
+
+-   Initially started with a 90% cutoff because acceptance rate is around 10%
+
+    -   Lowered gradually until 0.6
 
 # Visualizations
 
