@@ -117,11 +117,21 @@ set.seed(310)
 loans_split <- initial_split(loans_clean, prop=0.8)
 loans_train <- training(loans_split)
 loans_test  <- testing(loans_split)
-logit1 <- glm(Personal_Loan ~ Experience + Income + Education + Monthly_CC_Spending_to_Income + Family + CD_Account + CreditCard,
+logit1 <- glm(Personal_Loan ~ Experience + Income + Education + Monthly_CC_Spending_to_Income + CD_Account + CreditCard + Income_Per_Family_Member,
               data=loans_train, 
               family = binomial)
 
 summary(logit1)
+
+```
+
+-   Mortgage removed due to low significance
+
+-   Age removed due to likely high correlation with experience
+
+# Predict
+
+```{r}
 
 scores_train <- predict(logit1, newdata=loans_train, type="response")
 results_train <- 
@@ -133,7 +143,12 @@ results_test <-
   loans_test %>% 
     mutate(scores_te = scores_test)
 
-pred_class <- ifelse(scores_test > 0.6, 1, 0)
+```
+
+# Report Results
+
+```{r}
+pred_class <- ifelse(scores_test > 0.63, 1, 0)
 
 
 actual <- factor(loans_test$Personal_Loan,
@@ -149,13 +164,9 @@ cm <- confusionMatrix(predicted,
 cm
 ```
 
--   Mortgage removed due to low significance
-
--   Age removed due to likely high correlation with experience
-
 -   Initially started with a 90% cutoff because acceptance rate is around 10%
 
-    -   Lowered gradually until 0.6
+    -   Lowered gradually until 0.62
 
 # Visualizations
 
