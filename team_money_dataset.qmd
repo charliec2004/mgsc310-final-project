@@ -223,6 +223,40 @@ ggplot(results_train, aes(x = Income, y = scores_train, color = Personal_Loan)) 
        x = "Income",
        y = "Predicted Probability of Accepting Loan") +
   theme_minimal()
+
+# Visualization 3: This plots visualizes the amount of users that took the personal loan based on if they had a securities account, cd, or credit card.
+
+library(dplyr)
+
+plot_data <- data.frame(
+  Type = c("Securities Account", "CD Account", "Credit Card", "All Three"),
+  Percent = c(
+    sum(loans_clean$Personal_Loan == 1 & loans_clean$Securities_Account == 1) /
+      sum(loans_clean$Securities_Account == 1),
+    sum(loans_clean$Personal_Loan == 1 & loans_clean$CD_Account == 1) /
+      sum(loans_clean$CD_Account == 1),
+    sum(loans_clean$Personal_Loan == 1 & loans_clean$CreditCard == 1) /
+      sum(loans_clean$CreditCard == 1),
+    sum(loans_clean$Personal_Loan == 1 &
+          loans_clean$Securities_Account == 1 &
+          loans_clean$CD_Account == 1 &
+          loans_clean$CreditCard == 1) /
+      sum(loans_clean$Securities_Account == 1 &
+            loans_clean$CD_Account == 1 &
+            loans_clean$CreditCard == 1)
+  )
+)
+ggplot(plot_data, aes(Type, Percent, fill = Type)) +
+  geom_col() +
+  geom_text(aes(label = scales::percent(Percent)), vjust = -0.3) +
+  scale_y_continuous(labels = scales::percent) +
+  labs(
+    title = "Percent of Users Taking Personal Loans",
+    x = "",
+    y = "Percent Taking Loan"
+  ) +
+  theme_minimal()
+
 ```
 
 # Model 2
@@ -240,12 +274,22 @@ x_train <- model.matrix(
 
 y_train <- loans_train$Personal_Loan
 
+x_test <- model.matrix(
+  Personal_Loan ~ Experience + Income + Education +
+  Monthly_CC_Spending_to_Income + CD_Account + Income_Per_Family_Member
+  + CreditCard,
+  data = loans_test
+)[, -1]
+
 lasso_model <- cv.glmnet(
   x_train,
   y_train,
   family = "binomial",
   alpha = 1
 )
+
+coef(lasso_model, s = "lambda.min")
+
 
 ```
 
@@ -264,7 +308,7 @@ lasso_probs <- predict(
 
 ```{r}
 
-lasso_pred <- ifelse(lasso_probs > 0.5, 1, 0)
+lasso_pred <- ifelse(lasso_probs > 0.6, 1, 0)
 
 actual_lasso <- factor(loans_test$Personal_Loan,
                  levels = c(0,1))
