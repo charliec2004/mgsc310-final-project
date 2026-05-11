@@ -86,6 +86,7 @@ summary(loans)
 ```{r}
 loans_clean <- 
   loans %>% 
+  filter(Experience >= 0) %>%
   mutate(
     Education = factor(Education, 
                        levels = c(1, 2, 3),
@@ -101,13 +102,15 @@ loans_clean <-
   )
 ```
 
+-   Entries with negative years of experience removed
+
 -   Education changed to factor with labels in order to make visualizations with this predictor easier to interpret
 
 -   Income_Per_Family_Member created to find contribution of each member (gives insight into how much is going to expenses if family is larger)
 
 -   Monthly_CC_Spending_to_Income created to see how much of monthly income goes towards credit card
 
-# Model
+# Data Splitting
 
 ```{r}
 library(caret)
@@ -117,7 +120,19 @@ set.seed(310)
 loans_split <- initial_split(loans_clean, prop=0.8)
 loans_train <- training(loans_split)
 loans_test  <- testing(loans_split)
-logit1 <- glm(Personal_Loan ~ Experience + Income + Education + Monthly_CC_Spending_to_Income + CD_Account + CreditCard + Income_Per_Family_Member,
+```
+
+# Model 1
+
+```{r}
+library(caret)
+library(rsample)
+
+set.seed(310)
+loans_split <- initial_split(loans_clean, prop=0.8)
+loans_train <- training(loans_split)
+loans_test  <- testing(loans_split)
+logit1 <- glm(Personal_Loan ~ Experience + Income + Education + Family,
               data=loans_train, 
               family = binomial)
 
@@ -129,7 +144,7 @@ summary(logit1)
 
 -   Age removed due to likely high correlation with experience
 
-# Predict
+# Predict Model 1
 
 ```{r}
 
@@ -145,7 +160,7 @@ results_test <-
 
 ```
 
-# Report Results
+# Report Results Model 1
 
 ```{r}
 pred_class <- ifelse(scores_test > 0.63, 1, 0)
@@ -168,6 +183,21 @@ cm
 
     -   Lowered gradually until 0.62
 
+# ROC/AUC Model 1 
+
+```{r}
+library(pROC)
+roc <- roc(actual, scores_test)
+
+# AUC
+
+auc(roc)
+
+# Plot ROC Curve
+
+plot(roc)
+```
+
 # Visualizations
 
 ```{r}
@@ -186,7 +216,7 @@ ggplot(loans_train, aes(x = Income, fill = as.factor(Personal_Loan))) +
 
 
 # Visualization 2: This plot visualizes the predicted probabilities against income, which we believe could be a very significant predictor. 
-ggplot(results_train, aes(x = Income, y = scores, color = Personal_Loan)) +
+ggplot(results_train, aes(x = Income, y = scores_train, color = Personal_Loan)) +
   geom_point(alpha = 0.6) +
   geom_hline(yintercept = 0.5, color="red", linetype="dashed") + 
   labs(title = "Predicted Loan Probability vs. Income",
@@ -195,16 +225,71 @@ ggplot(results_train, aes(x = Income, y = scores, color = Personal_Loan)) +
   theme_minimal()
 ```
 
-# Plan
+# Model 2
 
-1.  More in depth data cleaning (looking at data for outliers and removing them along with missing values)
-2.  Adjusting model to find predictors that have the largest prediction impact (rather than just using variables we think may be useful)
-3.  Experiment with numerous types of models to find which one best pertains to our question and dataset
-4.  Predicting the probabilities of a certain person accepting the loan offer or not
-5.  Deciding what metrics are most useful to measure how impactful our model is
-6.  Creating visualizations that paint a picture to stakeholders of the type of clients they should be targeting with the new campaign
-7.  Refining our model(s)
+```{r}
+library(glmnet)
+library(caret)
+library(dplyr)
 
-# Roadblocks/Questions
+x_train <- model.matrix(
+  Personal_Loan ~ Experience + Income + Education +
+  Monthly_CC_Spending_to_Income + CD_Account + Income_Per_Family_Member
+  + CreditCard,
+  data = loans_train )[, -1]
 
-Deciding the type of model we want to use has been a roadblock. We will continue using what we learned in class (such as random forests) to experiment. Our preliminary model is a logistic regression.
+y_train <- loans_train$Personal_Loan
+
+lasso_model <- cv.glmnet(
+  x_train,
+  y_train,
+  family = "binomial",
+  alpha = 1
+)
+
+```
+
+# Predict Model 2
+
+```{r}
+lasso_probs <- predict(
+  lasso_model,
+  s = "lambda.min",
+  newx = x_test,
+  type = "response"
+)
+```
+
+# Report Results Model 2
+
+```{r}
+
+lasso_pred <- ifelse(lasso_probs > 0.5, 1, 0)
+
+actual_lasso <- factor(loans_test$Personal_Loan,
+                 levels = c(0,1))
+
+predicted_lasso <- factor(lasso_pred,
+                    levels = c(0,1))
+
+cm_lasso <- confusionMatrix(predicted_lasso,
+                      actual_lasso,
+                      positive = "1")
+
+cm_lasso
+
+```
+
+# ROC/AUC Model 2
+
+```{r}
+
+library(pROC)
+
+roc_lasso <- roc(actual_lasso, as.numeric(lasso_probs))
+auc(roc_lasso)
+plot(roc_lasso)
+
+```
+
+
