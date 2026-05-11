@@ -336,4 +336,9 @@ plot(roc_lasso)
 
 ```
 
-
+# I am thinking that running a random forest here could be the move- I feel as though we don't necessarily need to reduce some of the coefficients
+# I almost lean manually removing features like mortgage instead of running lasso
+# I have also added some things to the powerpoint 
+# Re model evaluation, we don't really gaf much about false positives (lower outreach costs) compared to false negatives (foregone interest on loans)
+# How are we doing an AI log for this
+# Do we want engineered features in model 1 or nah
