@@ -97,7 +97,7 @@ loans_clean <-
     Income_Per_Family_Member = (Income / Family), 
     Monthly_Income = Income * 12,
     Monthly_CC_Spending_to_Income = CCAvg / Monthly_Income,
-    100k_Income = ifelse(Income >= 100, 1, 0)
+    income_over_100k = ifelse(Income >= 100, 1, 0)
   )
 ```
 
@@ -272,7 +272,7 @@ library(dplyr)
 x_train <- model.matrix(
   Personal_Loan ~ Experience + Income + Education +
   Monthly_CC_Spending_to_Income + CD_Account + Income_Per_Family_Member
-  + CreditCard,
+  + CreditCard + income_over_100k,
   data = loans_train )[, -1]
 
 y_train <- loans_train$Personal_Loan
@@ -280,7 +280,7 @@ y_train <- loans_train$Personal_Loan
 x_test <- model.matrix(
   Personal_Loan ~ Experience + Income + Education +
   Monthly_CC_Spending_to_Income + CD_Account + Income_Per_Family_Member
-  + CreditCard + 100k_Income,
+  + CreditCard + income_over_100k,
   data = loans_test
 )[, -1]
 
