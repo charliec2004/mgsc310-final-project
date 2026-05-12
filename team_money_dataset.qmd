@@ -98,7 +98,8 @@ loans_clean <-
     CreditCard = factor(CreditCard),
     Income_Per_Family_Member = (Income / Family), 
     Monthly_Income = Income * 12,
-    Monthly_CC_Spending_to_Income = CCAvg / Monthly_Income 
+    Monthly_CC_Spending_to_Income = CCAvg / Monthly_Income,
+    100k_Income = ifelse(Income >= 100, 1, 0)
   )
 ```
 
@@ -132,7 +133,7 @@ set.seed(310)
 loans_split <- initial_split(loans_clean, prop=0.8)
 loans_train <- training(loans_split)
 loans_test  <- testing(loans_split)
-logit1 <- glm(Personal_Loan ~ Experience + Income + Education + Family,
+logit1 <- glm(Personal_Loan ~ Experience + Income + Education + Family + CD_Account,
               data=loans_train, 
               family = binomial)
 
@@ -277,7 +278,7 @@ y_train <- loans_train$Personal_Loan
 x_test <- model.matrix(
   Personal_Loan ~ Experience + Income + Education +
   Monthly_CC_Spending_to_Income + CD_Account + Income_Per_Family_Member
-  + CreditCard,
+  + CreditCard + 100k_Income,
   data = loans_test
 )[, -1]
 
@@ -336,11 +337,10 @@ plot(roc_lasso)
 
 ```
 
-# I am thinking that running a random forest here could be the move- I feel as though we don't necessarily need to reduce some of the coefficients
-  # yea we can do that i j did lasso cuz thats what the prof reccomended
-# I almost lean manually removing features like mortgage instead of running lasso
+
+
 # I have also added some things to the powerpoint 
 # Re model evaluation, we don't really gaf much about false positives (lower outreach costs) compared to false negatives (foregone interest on loans)
 # How are we doing an AI log for this
-# Do we want engineered features in model 1 or nah
-  # nah lets keep model 1 simple so we can improve upon it in model 2
+
+
