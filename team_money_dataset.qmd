@@ -73,8 +73,6 @@ summary(loans)
 
 -   Average household size is around 2.396
 
-    -   Vast majority are couples with 0-1 kids
-
 -   10.4% of users have a securities account
 
 -   6% of users have a CD
@@ -204,15 +202,19 @@ plot(roc)
 ```{r}
 library(ggplot2)
 
-# Visualization 1: This visualization examines the relationship between annual income and the propensity to accept a personal loan, segmented by education level.
+# Visualization 1: Probability of accepting a personal loan by education level
 
-ggplot(loans_train, aes(x = Income, fill = as.factor(Personal_Loan))) +
-  geom_density(alpha = 0.5) +
-  facet_wrap(~Education) +
-  labs(title = "Income Distribution by Loan Acceptance",
-       subtitle = "Faceted by Education Level",
-       x = "Annual Income (Thousands $)",
-       fill = "Personal Loan") +
+ggplot(loans_train,
+       aes(x = Education,
+           fill = as.factor(Personal_Loan))) +
+  geom_bar(position = "fill") +
+  scale_y_continuous(labels = scales::percent) +
+  labs(
+    title = "Probability of Accepting a Personal Loan by Education Level",
+    x = "Education Level",
+    y = "Probability",
+    fill = "Personal Loan"
+  ) +
   theme_minimal()
 
 
