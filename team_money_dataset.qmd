@@ -84,22 +84,18 @@ summary(loans)
 # Data Cleaning
 
 ```{r}
-loans_clean <- 
-  loans %>% 
+loans_clean <-
+  loans %>%
   filter(Experience >= 0) %>%
   mutate(
-    Education = factor(Education, 
+    Education = factor(Education,
                        levels = c(1, 2, 3),
                        labels = c("Undergraduate", "Graduate", "Professional")),
     Personal_Loan = factor(Personal_Loan),
     Securities_Account = factor(Securities_Account),
     CD_Account = factor(CD_Account),
     Online = factor(Online),
-    CreditCard = factor(CreditCard),
-    Income_Per_Family_Member = (Income / Family), 
-    Monthly_Income = Income * 12,
-    Monthly_CC_Spending_to_Income = CCAvg / Monthly_Income,
-    income_over_100k = ifelse(Income >= 100, 1, 0)
+    CreditCard = factor(CreditCard)
   )
 ```
 
@@ -107,9 +103,30 @@ loans_clean <-
 
 -   Education changed to factor with labels in order to make visualizations with this predictor easier to interpret
 
--   Income_Per_Family_Member created to find contribution of each member (gives insight into how much is going to expenses if family is larger)
+# Feature Engineering
 
--   Monthly_CC_Spending_to_Income created to see how much of monthly income goes towards credit card
+Beyond the basic cleaning, we created four engineered features to capture relationships we thought the raw columns would not pick up on their own.
+
+```{r}
+loans_clean <-
+  loans_clean %>%
+  mutate(
+    Income_Per_Family_Member = Income / Family,
+    Monthly_Income = Income * 12,
+    Monthly_CC_Spending_to_Income = CCAvg / Monthly_Income,
+    income_over_100k = ifelse(Income >= 100, 1, 0)
+  )
+```
+
+Income_Per_Family_Member came from the thought that household income tells us what the family earns but not how stretched that money is, so we divided income by family size to get a per-person figure. We expected a positive coefficient, but the lasso gave it a small negative one. That actually makes sense after the fact: for a fixed income, larger families have more financial need and may be more open to a loan.
+
+Monthly_Income is just Income multiplied by 12. Most household financial decisions get framed in monthly terms, so we built a monthly version mainly to feed into the next feature.
+
+Monthly_CC_Spending_to_Income puts credit card spending in context. Someone charging 2k a month on 200k of income is in a very different spot than someone charging the same on 40k, so dividing CCAvg by Monthly_Income gives a ratio that should pick up customers running close to their limits, who might be more receptive to a personal loan to consolidate.
+
+income_over_100k is a binary indicator for customers earning at least 100k. During exploration we noticed acceptance rates climbed sharply in the upper income tiers rather than gradually, so a binary lets the model pick up that jump without assuming the effect is linear in income. The lasso gave it a coefficient of 2.46, confirming a real threshold effect Income alone was missing.
+
+A few things did not pay off. Monthly_Income on its own added nothing once Income was in the model, since a linear model treats scalar transformations as redundant. We also considered Mortgage in Model 1 but dropped it because it came out insignificant, and we dropped Age because it overlapped heavily with Experience.
 
 # Data Splitting
 
