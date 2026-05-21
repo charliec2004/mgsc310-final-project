@@ -38,9 +38,11 @@ knitr::opts_chunk$set(
   )
 ```
 
-# Business Problem
+# Introduction & Business Problem
 
-Pacific Federal is a regional bank whose liability (deposit) customers outnumber its asset (loan) customers. The retail banking division recently ran a campaign offering personal loans to its deposit holders, but fewer than 10% accepted. The Chief Retail Officer wants to understand what distinguishes customers who accepted the loan from those who didn't, and build a system to identify high-potential targets for the next campaign round.
+Pacific Federal is a regional bank with more deposit customers than loan customers, and the retail banking division wants to convert more of those deposit holders into personal loan customers. The most recent campaign offered a personal loan to existing deposit holders and fewer than 10% accepted. That low conversion rate means the bank is spending outreach effort on a lot of customers who never planned to take the loan, while potentially missing better leads inside the same base.
+
+The decision-maker is the Chief Retail Officer, who needs to decide who to target in the next campaign round. A predictive model helps directly here. If we can estimate each customer's probability of accepting a loan based on what the bank already knows about them, the CRO can rank the deposit base from most to least likely to accept and focus the budget on the top of that list. Even a moderate lift over the 9.6% baseline acceptance rate would translate into noticeably more loans booked at a similar campaign cost.
 
 # Load the Data
 
