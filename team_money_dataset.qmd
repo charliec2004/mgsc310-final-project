@@ -44,13 +44,13 @@ Pacific Federal is a regional bank with more deposit customers than loan custome
 
 The decision-maker is the Chief Retail Officer, who needs to decide who to target in the next campaign round. A predictive model helps directly here. If we can estimate each customer's probability of accepting a loan based on what the bank already knows about them, the CRO can rank the deposit base from most to least likely to accept and focus the budget on the top of that list. Even a moderate lift over the 9.6% baseline acceptance rate would translate into noticeably more loans booked at a similar campaign cost.
 
-# Load the Data
+# Data Summary & Cleaning
 
 ```{r}
 loans <- read_csv("data/pacific_federal_loan_campaign.csv")
 ```
 
-# Summary Statistics
+## Summary Statistics
 
 The dataset has 5,000 customer records with 14 columns covering demographics (Age, Experience, Education, Family, ZIP), financial details (Income, CCAvg, Mortgage), and existing product ownership (Securities Account, CD Account, Online banking, Credit Card). The outcome variable is Personal_Loan, a binary flag for whether the customer accepted the loan offer in the previous campaign.
 
@@ -113,7 +113,7 @@ ggplot(plot_data, aes(Type, Percent, fill = Type)) +
 
 CD account holders accept at about 46%, nearly five times the 9.6% baseline, while credit card and securities holders sit close to baseline.
 
-# Data Cleaning
+## Data Cleaning
 
 ```{r}
 loans_clean <-
@@ -160,7 +160,9 @@ income_over_100k is a binary indicator for customers earning at least 100k. Duri
 
 A few things did not pay off. Monthly_Income on its own added nothing once Income was in the model, since a linear model treats scalar transformations as redundant. We also considered Mortgage in Model 1 but dropped it because it came out insignificant, and we dropped Age because it overlapped heavily with Experience.
 
-# Data Splitting
+# Modeling & Results
+
+## Data Splitting
 
 ```{r}
 library(caret)
@@ -172,7 +174,7 @@ loans_train <- training(loans_split)
 loans_test  <- testing(loans_split)
 ```
 
-# Model 1
+## Model 1
 
 ```{r}
 library(caret)
@@ -194,8 +196,6 @@ summary(logit1)
 
 -   Age removed due to likely high correlation with experience
 
-# Predict Model 1
-
 ```{r}
 
 scores_train <- predict(logit1, newdata=loans_train, type="response")
@@ -209,8 +209,6 @@ results_test <-
     mutate(scores_te = scores_test)
 
 ```
-
-# Report Results Model 1
 
 ```{r}
 pred_class <- ifelse(scores_test > 0.63, 1, 0)
@@ -232,8 +230,6 @@ cm
 -   Initially started with a 90% cutoff because acceptance rate is around 10%
 
     -   Lowered gradually until 0.62
-
-# ROC/AUC Model 1 
 
 ```{r}
 library(pROC)
@@ -260,7 +256,7 @@ ggplot(results_train, aes(x = Income, y = scores_train, color = Personal_Loan)) 
 
 Predicted acceptance stays near zero until income hits about 100k and then rises sharply, which is what motivated the income_over_100k feature in Model 2.
 
-# Model 2
+## Model 2
 
 ```{r}
 library(glmnet)
@@ -294,8 +290,6 @@ coef(lasso_model, s = "lambda.min")
 
 ```
 
-# Predict Model 2
-
 ```{r}
 lasso_probs <- predict(
   lasso_model,
@@ -304,8 +298,6 @@ lasso_probs <- predict(
   type = "response"
 )
 ```
-
-# Report Results Model 2
 
 ```{r}
 
@@ -324,8 +316,6 @@ cm_lasso <- confusionMatrix(predicted_lasso,
 cm_lasso
 
 ```
-
-# ROC/AUC Model 2
 
 ```{r}
 
