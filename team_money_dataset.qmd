@@ -166,6 +166,8 @@ A few things did not pay off. Monthly_Income on its own added nothing once Incom
 
 ## Data Splitting
 
+We split the cleaned data 80/20 into a training set used to fit the models and a test set used to evaluate them, with a fixed seed for reproducibility.
+
 ```{r}
 library(caret)
 library(rsample)
@@ -177,6 +179,8 @@ loans_test  <- testing(loans_split)
 ```
 
 ## Model 1
+
+Model 1 is a logistic regression using Experience, Income, Education, Family size, and CD account ownership as predictors. We picked this as the simple, interpretable baseline.
 
 ```{r}
 #| output: false
@@ -262,6 +266,8 @@ ggplot(results_train, aes(x = Income, y = scores_train, color = Personal_Loan)) 
 Predicted acceptance stays near zero until income hits about 100k and then rises sharply, which is what motivated the income_over_100k feature in Model 2.
 
 ## Model 2
+
+Model 2 is a lasso logistic regression fit on a wider feature set that includes our engineered variables. The lasso adds L1 regularization, which can shrink weak coefficients toward zero and acts as a form of variable selection.
 
 ```{r}
 #| output: false
