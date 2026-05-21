@@ -231,7 +231,7 @@ cm
 
 -   Initially started with a 90% cutoff because acceptance rate is around 10%
 
-    -   Lowered gradually until 0.62
+    -   Lowered gradually until 0.63
 
 ```{r}
 library(pROC)
@@ -355,13 +355,11 @@ Model 2 told a similar story but added two new pieces. The income_over_100k feat
 
 Experience came back as not significant in Model 1 (p ≈ 0.75). We had kept it in to capture career stage, but it did not add much once Income was in the model. Family was positive in Model 1 while Income_Per_Family_Member was negative in Model 2, which looked like a contradiction at first. The signs actually agree: for a given income, a bigger family means each person has less to work with, and those households are more open to a loan. The lasso also did not drop any predictors at the lambda that minimized CV error, so it acted like a regularized logit rather than doing real variable selection.
 
-Even with the better sensitivity we get from Model 2, the model still misses close to 30% of the customers who actually took the loan. That is the most honest limitation of the work and a reminder that this problem is hard to solve with the variables we had.
-
-A few limitations worth flagging. We only have one campaign of data, so we cannot say whether these patterns hold up over time or after the bank changes its product mix. We dropped ZIPCode, Online, and Securities_Account before modeling, and there might be signal in those. We also did not try interaction terms like Income times Education, which might have caught the nonlinearity above 100k more cleanly.
+Even with the better sensitivity we get from Model 2, the model still misses close to 30% of the customers who actually took the loan, which is the most honest limitation of the work. A few others are worth flagging too. We only have one campaign of data, so we cannot say whether these patterns hold up over time or after the bank changes its product mix. We dropped ZIPCode, Online, and Securities_Account before modeling, and there might be signal in those. We also did not try interaction terms like Income times Education, which might have caught the nonlinearity above 100k more cleanly.
 
 # Conclusion & Recommendation
 
-We recommend Model 2, the lasso. As laid out in the evaluation section, it cleanly outperforms Model 1 on the metrics that matter most for this problem without giving up meaningful ground on specificity. Given the cost asymmetry between false positives and false negatives, we would actually push the cutoff slightly below 0.6 in production to capture a few more positives, since the extra outreach is cheaper to absorb than additional missed customers.
+We recommend Model 2, the lasso. As shown in the evaluation section, it clearly beat Model 1 on the metrics that matter most for this problem without losing meaningful ground on specificity. Given the cost asymmetry between false positives and false negatives, we would actually push the cutoff slightly below 0.6 in production to capture a few more positives, since the extra outreach is cheaper to absorb than additional missed customers.
 
 For the Chief Retail Officer, the takeaways come straight out of those coefficients. The first priority should be high-income deposit customers, especially anyone above 100k, since the income_over_100k indicator alone shifted the odds by a lot. Graduate and Professional degree customers convert at much higher rates than Undergraduate customers, so the campaign could lean into that audience in the messaging or product framing. CD account holders are a strong second group: they are already invested with the bank and the model treats them as warm leads. Family size also matters once income is controlled for, so households with several dependents and moderate incomes look more loan-receptive than the raw averages suggest. Customers who already carry a credit card look like cooler leads than they otherwise appear, so the outreach budget could go elsewhere.
 
