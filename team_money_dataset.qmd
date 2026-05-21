@@ -179,6 +179,7 @@ loans_test  <- testing(loans_split)
 ## Model 1
 
 ```{r}
+#| output: false
 library(caret)
 library(rsample)
 
@@ -187,7 +188,7 @@ loans_split <- initial_split(loans_clean, prop=0.8)
 loans_train <- training(loans_split)
 loans_test  <- testing(loans_split)
 logit1 <- glm(Personal_Loan ~ Experience + Income + Education + Family + CD_Account,
-              data=loans_train, 
+              data=loans_train,
               family = binomial)
 
 summary(logit1)
@@ -213,6 +214,7 @@ results_test <-
 ```
 
 ```{r}
+#| output: false
 pred_class <- ifelse(scores_test > 0.63, 1, 0)
 
 
@@ -234,6 +236,7 @@ cm
     -   Lowered gradually until 0.63
 
 ```{r}
+#| results: hide
 library(pROC)
 roc <- roc(actual, scores_test)
 
@@ -261,6 +264,7 @@ Predicted acceptance stays near zero until income hits about 100k and then rises
 ## Model 2
 
 ```{r}
+#| output: false
 library(glmnet)
 library(caret)
 library(dplyr)
@@ -302,7 +306,7 @@ lasso_probs <- predict(
 ```
 
 ```{r}
-
+#| output: false
 lasso_pred <- ifelse(lasso_probs > 0.6, 1, 0)
 
 actual_lasso <- factor(loans_test$Personal_Loan,
@@ -320,7 +324,7 @@ cm_lasso
 ```
 
 ```{r}
-
+#| results: hide
 library(pROC)
 
 roc_lasso <- roc(actual_lasso, as.numeric(lasso_probs))
@@ -365,3 +369,48 @@ For the Chief Retail Officer, the takeaways come straight out of those coefficie
 
 If we had more time and data, there are a few things we would want to do. The first is to get an actual cost estimate from the marketing team for outreach versus a missed loan, then re-tune the cutoff to minimize expected dollar loss instead of picking a threshold by eye. The second is to try a tree-based model like random forest or XGBoost, since logit and lasso both assume linearity in the log-odds and acceptance probably has thresholds and interactions those models cannot pick up. We would also want to pull data from earlier campaigns to check whether the patterns hold up over time. Finally, if the bank has behavioral data like online banking activity or app logins, bringing that in would probably help with customers who do not have obvious income or CD signals.
 
+# Appendix: Model Outputs
+
+The full raw output from each model is reproduced here for verification and reproducibility. The same R code that produced these objects ran in the body of the report; the prints below show the underlying detail behind the metrics cited in the Model Evaluation table.
+
+## Model 1: Logistic Regression Summary
+
+```{r}
+#| echo: true
+summary(logit1)
+```
+
+## Model 1: Confusion Matrix (cutoff 0.63)
+
+```{r}
+#| echo: true
+cm
+```
+
+## Model 1: AUC
+
+```{r}
+#| echo: true
+auc(roc)
+```
+
+## Model 2: Lasso Coefficients at lambda.min
+
+```{r}
+#| echo: true
+coef(lasso_model, s = "lambda.min")
+```
+
+## Model 2: Confusion Matrix (cutoff 0.6)
+
+```{r}
+#| echo: true
+cm_lasso
+```
+
+## Model 2: AUC
+
+```{r}
+#| echo: true
+auc(roc_lasso)
+```
