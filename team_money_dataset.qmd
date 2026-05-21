@@ -67,19 +67,9 @@ head(loans)
 
 # Summary Statistics
 
-```{r}
-summary(loans)
-```
+The dataset has 5,000 customer records with 14 columns covering demographics (Age, Experience, Education, Family, ZIP), financial details (Income, CCAvg, Mortgage), and existing product ownership (Securities Account, CD Account, Online banking, Credit Card). The outcome variable is Personal_Loan, a binary flag for whether the customer accepted the loan offer in the previous campaign.
 
--   9.6% of users accepted the loan offer
-
--   Average household size is around 2.396
-
--   10.4% of users have a securities account
-
--   6% of users have a CD
-
--   29.4% of users have an active credit card
+The most important thing to flag up front is the class imbalance: only 9.6% of customers accepted, so any model we build needs to be evaluated with that imbalance in mind. The customer base skews older and more established, with a mean age of 45 and 20 years of experience on average. Income ranges from 8k to 224k with a mean around 74k, which gives the models room to separate high- and low-likelihood customers. Existing product ownership at the bank is generally low: around 10% of customers hold a securities account, 6% hold a CD, and 29% carry a bank credit card. We also noticed that 52 records have negative years of experience, which is impossible and gets cleaned in the next section.
 
 # Data Cleaning
 
