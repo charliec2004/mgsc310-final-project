@@ -12,7 +12,7 @@ format:
     code-overflow: wrap
     embed-resources: true
 execute:
-  echo: true
+  echo: false
   warning: false
   message: false
   cache: false
@@ -50,26 +50,68 @@ The decision-maker is the Chief Retail Officer, who needs to decide who to targe
 loans <- read_csv("data/pacific_federal_loan_campaign.csv")
 ```
 
-# Overview
-
-```{r}
-# Dimensions: rows x columns
-dim(loans)
-```
-
-```{r}
-glimpse(loans)
-```
-
-```{r}
-head(loans)
-```
-
 # Summary Statistics
 
 The dataset has 5,000 customer records with 14 columns covering demographics (Age, Experience, Education, Family, ZIP), financial details (Income, CCAvg, Mortgage), and existing product ownership (Securities Account, CD Account, Online banking, Credit Card). The outcome variable is Personal_Loan, a binary flag for whether the customer accepted the loan offer in the previous campaign.
 
 The most important thing to flag up front is the class imbalance: only 9.6% of customers accepted, so any model we build needs to be evaluated with that imbalance in mind. The customer base skews older and more established, with a mean age of 45 and 20 years of experience on average. Income ranges from 8k to 224k with a mean around 74k, which gives the models room to separate high- and low-likelihood customers. Existing product ownership at the bank is generally low: around 10% of customers hold a securities account, 6% hold a CD, and 29% carry a bank credit card. We also noticed that 52 records have negative years of experience, which is impossible and gets cleaned in the next section.
+
+Two patterns in the raw data jumped out during exploration and are worth flagging before the cleaning and modeling steps.
+
+```{r}
+library(ggplot2)
+
+ggplot(loans %>% filter(Experience >= 0),
+       aes(x = factor(Education, levels = c(1, 2, 3),
+                      labels = c("Undergraduate", "Graduate", "Professional")),
+           fill = as.factor(Personal_Loan))) +
+  geom_bar(position = "fill") +
+  scale_y_continuous(labels = scales::percent) +
+  labs(
+    title = "Probability of Accepting a Personal Loan by Education Level",
+    x = "Education Level",
+    y = "Probability",
+    fill = "Personal Loan"
+  ) +
+  theme_minimal()
+```
+
+Graduate and Professional customers accept at roughly 14% versus 5% for Undergraduate, a sharp gap that flagged Education as a likely strong predictor.
+
+```{r}
+library(dplyr)
+
+plot_data <- data.frame(
+  Type = c("Securities Account", "CD Account", "Credit Card", "All Three"),
+  Percent = c(
+    sum(loans$Personal_Loan == 1 & loans$Securities_Account == 1) /
+      sum(loans$Securities_Account == 1),
+    sum(loans$Personal_Loan == 1 & loans$CD_Account == 1) /
+      sum(loans$CD_Account == 1),
+    sum(loans$Personal_Loan == 1 & loans$CreditCard == 1) /
+      sum(loans$CreditCard == 1),
+    sum(loans$Personal_Loan == 1 &
+          loans$Securities_Account == 1 &
+          loans$CD_Account == 1 &
+          loans$CreditCard == 1) /
+      sum(loans$Securities_Account == 1 &
+            loans$CD_Account == 1 &
+            loans$CreditCard == 1)
+  )
+)
+ggplot(plot_data, aes(Type, Percent, fill = Type)) +
+  geom_col() +
+  geom_text(aes(label = scales::percent(Percent)), vjust = -0.3) +
+  scale_y_continuous(labels = scales::percent) +
+  labs(
+    title = "Percent of Users Taking Personal Loans",
+    x = "",
+    y = "Percent Taking Loan"
+  ) +
+  theme_minimal()
+```
+
+CD account holders accept at about 46%, nearly five times the 9.6% baseline, while credit card and securities holders sit close to baseline.
 
 # Data Cleaning
 
@@ -206,70 +248,17 @@ auc(roc)
 plot(roc)
 ```
 
-# Visualizations
-
 ```{r}
-library(ggplot2)
-
-# Visualization 1: Probability of accepting a personal loan by education level
-
-ggplot(loans_train,
-       aes(x = Education,
-           fill = as.factor(Personal_Loan))) +
-  geom_bar(position = "fill") +
-  scale_y_continuous(labels = scales::percent) +
-  labs(
-    title = "Probability of Accepting a Personal Loan by Education Level",
-    x = "Education Level",
-    y = "Probability",
-    fill = "Personal Loan"
-  ) +
-  theme_minimal()
-
-
-# Visualization 2: This plot visualizes the predicted probabilities against income, which we believe could be a very significant predictor. 
 ggplot(results_train, aes(x = Income, y = scores_train, color = Personal_Loan)) +
   geom_point(alpha = 0.6) +
-  geom_hline(yintercept = 0.5, color="red", linetype="dashed") + 
+  geom_hline(yintercept = 0.5, color = "red", linetype = "dashed") +
   labs(title = "Predicted Loan Probability vs. Income",
        x = "Income",
        y = "Predicted Probability of Accepting Loan") +
   theme_minimal()
-
-# Visualization 3: This plots visualizes the amount of users that took the personal loan based on if they had a securities account, cd, or credit card.
-
-library(dplyr)
-
-plot_data <- data.frame(
-  Type = c("Securities Account", "CD Account", "Credit Card", "All Three"),
-  Percent = c(
-    sum(loans_clean$Personal_Loan == 1 & loans_clean$Securities_Account == 1) /
-      sum(loans_clean$Securities_Account == 1),
-    sum(loans_clean$Personal_Loan == 1 & loans_clean$CD_Account == 1) /
-      sum(loans_clean$CD_Account == 1),
-    sum(loans_clean$Personal_Loan == 1 & loans_clean$CreditCard == 1) /
-      sum(loans_clean$CreditCard == 1),
-    sum(loans_clean$Personal_Loan == 1 &
-          loans_clean$Securities_Account == 1 &
-          loans_clean$CD_Account == 1 &
-          loans_clean$CreditCard == 1) /
-      sum(loans_clean$Securities_Account == 1 &
-            loans_clean$CD_Account == 1 &
-            loans_clean$CreditCard == 1)
-  )
-)
-ggplot(plot_data, aes(Type, Percent, fill = Type)) +
-  geom_col() +
-  geom_text(aes(label = scales::percent(Percent)), vjust = -0.3) +
-  scale_y_continuous(labels = scales::percent) +
-  labs(
-    title = "Percent of Users Taking Personal Loans",
-    x = "",
-    y = "Percent Taking Loan"
-  ) +
-  theme_minimal()
-
 ```
+
+Predicted acceptance stays near zero until income hits about 100k and then rises sharply, which is what motivated the income_over_100k feature in Model 2.
 
 # Model 2
 
