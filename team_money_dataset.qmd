@@ -146,7 +146,7 @@ loans_clean <-
   loans_clean %>%
   mutate(
     Income_Per_Family_Member = Income / Family,
-    Monthly_Income = Income * 12,
+    Monthly_Income = Income / 12,
     Monthly_CC_Spending_to_Income = CCAvg / Monthly_Income,
     income_over_100k = ifelse(Income >= 100, 1, 0)
   )
@@ -420,3 +420,7 @@ cm_lasso
 #| echo: true
 auc(roc_lasso)
 ```
+
+## How We Used AI
+
+We used AI tools (ChatGPT and Claude) to consult on R syntax and Quarto formatting. All analysis, modeling decisions, and written interpretation are our own.

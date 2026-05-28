@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.25">
+<meta name="generator" content="quarto-1.8.27">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -3503,6 +3503,7 @@ window.onload = function() {
   <li><a href="#model-2-lasso-coefficients-at-lambda.min" id="toc-model-2-lasso-coefficients-at-lambda.min" class="nav-link" data-scroll-target="#model-2-lasso-coefficients-at-lambda.min"><span class="header-section-number">7.4</span> Model 2: Lasso Coefficients at lambda.min</a></li>
   <li><a href="#model-2-confusion-matrix-cutoff-0.6" id="toc-model-2-confusion-matrix-cutoff-0.6" class="nav-link" data-scroll-target="#model-2-confusion-matrix-cutoff-0.6"><span class="header-section-number">7.5</span> Model 2: Confusion Matrix (cutoff 0.6)</a></li>
   <li><a href="#model-2-auc" id="toc-model-2-auc" class="nav-link" data-scroll-target="#model-2-auc"><span class="header-section-number">7.6</span> Model 2: AUC</a></li>
+  <li><a href="#how-we-used-ai" id="toc-how-we-used-ai" class="nav-link" data-scroll-target="#how-we-used-ai"><span class="header-section-number">7.7</span> How We Used AI</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -3794,7 +3795,7 @@ Experience                      0.006182619
 Income                          0.050573447
 EducationGraduate               3.519013864
 EducationProfessional           3.662988151
-Monthly_CC_Spending_to_Income 315.834659756
+Monthly_CC_Spending_to_Income   2.193296248
 CD_Account1                     3.064189459
 Income_Per_Family_Member       -0.019512053
 CreditCard1                    -0.913320546
@@ -3845,6 +3846,10 @@ Prediction   0   1
 <pre><code>Area under the curve: 0.9696</code></pre>
 </div>
 </div>
+</section>
+<section id="how-we-used-ai" class="level2" data-number="7.7">
+<h2 data-number="7.7" class="anchored" data-anchor-id="how-we-used-ai"><span class="header-section-number">7.7</span> How We Used AI</h2>
+<p>We used AI tools (ChatGPT and Claude) to consult on R syntax and Quarto formatting. All analysis, modeling decisions, and written interpretation are our own.</p>
 <!-- -->
 
 </section>
@@ -4451,7 +4456,7 @@ Prediction   0   1
 <span id="cb13-158"><a href="#cb13-158" aria-hidden="true" tabindex="-1"></a>  loans_clean <span class="sc">%&gt;%</span></span>
 <span id="cb13-159"><a href="#cb13-159" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb13-160"><a href="#cb13-160" aria-hidden="true" tabindex="-1"></a>    <span class="at">Income_Per_Family_Member =</span> Income <span class="sc">/</span> Family,</span>
-<span id="cb13-161"><a href="#cb13-161" aria-hidden="true" tabindex="-1"></a>    <span class="at">Monthly_Income =</span> Income <span class="sc">*</span> <span class="dv">12</span>,</span>
+<span id="cb13-161"><a href="#cb13-161" aria-hidden="true" tabindex="-1"></a>    <span class="at">Monthly_Income =</span> Income <span class="sc">/</span> <span class="dv">12</span>,</span>
 <span id="cb13-162"><a href="#cb13-162" aria-hidden="true" tabindex="-1"></a>    <span class="at">Monthly_CC_Spending_to_Income =</span> CCAvg <span class="sc">/</span> Monthly_Income,</span>
 <span id="cb13-163"><a href="#cb13-163" aria-hidden="true" tabindex="-1"></a>    <span class="at">income_over_100k =</span> <span class="fu">ifelse</span>(Income <span class="sc">&gt;=</span> <span class="dv">100</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
 <span id="cb13-164"><a href="#cb13-164" aria-hidden="true" tabindex="-1"></a>  )</span>
@@ -4724,6 +4729,10 @@ Prediction   0   1
 <span id="cb13-463"><a href="#cb13-463" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
 <span id="cb13-464"><a href="#cb13-464" aria-hidden="true" tabindex="-1"></a><span class="fu">auc</span>(roc_lasso)</span>
 <span id="cb13-465"><a href="#cb13-465" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb13-466"><a href="#cb13-466" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-467"><a href="#cb13-467" aria-hidden="true" tabindex="-1"></a><span class="fu">## How We Used AI</span></span>
+<span id="cb13-468"><a href="#cb13-468" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-469"><a href="#cb13-469" aria-hidden="true" tabindex="-1"></a>We used AI tools (ChatGPT and Claude) to consult on R syntax and Quarto formatting. All analysis, modeling decisions, and written interpretation are our own.</span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
